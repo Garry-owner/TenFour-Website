@@ -61,3 +61,4 @@ export function Capabilities() {
       </div>
     </section>
   )
+}
