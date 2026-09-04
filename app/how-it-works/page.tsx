@@ -8,7 +8,7 @@ import { CtaBand } from '@/components/cta-band'
 export const metadata: Metadata = {
   title: 'How It Works. TenFour Systems',
   description:
-    'From forwarding your line to a booked job on your calendar, see exactly how the TenFour AI dispatcher runs your second shift.',
+    'From forwarding your line to a qualified lead ready to book, see exactly how the TenFour AI dispatcher runs your second shift.',
 }
 
 const FLOW = [
@@ -29,20 +29,17 @@ const FLOW = [
   },
   {
     icon: Inbox,
-    title: 'The job is booked & routed',
-    body: 'A confirmed appointment hits your calendar and the transcript is pushed to your team.',
+    title: 'The lead is sent to you',
+    body: 'A qualified, ready-to-book lead and full transcript lands with your team in real time.',
   },
 ]
 
 const INCLUDED = [
   'Custom greeting and script for your trade',
   'Call qualification tuned to your service area',
-  'Calendar booking and availability rules',
-  'Instant SMS confirmations to callers',
+  'Instant SMS confirmation that a request was received',
   'Real-time lead alerts with full transcripts',
-  'Spam and robocall filtering',
-  'Bilingual answering available',
-  'Monthly performance reporting',
+  'Multilingual answering available',
 ]
 
 export default function HowItWorksPage() {
@@ -51,7 +48,7 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How It Works"
         title="Your second shift, fully automated"
-        description="TenFour sits between your phone number and your calendar, turning every ring into a qualified, booked job, without you lifting a finger."
+        description="TenFour sits between your phone number and your customers, turning every ring into a qualified, ready to book lead, without you lifting a finger."
       />
 
       <section className="border-b border-border py-20 sm:py-24">
@@ -109,4 +106,3 @@ export default function HowItWorksPage() {
       <CtaBand />
     </main>
   )
-}
