@@ -52,8 +52,8 @@ export default function AboutPage() {
             </p>
             <p>
               So we built a dispatcher that never clocks out. It answers in your business name,
-              talks like a real person, qualifies the caller, and books the job straight onto your
-              calendar, then hands you the lead with everything you need to show up ready.
+              talks like a real person, qualifies the caller, and gets them ready to book,
+              then hands you the lead with everything you need to show up ready.
             </p>
             <p>
               We&apos;re proud to be based in Terrell, Texas, serving home-service businesses that
@@ -96,4 +96,3 @@ export default function AboutPage() {
       />
     </main>
   )
-}
