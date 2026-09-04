@@ -52,3 +52,5 @@ export function Steps({ withHeading = true }: { withHeading?: boolean }) {
         </ol>
       </div>
     </section>
+  )
+}
