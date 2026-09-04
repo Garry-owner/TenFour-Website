@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { MapPin, Radio, HeartHandshake, Gauge } from 'lucide-react'
+import { MapPin, Radio, Wrench, Gauge } from 'lucide-react'
 import { PageHero } from '@/components/page-hero'
 import { SectionHeading } from '@/components/section-heading'
 import { CtaBand } from '@/components/cta-band'
@@ -17,14 +17,14 @@ const VALUES = [
     body: '"Ten-four" means message received. That is the promise: every call gets received, acknowledged, and handled.',
   },
   {
-    icon: HeartHandshake,
-    title: 'Built for the trades',
-    body: 'We come from the world of home services. We know a ringing phone at 9 PM is money, or a missed opportunity.',
+    icon: Wrench,
+    title: '35 plus years in IT',
+    body: 'Decades building and running technical systems, plus a background in commercial insurance, mean this is built by someone who understands both the automation and the risk.',
   },
   {
     icon: Gauge,
     title: 'Speed wins jobs',
-    body: 'The first business to answer usually wins the work. We make sure that business is always yours.',
+    body: 'The first business to answer usually wins the work. TenFour makes sure that business is always yours.',
   },
 ]
 
@@ -41,22 +41,23 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             eyebrow="Our Story"
-            title="We work the second shift so you don't have to"
-            description="Home service owners are the hardest working people we know. But there are only so many hours in a day, and the calls never stop coming."
+            title="I work the second shift so you don't have to"
+            description="Home service owners are the hardest working people I know. But there are only so many hours in a day, and the calls never stop coming."
           />
           <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
             <p>
-              We started TenFour Systems after watching great local contractors lose real money to
+              I started TenFour Systems after watching great local contractors lose real money to
               something completely fixable: a phone that rang when nobody could pick it up. A leak at
               midnight, a storm on a Saturday, a customer who simply calls the next name on the list.
             </p>
             <p>
-              So we built a dispatcher that never clocks out. It answers in your business name,
-              talks like a real person, qualifies the caller, and gets them ready to book,
-              then hands you the lead with everything you need to show up ready.
+              With over 35 years in IT, plus a background in commercial insurance, I built a dispatcher
+              that never clocks out. It answers in your business name, talks like a real person,
+              qualifies the caller, and gets them ready to book, then hands you the lead with
+              everything you need to show up ready.
             </p>
             <p>
-              We&apos;re proud to be based in Terrell, Texas, serving home-service businesses that
+              I&apos;m proud to be based in Terrell, Texas, serving home-service businesses that
               refuse to let a ringing phone go to waste.
             </p>
           </div>
@@ -66,7 +67,7 @@ export default function AboutPage() {
       <section className="border-b border-border py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading
-            eyebrow="What We Believe"
+            eyebrow="What I Believe"
             title="The principles behind the dispatcher"
             align="center"
             className="mx-auto items-center"
