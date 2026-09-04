@@ -14,7 +14,7 @@ const STEPS = [
   {
     id: '03',
     title: 'Calls get answered',
-    body: 'Every caller reaches a live-sounding dispatcher that qualifies them and books the job into your calendar.',
+    body: 'Every caller reaches a live-sounding dispatcher that qualifies them and gets them ready to book.',
   },
   {
     id: '04',
@@ -52,5 +52,3 @@ export function Steps({ withHeading = true }: { withHeading?: boolean }) {
         </ol>
       </div>
     </section>
-  )
-}
