@@ -14,13 +14,13 @@ const CAPS = [
   },
   {
     icon: CalendarClock,
-    title: 'Books the job',
-    body: 'Checks your availability and drops confirmed appointments straight onto your calendar.',
+    title: 'Delivers a ready lead',
+    body: 'Qualifies the caller and sends you everything you need to book the job yourself, fast.',
   },
   {
     icon: MessageSquareText,
     title: 'Texts confirmations',
-    body: 'Sends the caller an instant text confirmation and reminder so no-shows drop and trust goes up.',
+    body: 'Sends the caller an instant text confirming their request was received and someone will follow up.',
   },
   {
     icon: BellRing,
@@ -61,4 +61,3 @@ export function Capabilities() {
       </div>
     </section>
   )
-}
