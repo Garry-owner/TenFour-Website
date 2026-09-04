@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-grid: var(--grid);
+  --color-signal: var(--signal);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  color-scheme: dark;
+
+  /* deep charcoal-navy control room */
+  --background: oklch(0.17 0.018 256);
+  --foreground: oklch(0.96 0.005 250);
+
+  --card: oklch(0.21 0.02 256);
+  --card-foreground: oklch(0.96 0.005 250);
+
+  --popover: oklch(0.2 0.02 256);
+  --popover-foreground: oklch(0.96 0.005 250);
+
+  /* electric blue from the T4 mark */
+  --primary: oklch(0.6 0.185 254);
+  --primary-foreground: oklch(0.14 0.02 256);
+
+  --secondary: oklch(0.26 0.02 256);
+  --secondary-foreground: oklch(0.96 0.005 250);
+
+  --muted: oklch(0.24 0.018 256);
+  --muted-foreground: oklch(0.7 0.02 252);
+
+  --accent: oklch(0.6 0.185 254);
+  --accent-foreground: oklch(0.14 0.02 256);
+
+  --destructive: oklch(0.62 0.2 25);
+
+  --border: oklch(0.3 0.02 256);
+  --input: oklch(0.3 0.02 256);
+  --ring: oklch(0.6 0.185 254);
+
+  /* helpers */
+  --grid: oklch(1 0 0 / 5%);
+  --signal: oklch(0.72 0.16 150);
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'ss01', 'cv01';
+  }
+}
+
+/* faint blueprint grid used across control-room sections */
+.bg-control-grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* slow blinking status dot */
+@keyframes signal-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--signal) 60%, transparent);
+  }
+  50% {
+    opacity: 0.55;
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+.animate-signal {
+  animation: signal-pulse 2s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scan {
+  animation: scan 6s linear infinite;
+}
