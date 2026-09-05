@@ -3,18 +3,18 @@ import { SectionHeading } from '@/components/section-heading'
 const STEPS = [
   {
     id: '01',
-    title: 'Forward your line',
-    body: 'Point your existing business number to TenFour, or use a new one we provision. Setup takes minutes, not weeks.',
+    title: 'We watch your line',
+    body: 'Roger connects to your existing business number and watches for any call that goes unanswered. Setup takes minutes, not weeks.',
   },
   {
     id: '02',
-    title: 'We tune your agent',
-    body: 'We script your greeting, qualifying questions, and booking rules around your trade, service area, and hours.',
+    title: 'We tune Roger',
+    body: 'We script your text-back message, qualifying questions, and booking rules around your trade, service area, and hours.',
   },
   {
     id: '03',
-    title: 'Calls get answered',
-    body: 'Every caller reaches a live-sounding dispatcher that qualifies them and gets them ready to book.',
+    title: 'Missed calls get caught',
+    body: 'The moment a call goes unanswered, Roger texts that caller back before they can hang up and call a competitor.',
   },
   {
     id: '04',
