@@ -27,7 +27,7 @@ const bebasNeue = Bebas_Neue({
 export const metadata: Metadata = {
   title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
   description:
-    'TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.',
+    "TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.",
   generator: 'v0.app',
 }
 
