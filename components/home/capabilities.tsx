@@ -4,8 +4,8 @@ import { SectionHeading } from '@/components/section-heading'
 const CAPS = [
   {
     icon: PhoneCall,
-    title: 'Answers every call',
-    body: 'Picks up in under two rings, 24/7/365. No hold music, no voicemail, no missed opportunity.',
+    title: 'Catches every missed call',
+    body: 'The moment your phone goes unanswered, Roger texts that caller back within seconds, 24/7/365. No hold music, no dead-end voicemail, no missed opportunity.',
   },
   {
     icon: ClipboardCheck,
@@ -30,7 +30,7 @@ const CAPS = [
   {
     icon: ShieldCheck,
     title: 'Sounds like your brand',
-    body: 'Custom greeting, tone, and script tuned to your business, so callers get a seamless experience.',
+    body: 'Custom text-back script and tone tuned to your business, so callers get a seamless experience.',
   },
 ]
 
