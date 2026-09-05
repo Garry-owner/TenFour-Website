@@ -70,7 +70,7 @@ export function RaceTimer() {
             <div key={s.id} className={cx(styles.step, active && styles.active, s.avoided && styles.avoided, s.endState && styles.safe)}>
               {s.isRoger ? (
                 <div className={cx(styles.stepAvatar, active && styles.stepAvatarActive)}>
-                  <Image src="/roger-avatar.png" alt="Roger" width={32} height={32} />
+                  <Image src="/roger-avatar.png" alt="Roger" width={28} height={28} />
                 </div>
               ) : (
                 <div className={styles.stepDot} />
