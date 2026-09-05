@@ -6,7 +6,7 @@ import { DemoForm } from '@/components/demo-form'
 export const metadata: Metadata = {
   title: 'Book a Demo. TenFour Systems',
   description:
-    'Book a live demo of the TenFour AI dispatcher. Hear it answer, qualify, and book a call for your home service business.',
+    "Book a live demo of the TenFour AI dispatcher. See exactly how Roger catches a missed call and texts your next customer back.",
 }
 
 const CONTACT = [
@@ -21,8 +21,8 @@ export default function ContactPage() {
     <main>
       <PageHero
         eyebrow="Book a Demo"
-        title="Hear your dispatcher answer a call"
-        description="Tell us about your business and we'll set up a live demo tuned to your trade. You'll hear exactly what your callers will experience."
+        title="See Roger catch a missed call"
+        description="Tell us about your business and we'll set up a live demo tuned to your trade. You'll see exactly how Roger texts your callers back."
       />
 
       <section className="py-16 sm:py-20">
@@ -72,7 +72,7 @@ export default function ContactPage() {
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Your future callers never hit voicemail again. The moment you&apos;re live, every
-                ring is answered, days, nights, and weekends included.
+                missed call gets a text back, days, nights, and weekends included.
               </p>
             </div>
           </div>
