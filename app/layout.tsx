@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, Geist_Mono } from 'next/font/google'
+import { Space_Grotesk, Geist_Mono, Bebas_Neue } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import './globals.css'
@@ -17,10 +17,17 @@ const geistMono = Geist_Mono({
   display: 'swap',
 })
 
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-bebas',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
   description:
-    'TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don\u2019t have to.',
+    'TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.',
   generator: 'v0.app',
 }
 
@@ -35,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} bg-background`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable} bg-background`}>
       <body className="antialiased font-sans flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
