@@ -1,4 +1,4 @@
-importimport { CtaButton } from '@/components/cta-button'
+import { CtaButton } from '@/components/cta-button'
 
 export function CtaBand({
   title = 'Stop losing jobs to voicemail.',
