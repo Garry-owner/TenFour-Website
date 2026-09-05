@@ -1,8 +1,8 @@
-import { CtaButton } from '@/components/cta-button'
+importimport { CtaButton } from '@/components/cta-button'
 
 export function CtaBand({
   title = 'Stop losing jobs to voicemail.',
-  subtitle = 'Book a demo and hear your own AI dispatcher answer a call, live, in your voice, tuned to your trade.',
+  subtitle = "See how fast Roger catches a missed call and texts your next customer back, before your competitor does.",
 }: {
   title?: string
   subtitle?: string
