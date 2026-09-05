@@ -1,6 +1,6 @@
-import { PhoneCall, CalendarCheck, Clock } from 'lucide-react'
+import { MessageSquareText, Clock, Trophy } from 'lucide-react'
 import { CtaButton } from '@/components/cta-button'
-import { DispatchConsole } from '@/components/home/dispatch-console'
+import { RaceTimer } from '@/components/home/race-timer'
 
 export function Hero() {
   return (
@@ -17,23 +17,23 @@ export function Hero() {
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-2 w-2 rounded-full bg-[var(--signal)] animate-signal" />
             </span>
-            Dispatcher online · answering now
+            Watching for missed calls
           </span>
 
           <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            We work the <span className="text-primary">second shift</span> so you don&apos;t have
+            We work the <span className="text-primary">second shift</span> so you don't have
             to.
           </h1>
 
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            TenFour Systems is the 24/7 AI dispatcher for home-service businesses. Every missed call
-            gets answered, every lead gets qualified, and every job gets booked, day or night,
-            weekends included.
+            TenFour Systems catches every missed call for home-service businesses. The moment you
+            can't pick up, Roger texts that caller back before they hang up and dial your
+            competitor next.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <CtaButton href="/contact" size="lg">
-              <PhoneCall className="h-4 w-4" />
+              <MessageSquareText className="h-4 w-4" />
               Book a Demo
             </CtaButton>
             <CtaButton href="/how-it-works" variant="outline" size="lg">
@@ -43,9 +43,9 @@ export function Hero() {
 
           <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-border pt-6">
             {[
-              { icon: Clock, k: '24/7', v: 'Always answering' },
-              { icon: PhoneCall, k: '<2 rings', v: 'Pickup speed' },
-              { icon: CalendarCheck, k: '0', v: 'Missed leads' },
+              { icon: Clock, k: '24/7', v: 'Always watching' },
+              { icon: MessageSquareText, k: 'Seconds', v: 'Text-back speed' },
+              { icon: Trophy, k: '0', v: 'Missed leads' },
             ].map(({ icon: Icon, k, v }) => (
               <div key={v} className="flex flex-col gap-1">
                 <Icon className="h-4 w-4 text-primary" />
@@ -56,7 +56,7 @@ export function Hero() {
           </dl>
         </div>
 
-        <DispatchConsole />
+        <RaceTimer />
       </div>
     </section>
   )
