@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { PhoneForwarded, SlidersHorizontal, Headphones, Inbox, CheckCircle2 } from 'lucide-react'
+import { PhoneMissed, SlidersHorizontal, MessageSquareText, Inbox, CheckCircle2 } from 'lucide-react'
 import { PageHero } from '@/components/page-hero'
 import { Steps } from '@/components/steps'
 import { SectionHeading } from '@/components/section-heading'
@@ -8,38 +8,38 @@ import { CtaBand } from '@/components/cta-band'
 export const metadata: Metadata = {
   title: 'How It Works. TenFour Systems',
   description:
-    'From forwarding your line to a qualified lead ready to book, see exactly how the TenFour AI dispatcher runs your second shift.',
+    "See exactly how TenFour catches a missed call, texts the lead back, and hands you a qualified, ready-to-book job.",
 }
 
 const FLOW = [
   {
-    icon: PhoneForwarded,
-    title: 'A call comes in',
-    body: 'A homeowner calls after hours with a leak. Your line forwards to TenFour instantly.',
+    icon: PhoneMissed,
+    title: 'A call goes unanswered',
+    body: 'A homeowner calls after hours with a leak. Nobody picks up, and the call goes unanswered.',
   },
   {
-    icon: Headphones,
-    title: 'The agent answers',
-    body: 'In under two rings, a natural-sounding dispatcher greets them in your business name.',
+    icon: MessageSquareText,
+    title: 'Roger texts back instantly',
+    body: 'Within seconds, Roger sends that caller a text before they can hang up and call your competitor.',
   },
   {
     icon: SlidersHorizontal,
     title: 'The lead is qualified',
-    body: 'It captures service type, address, urgency, and budget signals using your custom script.',
+    body: 'Over text, it captures service type, address, urgency, and budget signals using your custom script.',
   },
   {
     icon: Inbox,
     title: 'The lead is sent to you',
-    body: 'A qualified, ready-to-book lead and full transcript lands with your team in real time.',
+    body: 'A qualified, ready-to-book lead and full text transcript lands with your team in real time.',
   },
 ]
 
 const INCLUDED = [
-  'Custom greeting and script for your trade',
-  'Call qualification tuned to your service area',
-  'Instant SMS confirmation that a request was received',
+  'Custom text-back script for your trade',
+  'Lead qualification tuned to your service area',
+  'Instant confirmation text that a request was received',
   'Real-time lead alerts with full transcripts',
-  'Multilingual answering available',
+  "Responds automatically in the lead's language",
 ]
 
 export default function HowItWorksPage() {
@@ -48,15 +48,15 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How It Works"
         title="Your second shift, fully automated"
-        description="TenFour sits between your phone number and your customers, turning every ring into a qualified, ready to book lead, without you lifting a finger."
+        description="TenFour watches for missed calls on your line and turns every one into a qualified, ready-to-book lead, without you lifting a finger."
       />
 
       <section className="border-b border-border py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading
             eyebrow="The Call Flow"
-            title="What happens on every single call"
-            description="Here's the exact path a caller takes from ring to booked appointment."
+            title="What happens on every missed call"
+            description="Here's the exact path a caller takes from missed call to booked appointment."
           />
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {FLOW.map(({ icon: Icon, title, body }, i) => (
