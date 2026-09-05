@@ -51,10 +51,10 @@ export default function AboutPage() {
               midnight, a storm on a Saturday, a customer who simply calls the next name on the list.
             </p>
             <p>
-              With over 35 years in IT, plus a background in commercial insurance, I built a dispatcher
-              that never clocks out. It answers in your business name, talks like a real person,
-              qualifies the caller, and gets them ready to book, then hands you the lead with
-              everything you need to show up ready.
+              With over 35 years in IT, plus a background in commercial insurance, I built a system
+              that never clocks out. The moment a call goes unanswered, it texts that caller back in
+              your business name, qualifies them over text, and gets them ready to book, then hands
+              you the lead with everything you need to show up ready.
             </p>
             <p>
               I&apos;m proud to be based in Terrell, Texas, serving home-service businesses that
@@ -93,7 +93,7 @@ export default function AboutPage() {
 
       <CtaBand
         title="Let's make sure you never miss another one."
-        subtitle="See how TenFour answers, qualifies, and books a call for your business. Book a live demo today."
+        subtitle="See how fast Roger catches a missed call and texts your next customer back. Book a demo today."
       />
     </main>
   )
