@@ -12,17 +12,6 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 pt-10 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full">
-            <Image src="/roger-avatar.png" alt="Roger" width={36} height={36} />
-          </div>
-          <p className="text-sm text-muted-foreground">
-            The name comes from an old radio callsign: ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a call go unanswered.
-          </p>
-        </div>
-      </div>
-
       <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-28">
         <div className="flex flex-col gap-7">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
@@ -42,6 +31,15 @@ export function Hero() {
             can't pick up, Roger texts that caller back before they hang up and dial your
             competitor next.
           </p>
+
+          <div className="flex items-center gap-3 max-w-xl border-l-2 border-border pl-4">
+            <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
+              <Image src="/roger-avatar.png" alt="Roger" width={40} height={40} />
+            </div>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a call go unanswered.
+            </p>
+          </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <CtaButton href="/contact" size="lg">
