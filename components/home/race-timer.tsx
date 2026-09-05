@@ -1,14 +1,15 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import styles from './race-timer.module.css'
 
 const STEPS = [
-  { id: 's0', t: 0, time: '0:00', label: 'Missed call', avoided: false, endState: false },
-  { id: 's1', t: 4, time: '0:04', label: 'Customer hangs up', avoided: false, endState: false },
-  { id: 's2', t: 6, time: '0:06', label: 'Roger texts back', avoided: false, endState: false },
-  { id: 's3', t: 8, time: '0:08', label: 'Calls a competitor', avoided: true, endState: false },
-  { id: 's4', t: 10, time: '0:10', label: 'Appointment booked', avoided: false, endState: true },
+  { id: 's0', t: 0, time: '0:00', label: 'Missed call', avoided: false, endState: false, isRoger: false },
+  { id: 's1', t: 4, time: '0:04', label: 'Customer hangs up', avoided: false, endState: false, isRoger: false },
+  { id: 's2', t: 6, time: '0:06', label: 'Roger texts back', avoided: false, endState: false, isRoger: true },
+  { id: 's3', t: 8, time: '0:08', label: 'Calls a competitor', avoided: true, endState: false, isRoger: false },
+  { id: 's4', t: 10, time: '0:10', label: 'Appointment booked', avoided: false, endState: true, isRoger: false },
 ]
 
 function cx(...classes: (string | false | undefined)[]) {
@@ -67,7 +68,13 @@ export function RaceTimer() {
           const active = tick >= s.t
           return (
             <div key={s.id} className={cx(styles.step, active && styles.active, s.avoided && styles.avoided, s.endState && styles.safe)}>
-              <div className={styles.stepDot} />
+              {s.isRoger ? (
+                <div className={cx(styles.stepAvatar, active && styles.stepAvatarActive)}>
+                  <Image src="/roger-avatar.png" alt="Roger" width={32} height={32} />
+                </div>
+              ) : (
+                <div className={styles.stepDot} />
+              )}
               <div className={styles.stepTime}>{s.time}</div>
               <div className={styles.stepLabel}>
                 {s.label}
