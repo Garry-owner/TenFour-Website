@@ -1,4 +1,5 @@
 import { MessageSquareText, Clock, Trophy } from 'lucide-react'
+import Image from 'next/image'
 import { CtaButton } from '@/components/cta-button'
 import { RaceTimer } from '@/components/home/race-timer'
 
@@ -10,6 +11,17 @@ export function Hero() {
         className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[42rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]"
         aria-hidden
       />
+
+      <div className="relative mx-auto max-w-6xl px-4 pt-10 sm:px-6">
+        <div className="flex items-center gap-3">
+          <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full">
+            <Image src="/roger-avatar.png" alt="Roger" width={36} height={36} />
+          </div>
+          <p className="text-sm text-muted-foreground">
+            The name comes from an old radio callsign: ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a call go unanswered.
+          </p>
+        </div>
+      </div>
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-28">
         <div className="flex flex-col gap-7">
