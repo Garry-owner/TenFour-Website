@@ -9,8 +9,8 @@ export function SiteFooter() {
         <div className="space-y-4">
           <BrandLogo />
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            The 24/7 AI dispatcher for home service businesses. We answer, qualify, and book so no
-            call goes unanswered.
+            The 24/7 AI dispatcher for home service businesses. We catch every missed call and
+            text back so no lead goes cold.
           </p>
           <p className="font-mono text-xs uppercase tracking-widest text-primary">
             We work the second shift so you don&apos;t have to.
@@ -72,10 +72,24 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 sm:flex-row sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:px-6">
           <p className="font-mono text-xs text-muted-foreground">
             © {new Date().getFullYear()} TenFour Systems. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
+              className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Terms of Service
+            </Link>
+          </div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
             Status: <span className="text-[var(--signal)]">Operational</span>
           </p>
