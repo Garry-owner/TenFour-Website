@@ -144,9 +144,12 @@ export function DemoForm() {
           className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
         />
         <span>
-          By checking this box, I agree to receive automated text messages from TenFour Systems at
-          the number provided. Consent is not a condition of purchase. Msg and data rates may
-          apply. Reply STOP to opt out.
+          By checking this box, I agree to receive automated text messages from TenFour Systems
+          at the number provided, regarding my service inquiry, appointment scheduling, and
+          follow-up updates. Message frequency varies. Consent is not a condition of purchase.
+          Msg and data rates may apply. Reply HELP for help or STOP to opt out. See our{' '}
+          <a href="/privacy" className="underline">Privacy Policy</a> and{' '}
+          <a href="/terms" className="underline">Terms of Service</a>.
         </span>
       </label>
 
