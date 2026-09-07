@@ -73,6 +73,7 @@ const structuredData = {
   url: 'https://www.tenfoursystems.com',
   telephone: '+1-231-218-2360',
   email: 'garry@tenfoursystems.com',
+  image: 'https://www.tenfoursystems.com/roger-avatar.png',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Terrell',
@@ -139,12 +140,4 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
-        <div id="main-content" className="flex-1">
-          {children}
-        </div>
-        <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
-    </html>
-  )
-}
+        <div id="main-content" class
