@@ -20,7 +20,7 @@ const FLOW = [
   {
     icon: MessageSquareText,
     title: 'Roger texts back instantly',
-    body: 'Within seconds, Roger sends that caller a text before they can hang up and call your competitor.',
+    body: 'Within seconds, Roger sends that caller a text, before they can call the next name on their list.',
   },
   {
     icon: SlidersHorizontal,
