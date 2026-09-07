@@ -44,7 +44,7 @@ export function SiteFooter() {
 
         <div className="space-y-3">
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Service Areas
+            Featured Coverage
           </h3>
           <ul className="space-y-2 text-sm">
             {SERVICE_AREAS.map((area) => (
@@ -58,6 +58,9 @@ export function SiteFooter() {
               </li>
             ))}
           </ul>
+          <p className="pt-1 text-xs text-muted-foreground">
+            Serving every trade across the full DFW metroplex.
+          </p>
         </div>
 
         <div className="space-y-3">
