@@ -25,10 +25,39 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.tenfoursystems.com'),
   title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
   description:
     "TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.",
   generator: 'v0.app',
+  icons: {
+    icon: '/roger-avatar.png',
+    apple: '/roger-avatar.png',
+  },
+  openGraph: {
+    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    description:
+      "We catch every missed call and text your next customer back, before your competitor does.",
+    url: 'https://www.tenfoursystems.com',
+    siteName: 'TenFour Systems',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'TenFour Systems, the 24/7 AI dispatcher for home service businesses',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    description:
+      "We catch every missed call and text your next customer back, before your competitor does.",
+    images: ['/og-image.png'],
+  },
 }
 
 export const viewport: Viewport = {
