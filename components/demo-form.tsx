@@ -9,8 +9,6 @@ const inputClass =
 
 const labelClass = 'font-mono text-xs uppercase tracking-widest text-muted-foreground'
 
-const WEBHOOK_URL = 'https://hook.us2.make.com/7jbyj4l1ysf5l6ompdzabl47l2p752lq'
-
 export function DemoForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
 
@@ -26,7 +24,7 @@ export function DemoForm() {
     })
 
     try {
-      const res = await fetch(WEBHOOK_URL, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
