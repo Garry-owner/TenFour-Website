@@ -64,6 +64,34 @@ export const viewport: Viewport = {
   colorScheme: 'dark light',
 }
 
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'TenFour Systems',
+  description:
+    "TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.",
+  url: 'https://www.tenfoursystems.com',
+  telephone: '+1-231-218-2360',
+  email: 'garry@tenfoursystems.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Terrell',
+    addressRegion: 'TX',
+    addressCountry: 'US',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Dallas' },
+    { '@type': 'City', name: 'Fort Worth' },
+    { '@type': 'City', name: 'Rockwall' },
+    { '@type': 'City', name: 'McKinney' },
+    { '@type': 'City', name: 'Terrell' },
+    { '@type': 'City', name: 'Southlake' },
+    { '@type': 'City', name: 'Grapevine' },
+    { '@type': 'City', name: 'Prosper' },
+  ],
+  priceRange: '$$',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -98,10 +126,22 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
-        <div className="flex-1">{children}</div>
+        <div id="main-content" className="flex-1">
+          {children}
+        </div>
         <SiteFooter />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
