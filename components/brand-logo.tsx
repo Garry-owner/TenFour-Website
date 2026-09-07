@@ -20,15 +20,7 @@ export function BrandLogo({
         alt="TenFour Systems logo"
         width={44}
         height={44}
-        className="hidden h-9 w-9 object-contain dark:block"
-        priority
-      />
-      <Image
-        src="/tenfour-logo-light.png"
-        alt="TenFour Systems logo"
-        width={44}
-        height={44}
-        className="block h-9 w-9 object-contain dark:hidden"
+        className="h-9 w-9 object-contain"
         priority
       />
       {showWordmark && (
