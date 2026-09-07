@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 import styles from './cost-calculator.module.css'
 
 const TRADES = [
@@ -43,8 +44,13 @@ export function CostCalculator() {
         <select
           id="trade"
           className={styles.select}
-          onChange={(e) => setValue(Number(e.target.value))}
           defaultValue={9000}
+          onChange={(e) => {
+            const newValue = Number(e.target.value)
+            setValue(newValue)
+            const trade = TRADES.find((t) => t.value === newValue)
+            track('calculator_trade_selected', { trade: trade?.name ?? 'unknown' })
+          }}
         >
           {TRADES.map((t) => (
             <option key={t.name} value={t.value}>
