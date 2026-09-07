@@ -64,6 +64,18 @@ export function DemoForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 rounded-xl border border-border bg-card p-6 sm:p-8"
     >
+      {/* Honeypot field: hidden from real visitors, catches simple bots */}
+      <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="company_website">Company Website</label>
+        <input
+          id="company_website"
+          name="company_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="fname" className={labelClass}>
