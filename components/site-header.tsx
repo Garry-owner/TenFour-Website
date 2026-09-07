@@ -13,6 +13,8 @@ const NAV = [
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
+  { href: '/roger', label: 'Meet Roger' },
+  { href: '/faq', label: 'FAQ' },
 ]
 
 export function SiteHeader() {
