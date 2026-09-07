@@ -28,6 +28,7 @@ export function SiteFooter() {
               { href: '/pricing', label: 'Pricing' },
               { href: '/about', label: 'About' },
               { href: '/roger', label: 'Meet Roger' },
+              { href: '/faq', label: 'FAQ' },
               { href: '/contact', label: 'Book a Demo' },
             ].map((l) => (
               <li key={l.href}>
