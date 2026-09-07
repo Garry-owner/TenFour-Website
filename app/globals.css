@@ -38,6 +38,45 @@
 }
 
 :root {
+  color-scheme: light;
+
+  /* clean white control room */
+  --background: oklch(0.99 0.004 250);
+  --foreground: oklch(0.17 0.018 256);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.17 0.018 256);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.17 0.018 256);
+
+  /* electric blue from the T4 mark */
+  --primary: oklch(0.55 0.19 254);
+  --primary-foreground: oklch(0.99 0.004 250);
+
+  --secondary: oklch(0.95 0.008 250);
+  --secondary-foreground: oklch(0.17 0.018 256);
+
+  --muted: oklch(0.96 0.006 250);
+  --muted-foreground: oklch(0.45 0.02 252);
+
+  --accent: oklch(0.55 0.19 254);
+  --accent-foreground: oklch(0.99 0.004 250);
+
+  --destructive: oklch(0.58 0.21 25);
+
+  --border: oklch(0.89 0.01 256);
+  --input: oklch(0.89 0.01 256);
+  --ring: oklch(0.55 0.19 254);
+
+  /* helpers */
+  --grid: oklch(0 0 0 / 5%);
+  --signal: oklch(0.52 0.15 150);
+
+  --radius: 0.5rem;
+}
+
+.dark {
   color-scheme: dark;
 
   /* deep charcoal-navy control room */
@@ -50,7 +89,6 @@
   --popover: oklch(0.2 0.02 256);
   --popover-foreground: oklch(0.96 0.005 250);
 
-  /* electric blue from the T4 mark */
   --primary: oklch(0.6 0.185 254);
   --primary-foreground: oklch(0.14 0.02 256);
 
@@ -69,11 +107,8 @@
   --input: oklch(0.3 0.02 256);
   --ring: oklch(0.6 0.185 254);
 
-  /* helpers */
   --grid: oklch(1 0 0 / 5%);
   --signal: oklch(0.72 0.16 150);
-
-  --radius: 0.5rem;
 }
 
 @layer base {
