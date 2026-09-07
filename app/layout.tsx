@@ -140,4 +140,12 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
-        <div id="main-content" class
+        <div id="main-content" className="flex-1">
+          {children}
+        </div>
+        <SiteFooter />
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
+}
