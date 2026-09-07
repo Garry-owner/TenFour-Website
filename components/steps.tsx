@@ -14,7 +14,7 @@ const STEPS = [
   {
     id: '03',
     title: 'Missed calls get caught',
-    body: 'The moment a call goes unanswered, Roger texts that caller back before they can hang up and call a competitor.',
+    body: 'The moment a call goes unanswered, Roger texts that caller back before they can call the next name on their list.',
   },
   {
     id: '04',
