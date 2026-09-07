@@ -5,7 +5,7 @@ export function Proof() {
         <div className="grid gap-4 sm:grid-cols-3">
           {[
             { k: 'Captured', v: 'Every after-hours call', note: 'nights, weekends, holidays' },
-            { k: 'Faster', v: 'Under 2-ring pickup', note: 'before the caller hangs up' },
+            { k: 'Faster', v: 'Seconds, not hours', note: 'texted back before they call a competitor' },
             { k: 'Qualified', v: 'Ready to book', note: 'no manual follow-up needed' },
           ].map((item) => (
             <div
