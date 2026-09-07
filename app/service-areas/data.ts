@@ -21,7 +21,7 @@ export const SERVICE_AREAS: ServiceArea[] = [
     trade: 'HVAC',
     landmark: 'Historic Square',
     blurb:
-      'A dead air conditioner in a McKinney summer cannot wait for a callback. Roger texts that customer back in seconds, day or night, so the job stays yours.',
+      'A no-cool call in a McKinney summer cannot wait for a callback. Roger texts that customer back in seconds, day or night, so the job stays yours.',
   },
   {
     slug: 'terrell-foundation-repair',
