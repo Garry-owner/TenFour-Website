@@ -10,6 +10,9 @@ const INDUSTRIES = [
   'Landscaping',
   'Pest Control',
   'Solar',
+  'Foundation Repair',
+  'Fencing',
+  'Tree Service',
   'General Contracting',
 ]
 
