@@ -32,8 +32,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#151b26',
+  colorScheme: 'dark light',
 }
 
 export default function RootLayout({
@@ -42,7 +41,35 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable} bg-background`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  var stored = localStorage.getItem('theme');
+                  var theme;
+                  if (stored) {
+                    theme = stored;
+                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    theme = 'light';
+                  } else {
+                    theme = 'dark';
+                  }
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
         <SiteHeader />
         <div className="flex-1">{children}</div>
