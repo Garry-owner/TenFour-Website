@@ -1,11 +1,11 @@
- .card {
+.card {
   width: 100%;
   margin: 0 auto;
-  background: #111114;
-  border: 1px solid #222226;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 36px 28px 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
 @media (min-width: 1024px) {
@@ -27,13 +27,13 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 500;
-  color: #8e8e93;
+  color: var(--muted-foreground);
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  border: 1px solid #292929;
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--secondary);
 }
 
 .dot {
@@ -46,8 +46,8 @@
 }
 
 .dot.safe {
-  background: #5cff9e;
-  box-shadow: 0 0 8px rgba(92, 255, 158, 0.35);
+  background: var(--signal);
+  box-shadow: 0 0 8px color-mix(in oklch, var(--signal) 35%, transparent);
 }
 
 .heading {
@@ -58,6 +58,7 @@
   text-align: center;
   margin-bottom: 12px;
   letter-spacing: 0.01em;
+  color: var(--foreground);
 }
 
 .money {
@@ -67,7 +68,7 @@
 }
 
 .money.safe {
-  color: #5cff9e;
+  color: var(--signal);
 }
 
 .timerWrap {
@@ -87,14 +88,14 @@
 }
 
 .timer.safe {
-  color: #5cff9e;
-  text-shadow: 0 0 32px rgba(92, 255, 158, 0.35);
+  color: var(--signal);
+  text-shadow: 0 0 32px color-mix(in oklch, var(--signal) 35%, transparent);
 }
 
 .timerCaption {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: #55555a;
+  color: var(--muted-foreground);
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
@@ -114,7 +115,7 @@
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: #222226;
+  background: var(--border);
 }
 
 .timelineFill {
@@ -123,7 +124,7 @@
   top: 8px;
   width: 2px;
   max-height: calc(100% - 16px);
-  background: linear-gradient(180deg, #ff4d4d 0%, #ff4d4d 50%, #5cff9e 100%);
+  background: linear-gradient(180deg, #ff4d4d 0%, #ff4d4d 50%, var(--signal) 100%);
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -150,8 +151,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #111114;
-  border: 2px solid #333338;
+  background: var(--card);
+  border: 2px solid var(--border);
   transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -165,7 +166,7 @@
   overflow: hidden;
   opacity: 0.4;
   transition: opacity 0.4s ease, box-shadow 0.4s ease;
-  border: 2px solid #333338;
+  border: 2px solid var(--border);
 }
 
 .stepAvatar img {
@@ -177,8 +178,8 @@
 
 .stepAvatarActive {
   opacity: 1;
-  border-color: #5cff9e;
-  box-shadow: 0 0 12px rgba(92, 255, 158, 0.35);
+  border-color: var(--signal);
+  box-shadow: 0 0 12px color-mix(in oklch, var(--signal) 35%, transparent);
 }
 
 .step.active .stepDot {
@@ -188,15 +189,15 @@
 }
 
 .step.active.safe .stepDot {
-  border-color: #5cff9e;
-  background: #5cff9e;
-  box-shadow: 0 0 12px rgba(92, 255, 158, 0.35);
+  border-color: var(--signal);
+  background: var(--signal);
+  box-shadow: 0 0 12px color-mix(in oklch, var(--signal) 35%, transparent);
 }
 
 .stepTime {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: #55555a;
+  color: var(--muted-foreground);
   letter-spacing: 0.05em;
   margin-bottom: 3px;
   font-variant-numeric: tabular-nums;
@@ -205,21 +206,21 @@
 .stepLabel {
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  color: #d4d4d8;
+  color: var(--muted-foreground);
   font-weight: 500;
 }
 
 .step.active .stepLabel {
-  color: #ffffff;
+  color: var(--foreground);
 }
 
 .step.avoided.active .stepLabel {
   text-decoration: line-through;
-  color: #754646;
+  color: #b04040;
 }
 
 .step.avoided.active .stepTime {
-  color: #613b3b;
+  color: #8a3333;
 }
 
 .avoidedTag {
@@ -227,10 +228,10 @@
   margin-left: 8px;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: #5cff9e;
+  color: var(--signal);
   letter-spacing: 0.06em;
-  border: 1px solid rgba(92, 255, 158, 0.35);
-  background: rgba(92, 255, 158, 0.08);
+  border: 1px solid color-mix(in oklch, var(--signal) 35%, transparent);
+  background: color-mix(in oklch, var(--signal) 8%, transparent);
   border-radius: 4px;
   padding: 1px 6px;
   vertical-align: middle;
