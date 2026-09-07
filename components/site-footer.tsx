@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
+import { SERVICE_AREAS } from '@/app/service-areas/data'
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-card/40">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <BrandLogo />
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -26,6 +27,7 @@ export function SiteFooter() {
               { href: '/how-it-works', label: 'How It Works' },
               { href: '/pricing', label: 'Pricing' },
               { href: '/about', label: 'About' },
+              { href: '/roger', label: 'Meet Roger' },
               { href: '/contact', label: 'Book a Demo' },
             ].map((l) => (
               <li key={l.href}>
@@ -34,6 +36,24 @@ export function SiteFooter() {
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            Service Areas
+          </h3>
+          <ul className="space-y-2 text-sm">
+            {SERVICE_AREAS.map((area) => (
+              <li key={area.slug}>
+                <Link
+                  href={`/service-areas/${area.slug}`}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {area.trade} in {area.city}
                 </Link>
               </li>
             ))}
