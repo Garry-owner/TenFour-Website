@@ -28,8 +28,8 @@ export function Hero() {
 
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
             TenFour Systems catches every missed call for home-service businesses. The moment you
-            can't pick up, Roger texts that caller back before they hang up and dial your
-            competitor next.
+            can't pick up, Roger texts that caller back within seconds, before they can call the
+            next name on their list.
           </p>
 
           <div className="flex items-center gap-3 max-w-xl border-l-2 border-border pl-4">
