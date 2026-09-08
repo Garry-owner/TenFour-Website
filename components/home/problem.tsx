@@ -11,13 +11,13 @@ const COSTS = [
   {
     icon: MoonStar,
     stat: '27%',
-    label: 'of service calls come after hours',
+    label: 'of home-service calls are never picked up',
     body: 'Storms, leaks, and outages do not keep business hours, and neither should your phone.',
   },
   {
     icon: TrendingDown,
     stat: '$1,200+',
-    label: 'average value of a booked job lost',
+    label: 'average value of a missed home-service call',
     body: 'A single missed emergency call can walk thousands of dollars straight to a competitor.',
   },
 ]
@@ -47,7 +47,13 @@ export function Problem() {
             </div>
           ))}
         </div>
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">
+          Industry figures based on published missed-call and home-service revenue studies.
+        </p>
       </div>
     </section>
   )
 }
+
+</parameter>
