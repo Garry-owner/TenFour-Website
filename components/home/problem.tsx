@@ -55,5 +55,3 @@ export function Problem() {
     </section>
   )
 }
-
-</parameter>
