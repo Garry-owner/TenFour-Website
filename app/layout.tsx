@@ -31,9 +31,15 @@ export const metadata: Metadata = {
     "TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.",
   generator: 'v0.app',
   icons: {
-    icon: '/roger-avatar.png',
-    apple: '/roger-avatar.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
     description:
@@ -62,6 +68,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
+  themeColor: '#041018',
 }
 
 const structuredData = {
