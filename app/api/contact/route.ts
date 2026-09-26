@@ -11,9 +11,11 @@ import {
   validatePayload,
 } from '@/lib/contact-guard'
 
-// The Make.com webhook address belongs in a Netlify environment variable named
-// MAKE_WEBHOOK_URL, not in the code. The value below is only a fallback so the
-// form keeps working until that variable is set. Remove it once it is.
+// The Make.com webhook address. This address is treated as public: it is
+// visible in the GitHub repo history. What actually protects the webhook is an
+// API key that Make.com requires in the x-make-apikey header. That key lives
+// only in the Netlify environment variable MAKE_WEBHOOK_API_KEY and must never
+// be written in the code. MAKE_WEBHOOK_URL can override the address if needed.
 const FALLBACK_WEBHOOK_URL = 'https://hook.us2.make.com/7jbyj4l1ysf5l6ompdzabl47l2p752lq'
 
 const ipLimiter = new RateLimiter(PER_IP_LIMIT, PER_IP_WINDOW_MS)
@@ -82,13 +84,20 @@ export async function POST(request: NextRequest) {
 
     // 6. Forward the cleaned payload to Make.com.
     const webhookUrl = process.env.MAKE_WEBHOOK_URL || FALLBACK_WEBHOOK_URL
+    const webhookHeaders: Record<string, string> = { 'Content-Type': 'application/json' }
+    const apiKey = process.env.MAKE_WEBHOOK_API_KEY
+    if (apiKey) {
+      webhookHeaders['x-make-apikey'] = apiKey
+    } else {
+      console.error('contact route: MAKE_WEBHOOK_API_KEY is not set')
+    }
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS)
     let res: Response
     try {
       res = await fetch(webhookUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: webhookHeaders,
         body: JSON.stringify(result.payload),
         signal: controller.signal,
       })
