@@ -6,7 +6,7 @@ export function Proof() {
           {[
             { k: 'Captured', v: 'Every after-hours call', note: 'nights, weekends, holidays' },
             { k: 'Faster', v: 'Seconds, not hours', note: 'texted back before they call a competitor' },
-            { k: 'Qualified', v: 'Ready to book', note: 'no manual follow-up needed' },
+            { k: 'Qualified', v: 'Ready to book', note: 'your link, or a lead your team can book' },
           ].map((item) => (
             <div
               key={item.k}

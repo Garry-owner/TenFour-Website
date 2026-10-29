@@ -8,7 +8,7 @@ import { CtaBand } from '@/components/cta-band'
 export const metadata: Metadata = {
   title: 'How It Works. TenFour Systems',
   description:
-    "See exactly how TenFour catches a missed call, texts the lead back, and hands you a qualified, ready-to-book job.",
+    "See exactly how TenFour catches a missed call, qualifies the lead, and sends your booking link or a ready to book lead.",
 }
 
 const FLOW = [
@@ -30,7 +30,7 @@ const FLOW = [
   {
     icon: Inbox,
     title: 'The lead is sent to you',
-    body: 'A qualified, ready-to-book lead and full text transcript lands with your team in real time.',
+    body: 'If you have a booking link, Roger texts it so the customer can book. Otherwise a ready to book lead and full transcript land with your team.',
   },
 ]
 
@@ -48,7 +48,7 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How It Works"
         title="Your second shift, fully automated"
-        description="TenFour watches for missed calls on your line and turns every one into a qualified, ready-to-book lead, without you lifting a finger."
+        description="TenFour watches for missed calls on your line. Roger qualifies each one, sends your booking link when you have one, and otherwise hands your team a ready to book lead."
       />
 
       <section className="border-b border-border py-20 sm:py-24">
@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
           <SectionHeading
             eyebrow="The Call Flow"
             title="What happens on every missed call"
-            description="Here's the exact path a caller takes from missed call to booked appointment."
+            description="Here's the exact path a caller takes from a missed call to your booking link, or a lead your team can book."
           />
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {FLOW.map(({ icon: Icon, title, body }, i) => (
