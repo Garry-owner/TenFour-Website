@@ -44,7 +44,7 @@ export default function TermsPage() {
             <a href="mailto:garry@tenfoursystems.com" className="text-primary underline">
               garry@tenfoursystems.com
             </a>{' '}
-            or call (231) 218 2360. Carriers are not liable for delayed or undelivered messages.
+            or call (972) 349 5808. Carriers are not liable for delayed or undelivered messages.
             See our{' '}
             <a href="/privacy" className="text-primary underline">
               Privacy Policy

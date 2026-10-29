@@ -183,7 +183,7 @@ export function DemoForm() {
 
       {status === 'error' && (
         <p className="text-center text-xs text-destructive">
-          Something went wrong. Please email garry@tenfoursystems.com or call (231) 218 2360
+          Something went wrong. Please email garry@tenfoursystems.com or call (972) 349 5808
           directly.
         </p>
       )}

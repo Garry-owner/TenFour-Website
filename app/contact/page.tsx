@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const CONTACT = [
   { icon: Mail, label: 'Email', value: 'garry@tenfoursystems.com', href: 'mailto:garry@tenfoursystems.com' },
-  { icon: PhoneCall, label: 'Phone', value: '(231) 218 2360', href: 'tel:+12312182360' },
+  { icon: PhoneCall, label: 'Phone', value: '(972) 349 5808', href: 'tel:+19723495808' },
   { icon: MapPin, label: 'Based in', value: 'Terrell, Texas', href: null },
   { icon: Clock, label: 'Dispatcher hours', value: '24 / 7 / 365', href: null },
 ]
