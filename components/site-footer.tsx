@@ -80,11 +80,11 @@ export function SiteFooter() {
             </li>
             <li>
               <a
-                href="tel:+12312182360"
+                href="tel:+19723495808"
                 className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Phone className="h-4 w-4 text-primary" />
-                (231) 218 2360
+                (972) 349 5808
               </a>
             </li>
             <li className="flex items-center gap-2 text-muted-foreground">

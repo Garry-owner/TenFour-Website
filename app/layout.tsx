@@ -78,7 +78,7 @@ const structuredData = {
   description:
     "TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.",
   url: 'https://www.tenfoursystems.com',
-  telephone: '+1-231-218-2360',
+  telephone: '+1-972-349-5808',
   email: 'garry@tenfoursystems.com',
   image: 'https://www.tenfoursystems.com/roger-avatar.png',
   address: {
