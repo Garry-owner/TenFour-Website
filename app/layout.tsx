@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.tenfoursystems.com'),
   title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
   description:
-    "TenFour Systems answers every missed call, qualifies the lead, and books the job, around the clock. We work the second shift so you don't have to.",
+    "TenFour Systems answers every missed call and qualifies the lead, then sends your booking link or a ready to book lead. We work the second shift so you don't have to.",
   generator: 'v0.app',
   icons: {
     icon: [

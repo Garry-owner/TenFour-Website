@@ -9,7 +9,7 @@ export default function TermsPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Terms of Service</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: September 6, 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: October 29, 2026</p>
 
       <div className="mt-10 space-y-8 text-muted-foreground">
         <section>
@@ -31,7 +31,35 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-foreground">3. Client accounts</h2>
+          <h2 className="text-lg font-semibold text-foreground">3. Text messages</h2>
+          <p className="mt-2 leading-relaxed">
+            TenFour Systems sends text messages under the program name TenFour Systems / Roger
+            text messages. If you ask for a demo, these messages are responses to that request,
+            regarding your service inquiry, appointment scheduling, and follow-up updates. For
+            client businesses, Roger replies to people who called and missed a connection.
+          </p>
+          <p className="mt-2 leading-relaxed">
+            Message frequency varies. Message and data rates may apply. Consent is not a
+            condition of purchase. Reply STOP to opt out and HELP for help. For support, email{' '}
+            <a href="mailto:garry@tenfoursystems.com" className="text-primary underline">
+              garry@tenfoursystems.com
+            </a>{' '}
+            or call (231) 218 2360. Carriers are not liable for delayed or undelivered messages.
+            See our{' '}
+            <a href="/privacy" className="text-primary underline">
+              Privacy Policy
+            </a>
+            .
+          </p>
+          <p className="mt-2 leading-relaxed">
+            Client businesses that use Roger are responsible for having proper consent to text
+            their callers and contacts, including any re-engagement or follow-up messages, and
+            agree to comply with the TCPA and carrier rules.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold text-foreground">4. Client accounts</h2>
           <p className="mt-2 leading-relaxed">
             Client businesses may cancel their subscription at any time by contacting us. Setup
             fees are non-refundable once engineering work on an account has begun. Upon
@@ -41,7 +69,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-foreground">4. Acceptable use</h2>
+          <h2 className="text-lg font-semibold text-foreground">5. Acceptable use</h2>
           <p className="mt-2 leading-relaxed">
             You agree not to use our service for any unlawful purpose, or to send messages to
             recipients who have not consented to be contacted.
@@ -49,7 +77,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-foreground">5. Limitation of liability</h2>
+          <h2 className="text-lg font-semibold text-foreground">6. Limitation of liability</h2>
           <p className="mt-2 leading-relaxed">
             TenFour Systems provides lead qualification and communication services and is not
             responsible for the quality, timeliness, or outcome of any home-service work
@@ -60,7 +88,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-foreground">6. Changes to these terms</h2>
+          <h2 className="text-lg font-semibold text-foreground">7. Changes to these terms</h2>
           <p className="mt-2 leading-relaxed">
             We may update these terms from time to time. The "Last updated" date above reflects
             the most recent changes.
@@ -68,7 +96,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-semibold text-foreground">7. Contact us</h2>
+          <h2 className="text-lg font-semibold text-foreground">8. Contact us</h2>
           <p className="mt-2 leading-relaxed">
             Questions about these terms can be sent to{' '}
             <a href="mailto:garry@tenfoursystems.com" className="text-primary underline">

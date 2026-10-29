@@ -9,7 +9,7 @@ export default function PrivacyPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: September 6, 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: October 29, 2026</p>
 
       <div className="mt-10 space-y-8 text-muted-foreground">
         <section>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
             If you check the consent box on our form, you agree to receive automated text
             messages from TenFour Systems at the number provided. Consent is not a condition of
             purchase. Message and data rates may apply. Message frequency varies. Reply STOP at
-            any time to opt out.
+            any time to opt out, or reply HELP for help.
           </p>
         </section>
 
@@ -58,7 +58,9 @@ export default function PrivacyPage() {
             information may be processed by them: Zoho CRM (record-keeping), Make.com
             (automation), Twilio (sending text messages), and Stripe (payment processing, for
             signed clients). We do not sell your personal information to third parties, and we do
-            not share it outside of these service providers except as required by law.
+            not share it outside of these service providers except as required by law. Mobile
+            information and SMS opt-in consent will not be shared with third parties or
+            affiliates for marketing or promotional purposes.
           </p>
         </section>
 
@@ -84,9 +86,9 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-lg font-semibold text-foreground">8. Your rights</h2>
           <p className="mt-2 leading-relaxed">
-            You may reply STOP to any text message to opt out of future messages, or contact us
-            at garry@tenfoursystems.com to ask what information we have about you or to request
-            deletion, subject to any records we're legally required to retain.
+            You may reply STOP to any text message to opt out of future messages, reply HELP for
+            help, or contact us at garry@tenfoursystems.com to ask what information we have about
+            you or to request deletion, subject to any records we're legally required to retain.
           </p>
         </section>
 

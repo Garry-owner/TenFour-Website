@@ -15,11 +15,11 @@ const CAPS = [
   {
     icon: CalendarClock,
     title: 'Delivers a ready lead',
-    body: 'Qualifies the caller and sends you everything you need to book the job yourself, fast.',
+    body: 'Qualifies the caller and texts your booking link when you have one. Otherwise you get what you need to book the job.',
   },
   {
     icon: MessageSquareText,
-    title: 'Texts confirmations',
+    title: 'Confirms the request',
     body: 'Sends the caller an instant text confirming their request was received and someone will follow up.',
   },
   {

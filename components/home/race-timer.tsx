@@ -9,7 +9,7 @@ const STEPS = [
   { id: 's1', t: 4, time: '0:04', label: 'Customer hangs up', avoided: false, endState: false, isRoger: false },
   { id: 's2', t: 6, time: '0:06', label: 'Roger texts back', avoided: false, endState: false, isRoger: true },
   { id: 's3', t: 8, time: '0:08', label: 'Calls a competitor', avoided: true, endState: false, isRoger: false },
-  { id: 's4', t: 10, time: '0:10', label: 'Appointment booked', avoided: false, endState: true, isRoger: false },
+  { id: 's4', t: 10, time: '0:10', label: 'Lead ready to book', avoided: false, endState: true, isRoger: false },
 ]
 
 function cx(...classes: (string | false | undefined)[]) {
@@ -52,7 +52,7 @@ export function RaceTimer() {
       </div>
 
       <p className={styles.heading}>
-        Missed call. <span className={cx(styles.money, safe && styles.safe)}>{safe ? 'Job secured.' : 'Money on the line.'}</span>
+        Missed call. <span className={cx(styles.money, safe && styles.safe)}>{safe ? 'Ready to book.' : 'Money on the line.'}</span>
       </p>
 
       <div className={styles.timerWrap}>

@@ -9,7 +9,7 @@ const STEPS = [
   {
     id: '02',
     title: 'We tune Roger',
-    body: 'We script your text-back message, qualifying questions, and booking rules around your trade, service area, and hours.',
+    body: 'We script your text-back message and qualifying questions around your trade, service area, and hours, and add your booking link when you have one.',
   },
   {
     id: '03',
@@ -19,7 +19,7 @@ const STEPS = [
   {
     id: '04',
     title: 'You get the lead',
-    body: 'Confirmed appointments, transcripts, and callback details land with your team in real time. You just show up.',
+    body: 'If you have a booking link, Roger texts it so the customer can book themselves. Otherwise a ready to book lead, transcript, and callback details land with your team.',
   },
 ]
 
