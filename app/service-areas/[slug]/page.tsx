@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { PageHero } from '@/components/page-hero'
-import { CtaBand } from '@/components/cta-band'
-import { SERVICE_AREAS } from '@/app/service-areas/data'
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { ServiceAreaPage } from "@/components/pages/service-area-page"
+import { SERVICE_AREAS, serviceAreaCopy } from "@/app/service-areas/data"
+import { withHreflang } from "@/lib/locale"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -14,30 +14,19 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const area = SERVICE_AREAS.find((a) => a.slug === slug)
+  const area = SERVICE_AREAS.find((item) => item.slug === slug)
   if (!area) return {}
-  return {
-    title: `${area.trade} Missed Call Dispatch in ${area.city}, TX. TenFour Systems`,
-    description: area.blurb,
-  }
+  const copy = serviceAreaCopy(area, "en")
+  return withHreflang(`/service-areas/${area.slug}`, "en", {
+    title: copy.metaTitle,
+    description: copy.description,
+  })
 }
 
-export default async function ServiceAreaPage({ params }: Props) {
+export default async function Page({ params }: Props) {
   const { slug } = await params
-  const area = SERVICE_AREAS.find((a) => a.slug === slug)
+  const area = SERVICE_AREAS.find((item) => item.slug === slug)
   if (!area) notFound()
 
-  return (
-    <main>
-      <PageHero
-        eyebrow={`${area.trade} in ${area.city}, TX`}
-        title={`Never miss another ${area.trade.toLowerCase()} call near ${area.landmark}`}
-        description={area.blurb}
-      />
-      <CtaBand
-        title={`Ready to stop losing ${area.city} jobs to voicemail?`}
-        subtitle="Book a demo and see how fast Roger catches a missed call."
-      />
-    </main>
-  )
+  return <ServiceAreaPage area={area} locale="en" />
 }

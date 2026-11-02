@@ -1,30 +1,62 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
-import { track } from '@vercel/analytics'
-import styles from './cost-calculator.module.css'
+import { useState } from "react"
+import { track } from "@vercel/analytics"
+import type { Locale } from "@/lib/locale"
+import { TRADES } from "@/lib/trades"
+import styles from "./cost-calculator.module.css"
 
-const TRADES = [
-  { name: 'Roofing', value: 9000 },
-  { name: 'HVAC', value: 8000 },
-  { name: 'Plumbing', value: 350 },
-  { name: 'Electrical', value: 350 },
-  { name: 'Restoration', value: 3900 },
-  { name: 'Garage Doors', value: 350 },
-  { name: 'Landscaping', value: 1500 },
-  { name: 'Pest Control', value: 180 },
-  { name: 'Solar', value: 22000 },
-  { name: 'Foundation Repair', value: 6000 },
-  { name: 'Fencing', value: 3200 },
-  { name: 'Tree Service', value: 850 },
-  { name: 'General Contracting', value: 5000 },
-]
+const COPY: Record<
+  Locale,
+  {
+    eyebrow: string
+    heading: string
+    trade: string
+    calls: string
+    value: string
+    rate: string
+    month: string
+    year: string
+    formula: string
+    sources: string
+  }
+> = {
+  en: {
+    eyebrow: "Free tool",
+    heading: "What are missed calls costing you?",
+    trade: "Trade",
+    calls: "Missed calls per week",
+    value: "Average job value",
+    rate: "Estimated close rate",
+    month: "Estimated / month",
+    year: "Estimated / year",
+    formula:
+      "formula: (missed calls per week × 4.33 weeks) × close rate × average job value.",
+    sources:
+      "Job value estimates based on 2026 national and Texas-regional pricing data from Angi, HomeAdvisor, and Consumer Affairs. Your actual job values may differ, adjust the sliders to match your business.",
+  },
+  es: {
+    eyebrow: "Herramienta gratis",
+    heading: "¿Cuánto te cuestan las llamadas perdidas?",
+    trade: "Oficio",
+    calls: "Llamadas perdidas por semana",
+    value: "Valor promedio del trabajo",
+    rate: "Tasa de cierre estimada",
+    month: "Estimado / mes",
+    year: "Estimado / año",
+    formula:
+      "fórmula: (llamadas perdidas por semana × 4.33 semanas) × tasa de cierre × valor promedio del trabajo.",
+    sources:
+      "Los valores estimados de los trabajos se basan en datos de precios nacionales y de la región de Texas de 2026, de Angi, HomeAdvisor y Consumer Affairs. Los valores reales de tus trabajos pueden ser distintos. Ajusta los deslizadores para que coincidan con tu negocio.",
+  },
+}
 
 function fmt(n: number) {
   return '$' + Math.round(n).toLocaleString()
 }
 
-export function CostCalculator() {
+export function CostCalculator({ locale = "en" }: { locale?: Locale }) {
+  const copy = COPY[locale]
   const [calls, setCalls] = useState(6)
   const [value, setValue] = useState(9000)
   const [rate, setRate] = useState(30)
@@ -34,12 +66,12 @@ export function CostCalculator() {
 
   return (
     <div className={styles.card}>
-      <p className={styles.eyebrow}>Free tool</p>
-      <h3 className={styles.heading}>What are missed calls costing you?</h3>
+      <p className={styles.eyebrow}>{copy.eyebrow}</p>
+      <h3 className={styles.heading}>{copy.heading}</h3>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor="trade">
-          Trade
+          {copy.trade}
         </label>
         <select
           id="trade"
@@ -49,12 +81,12 @@ export function CostCalculator() {
             const newValue = Number(e.target.value)
             setValue(newValue)
             const trade = TRADES.find((t) => t.value === newValue)
-            track('calculator_trade_selected', { trade: trade?.name ?? 'unknown' })
+            track("calculator_trade_selected", { trade: trade?.id ?? "unknown" })
           }}
         >
           {TRADES.map((t) => (
-            <option key={t.name} value={t.value}>
-              {t.name}
+            <option key={t.id} value={t.value}>
+              {t[locale]}
             </option>
           ))}
         </select>
@@ -63,7 +95,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="calls">
-            Missed calls per week
+            {copy.calls}
           </label>
           <span className={styles.readout}>{calls}</span>
         </div>
@@ -82,7 +114,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="value">
-            Average job value
+            {copy.value}
           </label>
           <span className={styles.readout}>{fmt(value)}</span>
         </div>
@@ -101,7 +133,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="rate">
-            Estimated close rate
+            {copy.rate}
           </label>
           <span className={styles.readout}>{rate}%</span>
         </div>
@@ -119,23 +151,18 @@ export function CostCalculator() {
 
       <div className={styles.results}>
         <div>
-          <p className={styles.resultLabel}>Estimated / month</p>
+          <p className={styles.resultLabel}>{copy.month}</p>
           <p className={styles.resultValue}>{fmt(monthly)}</p>
         </div>
         <div>
-          <p className={styles.resultLabel}>Estimated / year</p>
+          <p className={styles.resultLabel}>{copy.year}</p>
           <p className={styles.resultValue}>{fmt(yearly)}</p>
         </div>
       </div>
 
-      <p className={styles.formula}>
-        formula: (missed calls per week &times; 4.33 weeks) &times; close rate &times; average job value.
-      </p>
+      <p className={styles.formula}>{copy.formula}</p>
 
-      <p className={styles.sources}>
-        Job value estimates based on 2026 national and Texas-regional pricing data from Angi, HomeAdvisor, and
-        Consumer Affairs. Your actual job values may differ, adjust the sliders to match your business.
-      </p>
+      <p className={styles.sources}>{copy.sources}</p>
     </div>
   )
 }

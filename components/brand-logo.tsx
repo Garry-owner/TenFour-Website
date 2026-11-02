@@ -1,6 +1,10 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { localeFromPathname, localizeHref } from "@/lib/locale"
+import { cn } from "@/lib/utils"
 
 export function BrandLogo({
   className,
@@ -9,15 +13,18 @@ export function BrandLogo({
   className?: string
   showWordmark?: boolean
 }) {
+  const pathname = usePathname() || "/"
+  const locale = localeFromPathname(pathname)
+
   return (
     <Link
-      href="/"
-      className={cn('flex items-center gap-2.5', className)}
-      aria-label="TenFour Systems home"
+      href={localizeHref("/", locale)}
+      className={cn("flex items-center gap-2.5", className)}
+      aria-label={locale === "es" ? "Inicio de TenFour Systems" : "TenFour Systems home"}
     >
       <Image
         src="/tenfour-logo.png"
-        alt="TenFour Systems logo"
+        alt={locale === "es" ? "Logotipo de TenFour Systems" : "TenFour Systems logo"}
         width={44}
         height={44}
         className="h-9 w-9 object-contain"
@@ -28,9 +35,7 @@ export function BrandLogo({
           <span className="font-mono text-sm font-bold tracking-[0.18em] text-foreground">
             TENFOUR
           </span>
-          <span className="font-mono text-[0.6rem] tracking-[0.42em] text-primary">
-            SYSTEMS
-          </span>
+          <span className="font-mono text-[0.6rem] tracking-[0.42em] text-primary">SYSTEMS</span>
         </span>
       )}
     </Link>

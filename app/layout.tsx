@@ -1,8 +1,12 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { headers } from 'next/headers'
 import { Space_Grotesk, Geist_Mono, Bebas_Neue } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { HtmlLang } from '@/components/html-lang'
+import { SkipLink } from '@/components/skip-link'
+import { localeFromPathname } from '@/lib/locale'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -71,13 +75,16 @@ export const viewport: Viewport = {
   themeColor: '#041018',
 }
 
-const structuredData = {
+function structuredData(locale: 'en' | 'es') {
+  return {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'TenFour Systems',
   description:
-    "TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.",
-  url: 'https://www.tenfoursystems.com',
+    locale === 'es'
+      ? 'TenFour Systems capta cada llamada perdida de los negocios de servicios del hogar y le responde por texto al cliente antes de que llame a un competidor.'
+      : 'TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.',
+  url: locale === 'es' ? 'https://www.tenfoursystems.com/es' : 'https://www.tenfoursystems.com',
   telephone: '+1-972-349-5808',
   email: 'garry@tenfoursystems.com',
   image: 'https://www.tenfoursystems.com/roger-avatar.png',
@@ -98,16 +105,20 @@ const structuredData = {
     { '@type': 'City', name: 'Prosper' },
   ],
   priceRange: '$$',
+  }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const headerStore = await headers()
+  const locale = localeFromPathname(headerStore.get('x-pathname') || '/')
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable}`}
       suppressHydrationWarning
     >
@@ -136,16 +147,12 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData(locale)) }}
         />
       </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
-        >
-          Skip to content
-        </a>
+        <HtmlLang />
+        <SkipLink />
         <SiteHeader />
         <div id="main-content" className="flex-1">
           {children}
