@@ -1,11 +1,15 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
 import { lp } from '@/lib/locale'
 import { cn } from '@/lib/utils'
+
+// Lockups include the wordmark under the mark. The component already
+// renders a theme-colored wordmark, so frame just the T4 (same viewBox
+// as the mark-only logo) from each lockup file.
+const MARK_VIEW = '#svgView(viewBox(50,170,330,254))'
 
 export function BrandLogo({
   className,
@@ -23,13 +27,19 @@ export function BrandLogo({
       className={cn('flex shrink-0 items-center gap-2.5', className)}
       aria-label={t.homeLabel}
     >
-      <Image
-        src="/tenfour-logo.png"
-        alt={t.logoAlt}
+      <img
+        src={`/tenfour-lockup.svg${MARK_VIEW}`}
+        alt=""
         width={44}
-        height={44}
-        className="h-9 w-9 object-contain"
-        priority
+        height={34}
+        className="h-9 w-9 object-contain dark:hidden"
+      />
+      <img
+        src={`/tenfour-lockup-white.svg${MARK_VIEW}`}
+        alt=""
+        width={44}
+        height={34}
+        className="hidden h-9 w-9 object-contain dark:block"
       />
       {showWordmark && (
         <span className="hidden min-[380px]:flex flex-col leading-none">
