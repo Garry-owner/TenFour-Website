@@ -16,7 +16,7 @@ export function BrandLogo({
       aria-label="TenFour Systems home"
     >
       <Image
-        src="/tenfour-logo.png"
+        src="/tenfour-logo.svg"
         alt="TenFour Systems logo"
         width={44}
         height={44}
