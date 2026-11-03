@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import { CheckCircle2, Loader2, Send } from 'lucide-react'
+import { RichText } from '@/components/rich-text'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
 import { cn } from '@/lib/utils'
 
 const inputClass =
@@ -10,6 +13,8 @@ const inputClass =
 const labelClass = 'font-mono text-xs uppercase tracking-widest text-muted-foreground'
 
 export function DemoForm() {
+  const locale = useLocale()
+  const t = getCopy(locale).form
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -43,17 +48,14 @@ export function DemoForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/50 bg-background text-primary">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="text-xl font-bold tracking-tight">Message received. Ten four.</h3>
-        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Thanks for reaching out. We&apos;ll be in touch shortly to set up your live demo and get
-          your dispatcher on the air.
-        </p>
+        <h3 className="text-xl font-bold tracking-tight">{t.doneTitle}</h3>
+        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{t.doneBody}</p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
           className="mt-2 font-mono text-xs uppercase tracking-widest text-primary hover:underline"
         >
-          Submit another request
+          {t.another}
         </button>
       </div>
     )
@@ -66,7 +68,7 @@ export function DemoForm() {
     >
       {/* Honeypot field: hidden from real visitors, catches simple bots */}
       <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
-        <label htmlFor="company_website">Company Website</label>
+        <label htmlFor="company_website">{t.honeypot}</label>
         <input
           id="company_website"
           name="company_website"
@@ -79,42 +81,42 @@ export function DemoForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="fname" className={labelClass}>
-            First name
+            {t.first}
           </label>
-          <input id="fname" name="First name" required placeholder="Jordan" className={inputClass} />
+          <input id="fname" name="First name" required placeholder={t.firstPlaceholder} className={inputClass} />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="lname" className={labelClass}>
-            Last name
+            {t.last}
           </label>
-          <input id="lname" name="Last name" required placeholder="Rivera" className={inputClass} />
+          <input id="lname" name="Last name" required placeholder={t.lastPlaceholder} className={inputClass} />
         </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label htmlFor="phone" className={labelClass}>
-            Phone
+            {t.phone}
           </label>
           <input
             id="phone"
             name="Phone"
             type="tel"
             required
-            placeholder="(214) 555 0148"
+            placeholder={t.phonePlaceholder}
             className={inputClass}
           />
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email" className={labelClass}>
-            Email
+            {t.email}
           </label>
           <input
             id="email"
             name="Email Address"
             type="email"
             required
-            placeholder="you@business.com"
+            placeholder={t.emailPlaceholder}
             className={inputClass}
           />
         </div>
@@ -122,27 +124,28 @@ export function DemoForm() {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className={labelClass}>
-          What are you hoping to fix? (optional)
+          {t.message}
         </label>
         <textarea
           id="message"
           name="Message"
           rows={4}
-          placeholder="We miss a lot of after hours calls during storm season."
+          placeholder={t.messagePlaceholder}
           className={cn(inputClass, 'resize-none')}
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="timezone" className={labelClass}>
-          What time zone are you in?
+          {t.timezone}
         </label>
         <select id="timezone" name="Fax" required className={inputClass}>
-          <option value="">Select your time zone</option>
-          <option value="Eastern">Eastern</option>
-          <option value="Central">Central</option>
-          <option value="Mountain">Mountain</option>
-          <option value="Pacific">Pacific</option>
+          <option value="">{t.timezonePlaceholder}</option>
+          {t.zones.map((zone) => (
+            <option key={zone.value} value={zone.value}>
+              {zone.label}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -154,12 +157,7 @@ export function DemoForm() {
           className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
         />
         <span>
-          By checking this box, I agree to receive automated text messages from TenFour Systems
-          at the number provided, regarding my service inquiry, appointment scheduling, and
-          follow-up updates. Message frequency varies. Consent is not a condition of purchase.
-          Msg and data rates may apply. Reply HELP for help or STOP to opt out. See our{' '}
-          <a href="/privacy" className="underline">Privacy Policy</a> and{' '}
-          <a href="/terms" className="underline">Terms of Service</a>.
+          <RichText text={t.consent} locale={locale} linkClassName="underline" />
         </span>
       </label>
 
@@ -171,25 +169,22 @@ export function DemoForm() {
         {status === 'submitting' ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            Sending
+            {t.sending}
           </>
         ) : (
           <>
             <Send className="h-4 w-4" />
-            Request My Demo
+            {t.submit}
           </>
         )}
       </button>
 
       {status === 'error' && (
-        <p className="text-center text-xs text-destructive">
-          Something went wrong. Please email garry@tenfoursystems.com or call (972) 349 5808
-          directly.
-        </p>
+        <p className="text-center text-xs text-destructive">{t.error}</p>
       )}
 
       <p className="text-center font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
-        No spam. No obligation. We respond fast.
+        {t.fine}
       </p>
     </form>
   )

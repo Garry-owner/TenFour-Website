@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import { Sun, Moon } from 'lucide-react'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
 
 export function ThemeToggle() {
+  const locale = useLocale()
+  const label = getCopy(locale).chrome.theme
   const [isDark, setIsDark] = useState(true)
   const [mounted, setMounted] = useState(false)
 
@@ -28,7 +32,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
-      aria-label="Toggle theme"
+      aria-label={label}
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>

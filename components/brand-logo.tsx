@@ -1,5 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
+import { lp } from '@/lib/locale'
 import { cn } from '@/lib/utils'
 
 export function BrandLogo({
@@ -9,22 +14,25 @@ export function BrandLogo({
   className?: string
   showWordmark?: boolean
 }) {
+  const locale = useLocale()
+  const t = getCopy(locale).chrome
+
   return (
     <Link
-      href="/"
-      className={cn('flex items-center gap-2.5', className)}
-      aria-label="TenFour Systems home"
+      href={lp(locale, '/')}
+      className={cn('flex shrink-0 items-center gap-2.5', className)}
+      aria-label={t.homeLabel}
     >
       <Image
         src="/tenfour-logo.png"
-        alt="TenFour Systems logo"
+        alt={t.logoAlt}
         width={44}
         height={44}
         className="h-9 w-9 object-contain"
         priority
       />
       {showWordmark && (
-        <span className="flex flex-col leading-none">
+        <span className="hidden min-[380px]:flex flex-col leading-none">
           <span className="font-mono text-sm font-bold tracking-[0.18em] text-foreground">
             TENFOUR
           </span>

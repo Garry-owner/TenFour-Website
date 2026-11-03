@@ -1,56 +1,36 @@
 import { PhoneMissed, MoonStar, TrendingDown } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
+import { getCopy } from '@/lib/copy'
+import type { Locale } from '@/lib/locale'
 
-const COSTS = [
-  {
-    icon: PhoneMissed,
-    stat: '62%',
-    label: 'of calls to small businesses go unanswered',
-    body: 'Every ring that rolls to voicemail is a customer who calls the next name on the list.',
-  },
-  {
-    icon: MoonStar,
-    stat: '27%',
-    label: 'of home-service calls are never picked up',
-    body: 'Storms, leaks, and outages do not keep business hours, and neither should your phone.',
-  },
-  {
-    icon: TrendingDown,
-    stat: '$1,200+',
-    label: 'average value of a missed home-service call',
-    body: 'A single missed emergency call can walk thousands of dollars straight to a competitor.',
-  },
-]
+const ICONS = [PhoneMissed, MoonStar, TrendingDown]
 
-export function Problem() {
+export function Problem({ locale }: { locale: Locale }) {
+  const t = getCopy(locale).problem
+
   return (
     <section className="border-b border-border py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="The Problem"
-          title="The phone rings after 5 PM. Nobody answers. The job is gone."
-          description="Home service owners can't sit by the phone 24/7, but their customers expect an answer the moment something breaks."
-        />
+        <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
         <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {COSTS.map(({ icon: Icon, stat, label, body }) => (
-            <div
-              key={label}
-              className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/40"
-            >
-              <Icon className="h-6 w-6 text-primary" />
-              <p className="mt-6 font-mono text-4xl font-bold tracking-tight text-foreground">
-                {stat}
-              </p>
-              <p className="mt-2 text-sm font-medium text-foreground">{label}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
-            </div>
-          ))}
+          {t.cards.map(({ stat, label, body }, index) => {
+            const Icon = ICONS[index]
+            return (
+              <div
+                key={label}
+                className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/40"
+              >
+                <Icon className="h-6 w-6 text-primary" />
+                <p className="mt-6 font-mono text-4xl font-bold tracking-tight text-foreground">{stat}</p>
+                <p className="mt-2 text-sm font-medium text-foreground">{label}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+              </div>
+            )
+          })}
         </div>
 
-        <p className="mt-6 text-center text-xs text-muted-foreground">
-          Industry figures based on published missed-call and home-service revenue studies.
-        </p>
+        <p className="mt-6 text-center text-xs text-muted-foreground">{t.note}</p>
       </div>
     </section>
   )

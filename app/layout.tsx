@@ -1,8 +1,13 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { headers } from 'next/headers'
 import { Space_Grotesk, Geist_Mono, Bebas_Neue } from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { HtmlLang } from '@/components/html-lang'
+import { SkipLink } from '@/components/skip-link'
+import { StructuredData } from '@/components/structured-data'
+import { languageAlternates } from '@/lib/seo'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -29,6 +34,7 @@ export const metadata: Metadata = {
   title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
   description:
     "TenFour Systems answers every missed call and qualifies the lead, then sends your booking link or a ready to book lead. We work the second shift so you don't have to.",
+  ...languageAlternates('/'),
   generator: 'v0.app',
   icons: {
     icon: [
@@ -55,6 +61,7 @@ export const metadata: Metadata = {
       },
     ],
     locale: 'en_US',
+    alternateLocale: ['es_US'],
     type: 'website',
   },
   twitter: {
@@ -71,43 +78,17 @@ export const viewport: Viewport = {
   themeColor: '#041018',
 }
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'TenFour Systems',
-  description:
-    "TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.",
-  url: 'https://www.tenfoursystems.com',
-  telephone: '+1-972-349-5808',
-  email: 'garry@tenfoursystems.com',
-  image: 'https://www.tenfoursystems.com/roger-avatar.png',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Terrell',
-    addressRegion: 'TX',
-    addressCountry: 'US',
-  },
-  areaServed: [
-    { '@type': 'City', name: 'Dallas' },
-    { '@type': 'City', name: 'Fort Worth' },
-    { '@type': 'City', name: 'Rockwall' },
-    { '@type': 'City', name: 'McKinney' },
-    { '@type': 'City', name: 'Terrell' },
-    { '@type': 'City', name: 'Southlake' },
-    { '@type': 'City', name: 'Grapevine' },
-    { '@type': 'City', name: 'Prosper' },
-  ],
-  priceRange: '$$',
-}
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const headerList = await headers()
+  const lang = headerList.get('x-locale') === 'es' ? 'es' : 'en'
+
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable}`}
       suppressHydrationWarning
     >
@@ -134,18 +115,11 @@ export default function RootLayout({
             `,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
       </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
-        >
-          Skip to content
-        </a>
+        <HtmlLang />
+        <StructuredData />
+        <SkipLink />
         <SiteHeader />
         <div id="main-content" className="flex-1">
           {children}

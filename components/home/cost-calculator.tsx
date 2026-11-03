@@ -2,22 +2,24 @@
 
 import { useState } from 'react'
 import { track } from '@vercel/analytics'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
 import styles from './cost-calculator.module.css'
 
 const TRADES = [
-  { name: 'Roofing', value: 9000 },
-  { name: 'HVAC', value: 8000 },
-  { name: 'Plumbing', value: 350 },
-  { name: 'Electrical', value: 350 },
-  { name: 'Restoration', value: 3900 },
-  { name: 'Garage Doors', value: 350 },
-  { name: 'Landscaping', value: 1500 },
-  { name: 'Pest Control', value: 180 },
-  { name: 'Solar', value: 22000 },
-  { name: 'Foundation Repair', value: 6000 },
-  { name: 'Fencing', value: 3200 },
-  { name: 'Tree Service', value: 850 },
-  { name: 'General Contracting', value: 5000 },
+  { id: 'Roofing', value: 9000 },
+  { id: 'HVAC', value: 8000 },
+  { id: 'Plumbing', value: 350 },
+  { id: 'Electrical', value: 350 },
+  { id: 'Restoration', value: 3900 },
+  { id: 'Garage Doors', value: 350 },
+  { id: 'Landscaping', value: 1500 },
+  { id: 'Pest Control', value: 180 },
+  { id: 'Solar', value: 22000 },
+  { id: 'Foundation Repair', value: 6000 },
+  { id: 'Fencing', value: 3200 },
+  { id: 'Tree Service', value: 850 },
+  { id: 'General Contracting', value: 5000 },
 ]
 
 function fmt(n: number) {
@@ -25,6 +27,7 @@ function fmt(n: number) {
 }
 
 export function CostCalculator() {
+  const t = getCopy(useLocale()).calculator
   const [calls, setCalls] = useState(6)
   const [value, setValue] = useState(9000)
   const [rate, setRate] = useState(30)
@@ -34,12 +37,12 @@ export function CostCalculator() {
 
   return (
     <div className={styles.card}>
-      <p className={styles.eyebrow}>Free tool</p>
-      <h3 className={styles.heading}>What are missed calls costing you?</h3>
+      <p className={styles.eyebrow}>{t.eyebrow}</p>
+      <h3 className={styles.heading}>{t.heading}</h3>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor="trade">
-          Trade
+          {t.trade}
         </label>
         <select
           id="trade"
@@ -48,13 +51,13 @@ export function CostCalculator() {
           onChange={(e) => {
             const newValue = Number(e.target.value)
             setValue(newValue)
-            const trade = TRADES.find((t) => t.value === newValue)
-            track('calculator_trade_selected', { trade: trade?.name ?? 'unknown' })
+            const trade = TRADES.find((item) => item.value === newValue)
+            track('calculator_trade_selected', { trade: trade?.id ?? 'unknown' })
           }}
         >
-          {TRADES.map((t) => (
-            <option key={t.name} value={t.value}>
-              {t.name}
+          {TRADES.map((item, index) => (
+            <option key={item.id} value={item.value}>
+              {t.trades[index]}
             </option>
           ))}
         </select>
@@ -63,7 +66,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="calls">
-            Missed calls per week
+            {t.calls}
           </label>
           <span className={styles.readout}>{calls}</span>
         </div>
@@ -82,7 +85,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="value">
-            Average job value
+            {t.value}
           </label>
           <span className={styles.readout}>{fmt(value)}</span>
         </div>
@@ -101,7 +104,7 @@ export function CostCalculator() {
       <div className={styles.field}>
         <div className={styles.fieldHeader}>
           <label className={styles.label} htmlFor="rate">
-            Estimated close rate
+            {t.rate}
           </label>
           <span className={styles.readout}>{rate}%</span>
         </div>
@@ -119,22 +122,21 @@ export function CostCalculator() {
 
       <div className={styles.results}>
         <div>
-          <p className={styles.resultLabel}>Estimated / month</p>
+          <p className={styles.resultLabel}>{t.month}</p>
           <p className={styles.resultValue}>{fmt(monthly)}</p>
         </div>
         <div>
-          <p className={styles.resultLabel}>Estimated / year</p>
+          <p className={styles.resultLabel}>{t.year}</p>
           <p className={styles.resultValue}>{fmt(yearly)}</p>
         </div>
       </div>
 
       <p className={styles.formula}>
-        formula: (missed calls per week &times; 4.33 weeks) &times; close rate &times; average job value.
+        {t.formula}
       </p>
 
       <p className={styles.sources}>
-        Job value estimates based on 2026 national and Texas-regional pricing data from Angi, HomeAdvisor, and
-        Consumer Affairs. Your actual job values may differ, adjust the sliders to match your business.
+        {t.sources}
       </p>
     </div>
   )

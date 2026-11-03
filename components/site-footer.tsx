@@ -1,42 +1,41 @@
+'use client'
+
 import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
-import { BrandLogo } from '@/components/brand-logo'
 import { SERVICE_AREAS } from '@/app/service-areas/data'
+import { BrandLogo } from '@/components/brand-logo'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
+import { lp } from '@/lib/locale'
 
 export function SiteFooter() {
+  const locale = useLocale()
+  const t = getCopy(locale).chrome
+
   return (
     <footer className="border-t border-border bg-card/40">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <BrandLogo />
-          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-            The 24/7 AI dispatcher for home service businesses. We catch every missed call and
-            text back so no lead goes cold.
-          </p>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary">
-            We work the second shift so you don&apos;t have to.
-          </p>
+          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{t.footerBlurb}</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.footerTagline}</p>
         </div>
 
         <div className="space-y-3">
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Navigate
+            {t.navigate}
           </h3>
           <ul className="space-y-2 text-sm">
             {[
-              { href: '/how-it-works', label: 'How It Works' },
-              { href: '/pricing', label: 'Pricing' },
-              { href: '/about', label: 'About' },
-              { href: '/roger', label: 'Meet Roger' },
-              { href: '/faq', label: 'FAQ' },
-              { href: '/contact', label: 'Book a Demo' },
-            ].map((l) => (
-              <li key={l.href}>
+              ...t.nav,
+              { path: '/contact', label: t.bookDemo },
+            ].map((item) => (
+              <li key={item.path}>
                 <Link
-                  href={l.href}
+                  href={lp(locale, item.path)}
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {l.label}
+                  {item.label}
                 </Link>
               </li>
             ))}
@@ -45,28 +44,26 @@ export function SiteFooter() {
 
         <div className="space-y-3">
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Featured Coverage
+            {t.coverage}
           </h3>
           <ul className="space-y-2 text-sm">
             {SERVICE_AREAS.map((area) => (
               <li key={area.slug}>
                 <Link
-                  href={`/service-areas/${area.slug}`}
+                  href={lp(locale, `/service-areas/${area.slug}`)}
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {area.trade} in {area.city}
+                  {t.tradeIn(locale === 'es' ? area.tradeEs : area.trade, area.city)}
                 </Link>
               </li>
             ))}
           </ul>
-          <p className="pt-1 text-xs text-muted-foreground">
-            Serving every trade across the full DFW metroplex.
-          </p>
+          <p className="pt-1 text-xs text-muted-foreground">{t.coverageNote}</p>
         </div>
 
         <div className="space-y-3">
           <h3 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Contact
+            {t.contact}
           </h3>
           <ul className="space-y-3 text-sm">
             <li>
@@ -98,24 +95,24 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:px-6">
           <p className="font-mono text-xs text-muted-foreground">
-            © {new Date().getFullYear()} TenFour Systems. All rights reserved.
+            © {new Date().getFullYear()} TenFour Systems. {t.rights}
           </p>
           <div className="flex items-center gap-4">
             <Link
-              href="/privacy"
+              href={lp(locale, '/privacy')}
               className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Privacy Policy
+              {t.privacy}
             </Link>
             <Link
-              href="/terms"
+              href={lp(locale, '/terms')}
               className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
             >
-              Terms of Service
+              {t.terms}
             </Link>
           </div>
           <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Status: <span className="text-[var(--signal)]">Operational</span>
+            {t.status} <span className="text-[var(--signal)]">{t.operational}</span>
           </p>
         </div>
       </div>
