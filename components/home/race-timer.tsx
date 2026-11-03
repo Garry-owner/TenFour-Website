@@ -2,14 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
 import styles from './race-timer.module.css'
 
-const STEPS = [
-  { id: 's0', t: 0, time: '0:00', label: 'Missed call', avoided: false, endState: false, isRoger: false },
-  { id: 's1', t: 4, time: '0:04', label: 'Customer hangs up', avoided: false, endState: false, isRoger: false },
-  { id: 's2', t: 6, time: '0:06', label: 'Roger texts back', avoided: false, endState: false, isRoger: true },
-  { id: 's3', t: 8, time: '0:08', label: 'Calls a competitor', avoided: true, endState: false, isRoger: false },
-  { id: 's4', t: 10, time: '0:10', label: 'Lead ready to book', avoided: false, endState: true, isRoger: false },
+const STEP_META = [
+  { id: 's0', t: 0, time: '0:00', avoided: false, endState: false, isRoger: false },
+  { id: 's1', t: 4, time: '0:04', avoided: false, endState: false, isRoger: false },
+  { id: 's2', t: 6, time: '0:06', avoided: false, endState: false, isRoger: true },
+  { id: 's3', t: 8, time: '0:08', avoided: true, endState: false, isRoger: false },
+  { id: 's4', t: 10, time: '0:10', avoided: false, endState: true, isRoger: false },
 ]
 
 function cx(...classes: (string | false | undefined)[]) {
@@ -17,6 +19,8 @@ function cx(...classes: (string | false | undefined)[]) {
 }
 
 export function RaceTimer() {
+  const copy = getCopy(useLocale()).race
+  const steps = STEP_META.map((step, index) => ({ ...step, label: copy.steps[index] }))
   const [tick, setTick] = useState(-1)
   const pausedRef = useRef(false)
 
@@ -47,12 +51,13 @@ export function RaceTimer() {
       <div className={styles.badgeWrap}>
         <div role="status" className={styles.badge}>
           <span aria-hidden="true" className={cx(styles.dot, safe && styles.safe)} />
-          <span>{safe ? 'ROGER IS ON IT' : 'WATCHING FOR MISSED CALLS'}</span>
+          <span>{safe ? copy.onIt : copy.watching}</span>
         </div>
       </div>
 
       <p className={styles.heading}>
-        Missed call. <span className={cx(styles.money, safe && styles.safe)}>{safe ? 'Ready to book.' : 'Money on the line.'}</span>
+        {copy.missed}{' '}
+        <span className={cx(styles.money, safe && styles.safe)}>{safe ? copy.ready : copy.money}</span>
       </p>
 
       <div className={styles.timerWrap}>
@@ -60,11 +65,11 @@ export function RaceTimer() {
           0:{String(Math.max(0, tick)).padStart(2, '0')}
         </div>
       </div>
-      <div className={styles.timerCaption}>Time since the call was missed</div>
+      <div className={styles.timerCaption}>{copy.caption}</div>
 
-      <div className={styles.timeline} aria-label="Incident response sequence">
+      <div className={styles.timeline} aria-label={copy.sequence}>
         <div className={styles.timelineFill} style={{ height: `${percent}%` }} />
-        {STEPS.map((s) => {
+        {steps.map((s) => {
           const active = tick >= s.t
           return (
             <div key={s.id} className={cx(styles.step, active && styles.active, s.avoided && styles.avoided, s.endState && styles.safe)}>
@@ -78,7 +83,7 @@ export function RaceTimer() {
               <div className={styles.stepTime}>{s.time}</div>
               <div className={styles.stepLabel}>
                 {s.label}
-                {s.avoided && <span className={styles.avoidedTag}>AVOIDED</span>}
+                {s.avoided && <span className={styles.avoidedTag}>{copy.avoided}</span>}
               </div>
             </div>
           )

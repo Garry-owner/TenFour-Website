@@ -1,12 +1,18 @@
 import { CtaButton } from '@/components/cta-button'
+import { getCopy } from '@/lib/copy'
+import { lp, type Locale } from '@/lib/locale'
 
 export function CtaBand({
-  title = 'Stop losing jobs to voicemail.',
-  subtitle = "See how fast Roger catches a missed call and texts your next customer back, before your competitor does.",
+  locale,
+  title,
+  subtitle,
 }: {
+  locale: Locale
   title?: string
   subtitle?: string
 }) {
+  const t = getCopy(locale).cta
+
   return (
     <section className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 bg-control-grid opacity-60" aria-hidden />
@@ -15,14 +21,16 @@ export function CtaBand({
         aria-hidden
       />
       <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 text-center sm:px-6">
-        <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-        <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">{subtitle}</p>
+        <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl">{title ?? t.title}</h2>
+        <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">
+          {subtitle ?? t.subtitle}
+        </p>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <CtaButton href="/contact" size="lg">
-            Book a Demo
+          <CtaButton href={lp(locale, '/contact')} size="lg">
+            {t.book}
           </CtaButton>
-          <CtaButton href="/pricing" variant="outline" size="lg">
-            View Pricing
+          <CtaButton href={lp(locale, '/pricing')} variant="outline" size="lg">
+            {t.pricing}
           </CtaButton>
         </div>
       </div>

@@ -1,32 +1,18 @@
 import { Eyebrow } from '@/components/section-heading'
+import { getCopy } from '@/lib/copy'
+import type { Locale } from '@/lib/locale'
 
-const INDUSTRIES = [
-  'Roofing',
-  'HVAC',
-  'Plumbing',
-  'Electrical',
-  'Restoration',
-  'Garage Doors',
-  'Landscaping',
-  'Pest Control',
-  'Solar',
-  'Foundation Repair',
-  'Fencing',
-  'Tree Service',
-  'General Contracting',
-]
+export function Industries({ locale }: { locale: Locale }) {
+  const t = getCopy(locale).industries
 
-export function Industries() {
   return (
     <section className="border-b border-border py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col items-center gap-8 text-center">
-          <Eyebrow>Built for the trades</Eyebrow>
-          <p className="max-w-2xl text-pretty text-lg text-muted-foreground">
-            Tuned for home-service businesses where a missed call is a missed job.
-          </p>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
+          <p className="max-w-2xl text-pretty text-lg text-muted-foreground">{t.description}</p>
           <ul className="flex flex-wrap justify-center gap-3">
-            {INDUSTRIES.map((industry) => (
+            {t.items.map((industry) => (
               <li
                 key={industry}
                 className="rounded-full border border-border bg-card px-4 py-2 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"

@@ -27,20 +27,21 @@ type CtaButtonProps = {
   href: string
   className?: string
   children: React.ReactNode
+  onClick?: () => void
 } & VariantProps<typeof ctaVariants>
 
-export function CtaButton({ href, className, variant, size, children }: CtaButtonProps) {
+export function CtaButton({ href, className, variant, size, children, onClick }: CtaButtonProps) {
   const external = href.startsWith('http')
   const classes = cn(ctaVariants({ variant, size, className }))
   if (external) {
     return (
-      <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+      <a href={href} className={classes} target="_blank" rel="noopener noreferrer" onClick={onClick}>
         {children}
       </a>
     )
   }
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} onClick={onClick}>
       {children}
     </Link>
   )

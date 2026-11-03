@@ -1,4 +1,9 @@
+'use client'
+
 import Link from 'next/link'
+import { useLocale } from '@/components/use-locale'
+import { getCopy } from '@/lib/copy'
+import { lp } from '@/lib/locale'
 import { cn } from '@/lib/utils'
 
 // Lockups include the wordmark under the mark. The component already
@@ -13,11 +18,14 @@ export function BrandLogo({
   className?: string
   showWordmark?: boolean
 }) {
+  const locale = useLocale()
+  const t = getCopy(locale).chrome
+
   return (
     <Link
-      href="/"
-      className={cn('flex items-center gap-2.5', className)}
-      aria-label="TenFour Systems home"
+      href={lp(locale, '/')}
+      className={cn('flex shrink-0 items-center gap-2.5', className)}
+      aria-label={t.homeLabel}
     >
       <img
         src={`/tenfour-lockup.svg${MARK_VIEW}`}
@@ -34,7 +42,7 @@ export function BrandLogo({
         className="hidden h-9 w-9 object-contain dark:block"
       />
       {showWordmark && (
-        <span className="flex flex-col leading-none">
+        <span className="hidden min-[380px]:flex flex-col leading-none">
           <span className="font-mono text-sm font-bold tracking-[0.18em] text-foreground">
             TENFOUR
           </span>
