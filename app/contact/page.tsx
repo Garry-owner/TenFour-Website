@@ -3,9 +3,9 @@ import { ContactView } from '@/components/views/contact-view'
 import { languageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Book a Demo. TenFour Systems',
+  title: 'Join the Waitlist. TenFour Systems',
   description:
-    'Book a live demo of the TenFour AI dispatcher. See exactly how Roger catches a missed call and texts your next customer back.',
+    'Join the waitlist for TenFour. Roger texts back your missed calls, asks a few questions, and sends the lead to you.',
   ...languageAlternates('/contact'),
 }
 

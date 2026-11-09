@@ -22,7 +22,7 @@ export function SiteHeader() {
   const compact = locale === 'es' ? 'flex xl:hidden' : 'flex lg:hidden'
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b-[3px] border-primary bg-background text-foreground">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <BrandLogo />
 
@@ -36,8 +36,8 @@ export function SiteHeader() {
                 href={href}
                 className={cn(
                   locale === 'es'
-                    ? 'whitespace-nowrap rounded-md px-2 py-2 font-mono text-xs uppercase tracking-widest transition-colors'
-                    : 'whitespace-nowrap rounded-md px-2 py-2 font-mono text-xs uppercase tracking-widest transition-colors lg:px-3',
+                    ? 'whitespace-nowrap px-2 py-2 font-condensed text-base font-bold uppercase tracking-[0.05em] transition-colors'
+                    : 'whitespace-nowrap px-2 py-2 font-condensed text-[1.05rem] font-bold uppercase tracking-[0.06em] transition-colors lg:px-3',
                   active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
@@ -48,12 +48,6 @@ export function SiteHeader() {
         </nav>
 
         <div className={cn('shrink-0 items-center gap-3', desktop)}>
-          <span className="hidden items-center gap-2 font-mono text-[0.65rem] uppercase tracking-widest text-muted-foreground lg:flex">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-2 w-2 rounded-full bg-[var(--signal)] animate-signal" />
-            </span>
-            {t.live}
-          </span>
           <LanguageSwitch />
           <ThemeToggle />
           <CtaButton href={lp(locale, '/contact')} size="sm">
@@ -66,7 +60,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground"
+            className="inline-flex h-11 w-11 items-center justify-center bg-primary text-primary-foreground"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? t.closeMenu : t.openMenu}
             aria-expanded={open}
@@ -87,7 +81,7 @@ export function SiteHeader() {
                   href={href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'rounded-md px-3 py-3 font-mono text-sm uppercase tracking-widest',
+                    'border-b border-dashed border-border px-3 py-3 font-condensed text-2xl font-extrabold uppercase tracking-[0.05em]',
                     pathname === href ? 'bg-secondary text-primary' : 'text-muted-foreground',
                   )}
                 >

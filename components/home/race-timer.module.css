@@ -2,10 +2,10 @@
   width: 100%;
   margin: 0 auto;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 36px 28px 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--border);
+  border-top: 4px solid var(--primary);
+  border-radius: 0;
+  padding: 32px 24px 28px;
 }
 
 @media (min-width: 1024px) {
@@ -24,37 +24,36 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-family: var(--font-dispatch);
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--muted-foreground);
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 6px 14px;
-  background: var(--secondary);
+  border: 2px solid var(--border);
+  border-radius: 0;
+  padding: 6px 12px;
+  background: transparent;
 }
 
 .dot {
   width: 7px;
   height: 7px;
-  border-radius: 50%;
+  border-radius: 0;
   background: #ff4d4d;
-  box-shadow: 0 0 8px rgba(255, 77, 77, 0.35);
   transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .dot.safe {
-  background: var(--signal);
-  box-shadow: 0 0 8px color-mix(in oklch, var(--signal) 35%, transparent);
+  background: var(--primary);
 }
 
 .heading {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 1.85rem;
-  line-height: 1.2;
+  font-family: var(--font-stencil);
+  font-weight: 900;
+  font-size: 2.2rem;
+  line-height: 1;
+  text-transform: uppercase;
   text-align: center;
   margin-bottom: 12px;
   letter-spacing: 0.01em;
@@ -68,7 +67,7 @@
 }
 
 .money.safe {
-  color: var(--signal);
+  color: var(--primary);
 }
 
 .timerWrap {
@@ -77,29 +76,41 @@
 }
 
 .timer {
-  font-family: var(--font-bebas), sans-serif;
+  font-family: var(--font-stencil);
+  font-weight: 900;
   font-size: 6rem;
   line-height: 0.9;
   letter-spacing: 0.02em;
   color: #ff4d4d;
   font-variant-numeric: tabular-nums;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-  text-shadow: 0 0 32px rgba(255, 77, 77, 0.35);
+  transition: color 0.4s ease;
 }
 
 .timer.safe {
-  color: var(--signal);
-  text-shadow: 0 0 32px color-mix(in oklch, var(--signal) 35%, transparent);
+  color: var(--primary);
 }
 
 .timerCaption {
-  font-family: var(--font-mono);
+  font-family: var(--font-dispatch);
   font-size: 0.65rem;
   color: var(--muted-foreground);
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
+}
+
+.exampleLabel {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  font-family: var(--font-dispatch);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
 .timeline {
@@ -124,7 +135,7 @@
   top: 8px;
   width: 2px;
   max-height: calc(100% - 16px);
-  background: linear-gradient(180deg, #ff4d4d 0%, #ff4d4d 50%, var(--signal) 100%);
+  background: linear-gradient(180deg, #ff4d4d 0%, #ff4d4d 50%, var(--primary) 100%);
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -150,10 +161,10 @@
   top: 1px;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--card);
   border: 2px solid var(--border);
-  transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+  transition: border-color 0.4s ease, background 0.4s ease;
 }
 
 .stepAvatar {
@@ -178,24 +189,21 @@
 
 .stepAvatarActive {
   opacity: 1;
-  border-color: var(--signal);
-  box-shadow: 0 0 12px color-mix(in oklch, var(--signal) 35%, transparent);
+  border-color: var(--primary);
 }
 
 .step.active .stepDot {
   border-color: #ff4d4d;
   background: #ff4d4d;
-  box-shadow: 0 0 12px rgba(255, 77, 77, 0.35);
 }
 
 .step.active.safe .stepDot {
-  border-color: var(--signal);
-  background: var(--signal);
-  box-shadow: 0 0 12px color-mix(in oklch, var(--signal) 35%, transparent);
+  border-color: var(--primary);
+  background: var(--primary);
 }
 
 .stepTime {
-  font-family: var(--font-mono);
+  font-family: var(--font-dispatch);
   font-size: 0.65rem;
   color: var(--muted-foreground);
   letter-spacing: 0.05em;
@@ -204,10 +212,12 @@
 }
 
 .stepLabel {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-family: var(--font-condensed);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--muted-foreground);
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .step.active .stepLabel {
@@ -226,13 +236,25 @@
 .avoidedTag {
   display: inline-block;
   margin-left: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--signal);
-  letter-spacing: 0.06em;
-  border: 1px solid color-mix(in oklch, var(--signal) 35%, transparent);
-  background: color-mix(in oklch, var(--signal) 8%, transparent);
-  border-radius: 4px;
+  font-family: var(--font-dispatch);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--primary-foreground);
+  letter-spacing: 0.08em;
+  border: 0;
+  background: var(--primary);
+  border-radius: 0;
+  text-decoration: none;
   padding: 1px 6px;
   vertical-align: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step,
+  .timelineFill,
+  .timer,
+  .dot,
+  .money {
+    transition: none;
+  }
 }

@@ -8,23 +8,20 @@ export const en = {
       { path: '/roger', label: 'Meet Roger' },
       { path: '/faq', label: 'FAQ' },
     ],
-    live: 'Live',
-    bookDemo: 'Book a Demo',
+    bookDemo: 'Join the Waitlist',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
     footerBlurb:
-      'The 24/7 AI dispatcher for home service businesses. We catch every missed call and text back so no lead goes cold.',
+      'Missed call text back for home service businesses. When you miss a call, Roger texts the caller back, asks a few questions, and sends the lead to you.',
     footerTagline: "We work the second shift so you don't have to.",
     navigate: 'Navigate',
     coverage: 'Featured Coverage',
-    coverageNote: 'Serving every trade across the full DFW metroplex.',
+    coverageNote: 'Serving home service trades across the DFW metroplex.',
     contact: 'Contact',
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     rights: 'All rights reserved.',
-    status: 'Status:',
-    operational: 'Operational',
     homeLabel: 'TenFour Systems home',
     logoAlt: 'TenFour Systems logo',
     theme: 'Toggle theme',
@@ -33,8 +30,8 @@ export const en = {
   cta: {
     title: 'Stop losing jobs to voicemail.',
     subtitle:
-      'See how fast Roger catches a missed call and texts your next customer back, before your competitor does.',
-    book: 'Book a Demo',
+      'Be one of the first contractors to try Roger.',
+    book: 'Join the Waitlist',
     pricing: 'View Pricing',
   },
   hero: {
@@ -42,16 +39,15 @@ export const en = {
     titleBefore: 'We work the ',
     titleEmphasis: 'second shift',
     titleAfter: " so you don't have to.",
-    body: "TenFour Systems catches every missed call for home-service businesses. The moment you can't pick up, Roger texts that caller back within seconds, before they can call the next name on their list.",
+    body: "TenFour Systems texts back your missed calls, built for home-service businesses. When you can't pick up, Roger texts that caller back fast, so they're less likely to call the next name on their list.",
     rogerAlt: 'Roger',
     roger:
-      "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a call go unanswered.",
-    primary: 'Book a Demo',
+      "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a missed call go cold.",
+    primary: 'Join the Waitlist',
     secondary: 'See How It Works',
     stats: [
-      { k: '24/7', v: 'Always watching' },
-      { k: 'Seconds', v: 'Text-back speed' },
-      { k: '0', v: 'Missed leads' },
+      { k: 'Nights and weekends', v: 'Covered' },
+      { k: 'Fast', v: 'Text-back speed' },
     ],
   },
   industries: {
@@ -78,38 +74,40 @@ export const en = {
     title: 'The phone rings after 5 PM. Nobody answers. The job is gone.',
     description:
       "Home service owners can't sit by the phone 24/7, but their customers expect an answer the moment something breaks.",
-    note: 'Industry figures based on published missed-call and home-service revenue studies.',
+    note: 'Source for 27%: Invoca research on calls to home services businesses (2024).',
+    sourceLabel: 'Read the Invoca article',
+    sourceUrl: 'https://invoca.com/blog/how-much-missed-sales-calls-cost-home-services-businesses',
     cards: [
       {
-        stat: '62%',
-        label: 'of calls to small businesses go unanswered',
-        body: 'Every ring that rolls to voicemail is a customer who calls the next name on the list.',
+        stat: '27%',
+        label: 'of calls to home-service businesses are not answered',
+        body: 'Every ring that rolls to voicemail is a customer who may call the next name on the list.',
       },
       {
-        stat: '27%',
-        label: 'of home-service calls are never picked up',
+        stat: 'After 5 PM',
+        label: 'is when a lot of trouble starts',
         body: 'Storms, leaks, and outages do not keep business hours, and neither should your phone.',
       },
       {
-        stat: '$1,200+',
-        label: 'average value of a missed home-service call',
-        body: 'A single missed emergency call can walk thousands of dollars straight to a competitor.',
+        stat: 'One call',
+        label: 'can be a big job',
+        body: 'A single missed emergency call can send a big job straight to a competitor.',
       },
     ],
   },
   capabilities: {
     eyebrow: 'The System',
-    title: 'A full dispatch desk, running on autopilot',
+    title: 'Your missed callers get a text back, automatically',
     description:
-      'TenFour handles the entire front-of-house call flow so your crew stays on the roof, not on the phone.',
+      "When you can't get to the phone, TenFour texts the caller back so your crew stays on the roof, not on the phone.",
     items: [
       {
-        title: 'Catches every missed call',
-        body: 'The moment your phone goes unanswered, Roger texts that caller back within seconds, 24/7/365. No hold music, no dead-end voicemail, no missed opportunity.',
+        title: 'Texts back missed calls',
+        body: 'When your phone goes unanswered, Roger texts that caller back fast, nights and weekends included. No hold music and no dead-end voicemail.',
       },
       {
         title: 'Qualifies the lead',
-        body: 'Asks the right questions for your trade, including service type, location, and urgency, and filters out tire kickers.',
+        body: 'Asks the right questions for your trade, including service type, location, and urgency.',
       },
       {
         title: 'Delivers a ready lead',
@@ -117,11 +115,11 @@ export const en = {
       },
       {
         title: 'Confirms the request',
-        body: 'Sends the caller an instant text confirming their request was received and someone will follow up.',
+        body: 'Sends the caller a text confirming their request was received and someone will follow up.',
       },
       {
         title: 'Notifies your team',
-        body: 'Every qualified lead is pushed to you in real time with a full transcript and the details that matter.',
+        body: 'Each qualified lead is sent to you with the text conversation and the details that matter.',
       },
       {
         title: 'Sounds like your brand',
@@ -131,31 +129,31 @@ export const en = {
   },
   proof: {
     items: [
-      { k: 'Captured', v: 'Every after-hours call', note: 'nights, weekends, holidays' },
-      { k: 'Faster', v: 'Seconds, not hours', note: 'texted back before they call a competitor' },
-      { k: 'Qualified', v: 'Ready to book', note: 'your link, or a lead your team can book' },
+      { k: 'Captured', v: 'After-hours missed calls', note: 'nights, weekends, holidays' },
+      { k: 'Faster', v: 'Fast, not hours later', note: 'a text back while the caller is still looking' },
+      { k: 'Qualified', v: 'Ready for you', note: 'your link, or a lead your team can book' },
     ],
   },
   steps: {
     eyebrow: 'How It Works',
-    title: 'Live in a day. Answering forever.',
+    title: 'Set up fast. Stop losing leads.',
     description: 'No apps to babysit, no scripts to memorize. We handle the wiring, you get your evenings back.',
     items: [
       {
         title: 'We watch your line',
-        body: 'Roger connects to your existing business number and watches for any call that goes unanswered. Setup takes minutes, not weeks.',
+        body: 'Roger connects to your existing business number and watches for any call that goes unanswered. We handle the setup for you.',
       },
       {
         title: 'We tune Roger',
         body: 'We script your text-back message and qualifying questions around your trade, service area, and hours, and add your booking link when you have one.',
       },
       {
-        title: 'Missed calls get caught',
-        body: 'The moment a call goes unanswered, Roger texts that caller back before they can call the next name on their list.',
+        title: 'Missed callers get a text',
+        body: "When a call goes unanswered, Roger texts that caller back fast, so they're less likely to call the next name on their list.",
       },
       {
         title: 'You get the lead',
-        body: 'If you have a booking link, Roger texts it so the customer can book themselves. Otherwise a ready to book lead, transcript, and callback details land with your team.',
+        body: 'If you have a booking link, Roger texts it so the customer can book themselves. Otherwise the lead, the text conversation, and callback details land with your team.',
       },
     ],
   },
@@ -163,6 +161,7 @@ export const en = {
     eyebrow: 'Free tool',
     heading: 'What are missed calls costing you?',
     trade: 'Trade',
+    choose: 'Choose your trade',
     calls: 'Missed calls per week',
     value: 'Average job value',
     rate: 'Estimated close rate',
@@ -170,8 +169,9 @@ export const en = {
     year: 'Estimated / year',
     formula:
       'formula: (missed calls per week × 4.33 weeks) × close rate × average job value.',
+    estimate: 'This is a rough estimate, not a promise. Your real numbers will be different.',
     sources:
-      'Job value estimates based on 2026 national and Texas-regional pricing data from Angi, HomeAdvisor, and Consumer Affairs. Your actual job values may differ, adjust the sliders to match your business.',
+      'Job values are rough averages. Adjust the sliders to match your business.',
     trades: [
       'Roofing',
       'HVAC',
@@ -193,8 +193,9 @@ export const en = {
     onIt: 'ROGER IS ON IT',
     missed: 'Missed call.',
     money: 'Money on the line.',
-    ready: 'Ready to book.',
+    ready: 'Lead sent to you.',
     caption: 'Time since the call was missed',
+    example: 'Example',
     sequence: 'Incident response sequence',
     avoided: 'AVOIDED',
     steps: [
@@ -202,12 +203,12 @@ export const en = {
       'Customer hangs up',
       'Roger texts back',
       'Calls a competitor',
-      'Lead ready to book',
+      'Lead sent to you',
     ],
   },
   about: {
     eyebrow: 'About',
-    title: 'No job lost to a missed call. Ever.',
+    title: 'Stop losing jobs to missed calls.',
     description:
       "TenFour Systems was built for the owner who's up on the roof, under the sink, or asleep after a 14 hour day, and can't get to the phone.",
     storyEyebrow: 'Our Story',
@@ -216,15 +217,15 @@ export const en = {
       "Home service owners are the hardest working people I know. But there are only so many hours in a day, and the calls never stop coming.",
     paragraphs: [
       'I started TenFour Systems after watching great local contractors lose real money to something completely fixable: a phone that rang when nobody could pick it up. A leak at midnight, a storm on a Saturday, a customer who simply calls the next name on the list.',
-      'With over 35 years in IT, plus a background in commercial insurance, I built a system that never clocks out. The moment a call goes unanswered, it texts that caller back in your business name, qualifies them over text, and gets them ready to book, then hands you the lead with everything you need to show up ready.',
+      "With over 35 years in IT, plus a background in commercial insurance, I'm building a system that keeps working after you clock out. When a call goes unanswered, it texts that caller back in your business name, asks a few questions over text, then sends you the lead with what you need to follow up.",
       "I'm proud to be based in Terrell, Texas, serving home-service businesses that refuse to let a ringing phone go to waste.",
     ],
     valuesEyebrow: 'What I Believe',
-    valuesTitle: 'The principles behind the dispatcher',
+    valuesTitle: 'The principles behind Roger',
     values: [
       {
-        title: 'Always on the air',
-        body: '"Ten-four" means message received. That is the promise: every call gets received, acknowledged, and handled.',
+        title: 'On the air after hours',
+        body: '"Ten-four" means message received. That is the idea: a missed call gets a text back instead of silence.',
       },
       {
         title: '35 plus years in IT',
@@ -232,21 +233,21 @@ export const en = {
       },
       {
         title: 'Speed wins jobs',
-        body: 'The first business to answer usually wins the work. TenFour makes sure that business is always yours.',
+        body: 'The first business to respond often wins the work. TenFour helps make that business yours.',
       },
     ],
     location: 'Proudly based in Terrell, Texas',
-    ctaTitle: "Let's make sure you never miss another one.",
+    ctaTitle: "Let's stop the next missed call from going cold.",
     ctaSubtitle:
-      'See how fast Roger catches a missed call and texts your next customer back. Book a demo today.',
+      'Be one of the first contractors to try Roger. Join the waitlist today.',
   },
   how: {
     eyebrow: 'How It Works',
     title: 'Your second shift, fully automated',
     description:
-      'TenFour watches for missed calls on your line. Roger qualifies each one, sends your booking link when you have one, and otherwise hands your team a ready to book lead.',
+      'TenFour watches for missed calls on your line. Roger texts each caller back, asks a few questions, sends your booking link when you have one, and otherwise sends the lead to your team.',
     flowEyebrow: 'The Call Flow',
-    flowTitle: 'What happens on every missed call',
+    flowTitle: 'What happens on a missed call',
     flowDescription:
       "Here's the exact path a caller takes from a missed call to your booking link, or a lead your team can book.",
     flow: [
@@ -255,8 +256,8 @@ export const en = {
         body: 'A homeowner calls after hours with a leak. Nobody picks up, and the call goes unanswered.',
       },
       {
-        title: 'Roger texts back instantly',
-        body: 'Within seconds, Roger sends that caller a text, before they can call the next name on their list.',
+        title: 'Roger texts back fast',
+        body: "Roger sends that caller a text right away, so they're less likely to call the next name on their list.",
       },
       {
         title: 'The lead is qualified',
@@ -264,17 +265,17 @@ export const en = {
       },
       {
         title: 'The lead is sent to you',
-        body: 'If you have a booking link, Roger texts it so the customer can book. Otherwise a ready to book lead and full transcript land with your team.',
+        body: 'If you have a booking link, Roger texts it so the customer can book. Otherwise the lead and the text conversation land with your team.',
       },
     ],
     includedEyebrow: "What's Included",
-    includedTitle: 'Everything a front desk hire would do, minus the payroll',
-    includedDescription: 'One flat system that replaces missed calls, voicemail tag, and after-hours chaos.',
+    includedTitle: 'Help with missed calls, minus the payroll',
+    includedDescription: 'One flat system for missed calls, voicemail tag, and after-hours chaos.',
     included: [
       'Custom text-back script for your trade',
       'Lead qualification tuned to your service area',
-      'Instant confirmation text that a request was received',
-      'Real-time lead alerts with full transcripts',
+      'Confirmation text that a request was received',
+      'Lead alerts with the text conversation',
       "Responds automatically in the lead's language",
     ],
   },
@@ -282,52 +283,52 @@ export const en = {
     eyebrow: 'Pricing',
     title: 'Flat pricing. No missed-call math.',
     description:
-      'One booked job usually covers the month. Every plan includes setup, tuning, and a dispatcher that never sleeps.',
+      'One booked job can cover the month. Every plan includes setup, tuning, and missed call text back on nights and weekends.',
     plans: [
       {
-        name: 'Base Dispatch',
+        name: 'Base',
         tag: 'Get started',
         price: '$299',
         cadence: '/mo',
         setup: '$699 one time setup fee',
-        blurb: 'Instant automated response to every missed call and web inquiry, with full CRM tracking.',
+        blurb: 'Automated text response to missed calls and web inquiries, with full CRM tracking.',
         features: [
-          'Instant automated text response to every missed call and web inquiry',
+          'Automated text response to missed calls and web inquiries',
           'Full lead and CRM tracking',
           'Standard monthly message quota',
           'One dedicated phone number',
         ],
-        cta: 'Start with Base Dispatch',
+        cta: 'Start with Base',
       },
       {
-        name: 'Pro Dispatch',
+        name: 'Pro',
         tag: 'Most popular',
         price: '$499',
         cadence: '/mo',
         setup: '$899 one time setup fee',
-        blurb: 'Everything in Base Dispatch, plus storm reactive follow up for weather driven trades.',
+        blurb: 'Everything in Base, plus storm reactive follow up for weather driven trades.',
         features: [
-          'Everything in Base Dispatch',
+          'Everything in Base',
           'Storm reactive re engagement for weather driven trades',
           'Higher message quota',
           'Priority support',
         ],
-        cta: 'Start with Pro Dispatch',
+        cta: 'Start with Pro',
       },
       {
-        name: 'Elite Full Stack',
+        name: 'Elite',
         tag: 'Full coverage',
         price: '$799',
         cadence: '/mo',
         setup: '$1,199 one time setup fee',
-        blurb: 'Everything in Pro Dispatch, plus an emergency phone alert for your most urgent leads.',
+        blurb: 'Everything in Pro, plus an emergency phone alert for your most urgent leads.',
         features: [
-          'Everything in Pro Dispatch',
+          'Everything in Pro',
           'Emergency phone call alert for urgent leads',
           'Highest quota ceiling',
           'Dedicated onboarding',
         ],
-        cta: 'Start with Elite Full Stack',
+        cta: 'Start with Elite',
       },
     ],
     overageTitle: 'Overage billing',
@@ -340,20 +341,20 @@ export const en = {
     questions: 'Questions? Talk to us',
     ctaTitle: 'Not sure which plan fits?',
     ctaSubtitle:
-      'Tell us your call volume and trade. We will recommend the right setup and show you a live demo.',
+      'Tell us your call volume and trade. We will recommend the right setup and save your spot on the waitlist.',
   },
   roger: {
     eyebrow: 'Meet Roger',
-    title: 'The one who never misses a call',
-    description: "Roger is TenFour's AI dispatcher, on the job 24/7.",
+    title: 'The one who texts back your missed calls',
+    description: 'Roger is the one who texts back when your phone goes unanswered.',
     alt: 'Roger',
     paragraphs: [
-      "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a call go unanswered.",
-      "The moment a call to your business goes unanswered, Roger texts that caller back within seconds, before they can call the next name on their list. He asks the right questions for your trade, gets the details you need, and hands you a ready lead, all before the phone would've rung a fourth time.",
-      "Roger doesn't answer live calls today, that's honest, and it's by design. What he does is faster than voicemail and cheaper than a full-time dispatcher, and he never has an off day.",
+      "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a missed call go cold.",
+      "When a call to your business goes unanswered, Roger texts that caller back fast, so they're less likely to call the next name on their list. He asks a few questions for your trade, gets the details you need, and sends the lead to you.",
+      "Roger doesn't answer calls and doesn't book appointments. That's honest, and it's by design. What he does is faster than voicemail and cheaper than a full-time dispatcher.",
     ],
-    ctaTitle: 'See Roger catch a missed call',
-    ctaSubtitle: 'Book a demo and watch exactly how it works.',
+    ctaTitle: 'Be one of the first to try Roger',
+    ctaSubtitle: 'Join the waitlist and we will let you know when Roger is ready for your business.',
   },
   faq: {
     eyebrow: 'FAQ',
@@ -362,15 +363,15 @@ export const en = {
     items: [
       {
         q: 'Does Roger replace my receptionist?',
-        a: "Not entirely. Roger catches the calls nobody could get to, missed calls, after-hours, mid-job, and turns them into qualified, ready-to-book leads over text. It's built for the calls that would have gone to voicemail, not to replace a front desk you already have covered.",
+        a: "Not entirely. Roger texts back the calls nobody could get to, after hours or mid-job, asks a few questions, and sends you the lead. It's built for the calls that would have gone to voicemail, not to replace a front desk you already have covered.",
       },
       {
         q: 'Does Roger answer the phone live?',
-        a: "No, and we're upfront about that. Roger works entirely over text. The moment a call to your business goes unanswered, Roger texts that customer back within seconds, asks the right questions for your trade, and hands you a ready lead. There's no live voice conversation today.",
+        a: "No, and we're upfront about that. Roger works entirely over text. When a call to your business goes unanswered, Roger texts that customer back, asks the right questions for your trade, and sends you the lead. He doesn't answer calls and doesn't book appointments.",
       },
       {
         q: 'What happens after hours or on weekends?',
-        a: "The same thing that happens during the day. Roger doesn't have hours, he watches for missed calls 24/7/365, including nights, weekends, and holidays.",
+        a: 'The same thing that happens during the day. Roger is built to text back missed calls on nights, weekends, and holidays too.',
       },
       {
         q: 'Do I need to change my phone number?',
@@ -378,11 +379,11 @@ export const en = {
       },
       {
         q: 'How fast does Roger actually respond?',
-        a: 'Within seconds of a call going unanswered, well before most callers give up and dial the next business on their list.',
+        a: 'Fast. Roger sends the text as soon as the missed call comes through, so the caller hears from you while they are still looking.',
       },
       {
         q: 'What if a customer wants pricing right away?',
-        a: 'Roger never gives firm pricing or arrival times over text. He qualifies the lead, service type, location, urgency, and gets them ready to book, then hands that lead straight to you with full details so you can follow up with real numbers.',
+        a: "Roger doesn't give firm pricing or arrival times over text. He asks about the service type, location, and urgency, then sends that lead straight to you with the details so you can follow up with real numbers.",
       },
       {
         q: 'Is there a long-term contract?',
@@ -390,24 +391,24 @@ export const en = {
       },
     ],
     ctaTitle: 'Still have questions?',
-    ctaSubtitle: "Book a demo and we'll walk through exactly how it would work for your business.",
+    ctaSubtitle: "Join the waitlist and we'll walk through exactly how it would work for your business.",
   },
   contact: {
-    eyebrow: 'Book a Demo',
-    title: 'See Roger catch a missed call',
+    eyebrow: 'Join the Waitlist',
+    title: 'Be one of the first to try Roger',
     description:
-      "Tell us about your business and we'll set up a live demo tuned to your trade. You'll see exactly how Roger texts your callers back.",
-    heading: "Let's get you on the air",
-    intro: "Fill out the form and we'll reach out to schedule your demo. Prefer to talk first? Reach us directly below.",
+      "Roger isn't launched yet. Tell us about your business and we'll save your spot and reach out when he's ready for your trade.",
+    heading: "Let's get you on the list",
+    intro: "Fill out the form and we'll reach out about early access. Prefer to talk first? Reach us directly below.",
     cards: [
       { label: 'Email', value: 'garry@tenfoursystems.com', href: 'mailto:garry@tenfoursystems.com' },
       { label: 'Phone', value: '(972) 349 5808', href: 'tel:+19723495808' },
       { label: 'Based in', value: 'Terrell, Texas', href: '' },
-      { label: 'Dispatcher hours', value: '24 / 7 / 365', href: '' },
+      { label: 'Built for', value: 'After-hours missed calls', href: '' },
     ],
-    online: 'Dispatcher online',
+    online: 'Coming soon',
     onlineBody:
-      "Your future callers never hit voicemail again. The moment you're live, every missed call gets a text back, days, nights, and weekends included.",
+      'Roger is getting ready for launch. Once your line is set up, missed calls get a text back, days, nights, and weekends included.',
   },
   form: {
     first: 'First name',
@@ -431,13 +432,13 @@ export const en = {
     consent:
       'By checking this box, I agree to receive automated text messages from TenFour Systems at the number provided, regarding my service inquiry, appointment scheduling, and follow-up updates. Message frequency varies. Consent is not a condition of purchase. Msg and data rates may apply. Reply HELP for help or STOP to opt out. See our {{privacy}} and {{terms}}.',
     sending: 'Sending',
-    submit: 'Request My Demo',
+    submit: 'Join the Waitlist',
     error:
       'Something went wrong. Please email garry@tenfoursystems.com or call (972) 349 5808 directly.',
     fine: 'No spam. No obligation. We respond fast.',
     doneTitle: 'Message received. Ten four.',
     doneBody:
-      "Thanks for reaching out. We'll be in touch shortly to set up your live demo and get your dispatcher on the air.",
+      "Thanks for reaching out. You're on the list, and we'll be in touch about early access.",
     another: 'Submit another request',
     honeypot: 'Company Website',
   },
@@ -445,10 +446,10 @@ export const en = {
     title: 'Looks like this page went missing.',
     body: 'Kind of like a call nobody caught. Unlike this page, Roger would have texted you back already.',
     home: 'Back to home',
-    demo: 'Book a Demo',
+    demo: 'Join the Waitlist',
   },
   serviceArea: {
-    ctaSubtitle: 'Book a demo and see how fast Roger catches a missed call.',
+    ctaSubtitle: 'Join the waitlist and be one of the first contractors to try Roger.',
   },
   privacy: {
     title: 'Privacy Policy',
@@ -539,7 +540,7 @@ export const en = {
       {
         heading: '3. Text messages',
         paragraphs: [
-          'TenFour Systems sends text messages under the program name TenFour Systems / Roger text messages. If you ask for a demo, these messages are responses to that request, regarding your service inquiry, appointment scheduling, and follow-up updates. For client businesses, Roger replies to people who called and missed a connection.',
+          'TenFour Systems sends text messages under the program name TenFour Systems / Roger text messages. If you join the waitlist or ask about early access, these messages are responses to that request, regarding your service inquiry, appointment scheduling, and follow-up updates. For client businesses, Roger replies to people who called and missed a connection.',
           'Message frequency varies. Message and data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out and HELP for help. For support, email {{email}} or call (972) 349 5808. Carriers are not liable for delayed or undelivered messages. See our {{privacy}}.',
           'Client businesses that use Roger are responsible for having proper consent to text their callers and contacts, including any re-engagement or follow-up messages, and agree to comply with the TCPA and carrier rules.',
         ],

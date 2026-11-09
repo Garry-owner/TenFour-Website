@@ -10,23 +10,20 @@ export const es: typeof en = {
       { path: '/roger', label: 'Conoce a Roger' },
       { path: '/faq', label: 'Preguntas' },
     ],
-    live: 'En vivo',
-    bookDemo: 'Agenda una demo',
+    bookDemo: 'Únete a la lista de espera',
     openMenu: 'Abrir menú',
     closeMenu: 'Cerrar menú',
     language: 'Idioma',
     footerBlurb:
-      'Texto de regreso por llamada perdida para negocios de servicio en el hogar. Atrapamos cada llamada que nadie contesta y escribimos de vuelta para que ningún prospecto se enfríe.',
+      'Texto de regreso por llamada perdida para negocios de servicio en el hogar. Cuando no alcanzas a contestar, Roger le escribe a quien llamó, le hace unas preguntas y te pasa el prospecto.',
     footerTagline: 'Nosotros cubrimos el segundo turno para que tú no tengas que hacerlo.',
     navigate: 'Navegación',
     coverage: 'Cobertura destacada',
-    coverageNote: 'Para todos los oficios en todo el metroplex de DFW.',
+    coverageNote: 'Para oficios de servicio en el hogar en el metroplex de DFW.',
     contact: 'Contacto',
     privacy: 'Política de privacidad',
     terms: 'Términos del servicio',
     rights: 'Todos los derechos reservados.',
-    status: 'Estado:',
-    operational: 'Operativo',
     homeLabel: 'Inicio de TenFour Systems',
     logoAlt: 'Logotipo de TenFour Systems',
     theme: 'Cambiar tema',
@@ -35,8 +32,8 @@ export const es: typeof en = {
   cta: {
     title: 'Deja de perder trabajos por el buzón.',
     subtitle:
-      'Mira qué tan rápido Roger atrapa una llamada perdida y le escribe a tu siguiente cliente, antes de que lo haga tu competencia.',
-    book: 'Agenda una demo',
+      'Sé de los primeros contratistas en probar a Roger.',
+    book: 'Únete a la lista de espera',
     pricing: 'Ver precios',
   },
   hero: {
@@ -44,16 +41,15 @@ export const es: typeof en = {
     titleBefore: 'Nosotros cubrimos el ',
     titleEmphasis: 'segundo turno',
     titleAfter: ' para que tú no tengas que hacerlo.',
-    body: 'TenFour Systems atrapa cada llamada perdida de los negocios de servicio en el hogar. En el momento en que no puedes contestar, Roger le manda un texto a esa persona en segundos, antes de que marque el siguiente nombre de la lista.',
+    body: 'TenFour Systems le manda un texto a tus llamadas perdidas, hecho para negocios de servicio en el hogar. Cuando no puedes contestar, Roger le escribe rápido a esa persona, para que sea menos probable que marque el siguiente nombre de la lista.',
     rogerAlt: 'Roger',
     roger:
-      'El nombre viene de un código viejo de radio, ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja una llamada perdida sin texto de regreso.',
-    primary: 'Agenda una demo',
+      'El nombre viene de un código viejo de radio, ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja que una llamada perdida se enfríe.',
+    primary: 'Únete a la lista de espera',
     secondary: 'Mira cómo funciona',
     stats: [
-      { k: '24/7', v: 'Siempre pendiente' },
-      { k: 'Segundos', v: 'Velocidad del texto' },
-      { k: '0', v: 'Prospectos perdidos' },
+      { k: 'Noches y fines de semana', v: 'Cubiertos' },
+      { k: 'Rápido', v: 'Velocidad del texto' },
     ],
   },
   industries: {
@@ -81,38 +77,40 @@ export const es: typeof en = {
     title: 'El teléfono suena después de las 5. Nadie contesta. El trabajo se va.',
     description:
       'El dueño no puede vivir pegado al teléfono, pero el cliente espera que alguien le hable en cuanto algo se descompone.',
-    note: 'Cifras del sector, tomadas de estudios publicados sobre llamadas perdidas e ingresos en servicios del hogar.',
+    note: 'Fuente del 27%: investigación de Invoca sobre llamadas a negocios de servicio en el hogar (2024, en inglés).',
+    sourceLabel: 'Leer el artículo de Invoca',
+    sourceUrl: 'https://invoca.com/blog/how-much-missed-sales-calls-cost-home-services-businesses',
     cards: [
       {
-        stat: '62%',
-        label: 'de las llamadas a negocios pequeños se quedan sin contestar',
-        body: 'Cada timbre que cae en el buzón es un cliente que marca el siguiente nombre de la lista.',
+        stat: '27%',
+        label: 'de las llamadas a negocios de servicio en el hogar no se contestan',
+        body: 'Cada timbre que cae en el buzón es un cliente que puede marcar el siguiente nombre de la lista.',
       },
       {
-        stat: '27%',
-        label: 'de las llamadas de servicio en el hogar nadie las contesta',
+        stat: 'Después de las 5',
+        label: 'es cuando empiezan muchos problemas',
         body: 'Las tormentas, las fugas y los apagones no respetan horario de oficina. La llamada perdida tampoco espera.',
       },
       {
-        stat: '$1,200+',
-        label: 'valor promedio de una llamada perdida en servicio del hogar',
-        body: 'Una sola llamada de emergencia que se pierde puede llevarse miles de dólares directo con la competencia.',
+        stat: 'Una llamada',
+        label: 'puede ser un trabajo grande',
+        body: 'Una sola llamada de emergencia que se pierde puede mandar un trabajo grande directo con la competencia.',
       },
     ],
   },
   capabilities: {
     eyebrow: 'El sistema',
-    title: 'Toda la recepción, trabajando sola',
+    title: 'Quien llamó recibe un texto de regreso, en automático',
     description:
-      'TenFour se encarga del frente cuando nadie puede tomar el teléfono, para que tu cuadrilla siga en el techo y no en la llamada.',
+      'Cuando nadie puede tomar el teléfono, TenFour le escribe a quien llamó, para que tu cuadrilla siga en el techo y no en la llamada.',
     items: [
       {
-        title: 'Atrapa cada llamada perdida',
-        body: 'En cuanto tu teléfono se queda sin contestar, Roger le escribe a esa persona en segundos, los 365 días del año. Sin música de espera, sin buzón muerto y sin perder la oportunidad.',
+        title: 'Le escribe a tus llamadas perdidas',
+        body: 'Cuando tu teléfono se queda sin contestar, Roger le escribe rápido a esa persona, también de noche y en fin de semana. Sin música de espera y sin buzón muerto.',
       },
       {
         title: 'Califica al prospecto',
-        body: 'Hace las preguntas de tu oficio: tipo de servicio, ubicación y urgencia, y aparta a quien solo está mirando.',
+        body: 'Hace las preguntas de tu oficio: tipo de servicio, ubicación y urgencia.',
       },
       {
         title: 'Te deja un prospecto listo',
@@ -120,11 +118,11 @@ export const es: typeof en = {
       },
       {
         title: 'Confirma la solicitud',
-        body: 'Le manda un texto al instante confirmando que su solicitud llegó y que alguien le va a dar seguimiento.',
+        body: 'Le manda un texto confirmando que su solicitud llegó y que alguien le va a dar seguimiento.',
       },
       {
         title: 'Avisa a tu equipo',
-        body: 'Cada prospecto calificado te llega al momento, con la conversación completa y los datos que importan.',
+        body: 'Cada prospecto calificado te llega con la conversación por texto y los datos que importan.',
       },
       {
         title: 'Se siente como tu negocio',
@@ -136,42 +134,42 @@ export const es: typeof en = {
     items: [
       {
         k: 'Capturadas',
-        v: 'Cada llamada fuera de horario',
+        v: 'Llamadas perdidas fuera de horario',
         note: 'noches, fines de semana y días festivos',
       },
       {
         k: 'Más rápido',
-        v: 'Segundos, no horas',
-        note: 'texto de regreso antes de que llamen a la competencia',
+        v: 'Rápido, no horas después',
+        note: 'un texto de regreso mientras quien llamó sigue buscando',
       },
       {
         k: 'Calificados',
-        v: 'Listos para agendar',
+        v: 'Listos para ti',
         note: 'tu enlace, o un prospecto que tu equipo puede agendar',
       },
     ],
   },
   steps: {
     eyebrow: 'Cómo funciona',
-    title: 'Listo en un día. Pendiente de ahí en adelante.',
+    title: 'Listo rápido. Deja de perder prospectos.',
     description:
       'Sin aplicaciones que cuidar ni guiones que memorizar. Nosotros hacemos la conexión y tú recuperas tus tardes.',
     items: [
       {
         title: 'Vigilamos tu línea',
-        body: 'Roger se conecta a tu número actual y vigila cualquier llamada que se quede sin contestar. La instalación toma minutos, no semanas.',
+        body: 'Roger se conecta a tu número actual y vigila cualquier llamada que se quede sin contestar. Nosotros nos encargamos de la instalación.',
       },
       {
         title: 'Ajustamos a Roger',
         body: 'Armamos tu mensaje de texto y las preguntas según tu oficio, tu zona y tu horario, y agregamos tu enlace para agendar si ya tienes uno.',
       },
       {
-        title: 'Las llamadas perdidas no se escapan',
-        body: 'En cuanto una llamada se queda sin contestar, Roger le escribe a esa persona antes de que marque el siguiente nombre de la lista.',
+        title: 'Quien llamó recibe un texto',
+        body: 'Cuando una llamada se queda sin contestar, Roger le escribe rápido a esa persona, para que sea menos probable que marque el siguiente nombre de la lista.',
       },
       {
         title: 'Tú recibes el prospecto',
-        body: 'Si tienes un enlace para agendar, Roger se lo manda para que el cliente aparte por su cuenta. Si no, tu equipo recibe un prospecto listo para agendar, la conversación y los datos para devolver la llamada.',
+        body: 'Si tienes un enlace para agendar, Roger se lo manda para que el cliente aparte por su cuenta. Si no, tu equipo recibe el prospecto, la conversación por texto y los datos para devolver la llamada.',
       },
     ],
   },
@@ -179,6 +177,7 @@ export const es: typeof en = {
     eyebrow: 'Herramienta gratis',
     heading: '¿Cuánto te cuestan las llamadas perdidas?',
     trade: 'Oficio',
+    choose: 'Elige tu oficio',
     calls: 'Llamadas perdidas por semana',
     value: 'Valor promedio del trabajo',
     rate: 'Cierre estimado',
@@ -186,8 +185,9 @@ export const es: typeof en = {
     year: 'Estimado / año',
     formula:
       'fórmula: (llamadas perdidas por semana × 4.33 semanas) × tasa de cierre × valor promedio del trabajo.',
+    estimate: 'Es un cálculo aproximado, no una promesa. Tus números reales van a ser distintos.',
     sources:
-      'Los valores de trabajo son estimados con datos de precios de 2026, nacionales y de la región de Texas, de Angi, HomeAdvisor y Consumer Affairs. Tus trabajos reales pueden ser distintos. Mueve las barras para ajustarlas a tu negocio.',
+      'Los valores de trabajo son promedios aproximados. Mueve las barras para ajustarlas a tu negocio.',
     trades: [
       'Techos',
       'HVAC',
@@ -209,8 +209,9 @@ export const es: typeof en = {
     onIt: 'ROGER YA LE ESCRIBIÓ',
     missed: 'Llamada perdida.',
     money: 'Hay dinero en juego.',
-    ready: 'Listo para agendar.',
+    ready: 'Prospecto enviado a ti.',
     caption: 'Tiempo desde que se perdió la llamada',
+    example: 'Ejemplo',
     sequence: 'Secuencia después de la llamada perdida',
     avoided: 'EVITADO',
     steps: [
@@ -218,12 +219,12 @@ export const es: typeof en = {
       'El cliente cuelga',
       'Roger manda el texto',
       'Llama a la competencia',
-      'Prospecto listo para agendar',
+      'Prospecto enviado a ti',
     ],
   },
   about: {
     eyebrow: 'Nosotros',
-    title: 'Ningún trabajo perdido por una llamada. Nunca.',
+    title: 'Deja de perder trabajos por llamadas perdidas.',
     description:
       'TenFour Systems nació para el dueño que está en el techo, debajo del fregadero o dormido después de un día de 14 horas, y no alcanza a contestar.',
     storyEyebrow: 'Nuestra historia',
@@ -232,15 +233,15 @@ export const es: typeof en = {
       'Los dueños de negocios de servicio son de la gente más trabajadora que conozco. Pero el día no alcanza, y las llamadas no paran.',
     paragraphs: [
       'Armé TenFour Systems después de ver a buenos contratistas de aquí perder dinero de verdad por algo que sí tiene arreglo: el teléfono sonaba cuando nadie podía contestar. Una fuga a medianoche, una tormenta en sábado, un cliente que simplemente marca el siguiente nombre de la lista.',
-      'Con más de 35 años en sistemas, y experiencia en seguros comerciales, construí un sistema que no cierra turno. En cuanto una llamada se queda sin contestar, le manda un texto a esa persona en el nombre de tu negocio, la califica por mensaje y la deja lista para agendar. Después te entrega el prospecto con todo lo que necesitas para llegar preparado.',
+      'Con más de 35 años en sistemas, y experiencia en seguros comerciales, estoy construyendo un sistema que sigue trabajando cuando tú ya cerraste turno. Cuando una llamada se queda sin contestar, le manda un texto a esa persona en el nombre de tu negocio, le hace unas preguntas por mensaje y después te pasa el prospecto con lo que necesitas para dar seguimiento.',
       'Me da orgullo estar en Terrell, Texas, sirviendo a negocios de servicio en el hogar que no quieren que un teléfono sonando se quede en nada.',
     ],
     valuesEyebrow: 'En qué creo',
-    valuesTitle: 'Los principios detrás del texto de regreso',
+    valuesTitle: 'Los principios detrás de Roger',
     values: [
       {
-        title: 'Siempre en el aire',
-        body: '«Ten-four» significa mensaje recibido. Esa es la promesa: cada llamada perdida se confirma y se atiende por texto.',
+        title: 'En el aire fuera de horario',
+        body: '«Ten-four» significa mensaje recibido. Esa es la idea: una llamada perdida recibe un texto en vez de silencio.',
       },
       {
         title: 'Más de 35 años en sistemas',
@@ -248,21 +249,21 @@ export const es: typeof en = {
       },
       {
         title: 'La rapidez se queda con el trabajo',
-        body: 'El primer negocio que le habla al cliente suele quedarse con el trabajo. TenFour hace que ese negocio seas tú.',
+        body: 'El primer negocio que le responde al cliente muchas veces se queda con el trabajo. TenFour te ayuda a que ese negocio seas tú.',
       },
     ],
     location: 'Con orgullo desde Terrell, Texas',
-    ctaTitle: 'Vamos a cuidar que no se te vaya otra.',
+    ctaTitle: 'Que la próxima llamada perdida no se enfríe.',
     ctaSubtitle:
-      'Mira qué tan rápido Roger atrapa una llamada perdida y le escribe a tu siguiente cliente. Agenda una demo hoy.',
+      'Sé de los primeros contratistas en probar a Roger. Únete hoy a la lista de espera.',
   },
   how: {
     eyebrow: 'Cómo funciona',
     title: 'Tu segundo turno, en automático',
     description:
-      'TenFour vigila las llamadas perdidas en tu línea. Roger califica cada una, manda tu enlace para agendar cuando lo tienes, y si no, le deja a tu equipo un prospecto listo para agendar.',
+      'TenFour vigila las llamadas perdidas en tu línea. Roger le escribe a cada persona, le hace unas preguntas, manda tu enlace para agendar cuando lo tienes, y si no, le pasa el prospecto a tu equipo.',
     flowEyebrow: 'El recorrido de la llamada',
-    flowTitle: 'Qué pasa en cada llamada perdida',
+    flowTitle: 'Qué pasa con una llamada perdida',
     flowDescription:
       'Este es el camino, de la llamada perdida a tu enlace para agendar, o a un prospecto que tu equipo puede agendar.',
     flow: [
@@ -271,8 +272,8 @@ export const es: typeof en = {
         body: 'Un dueño de casa llama fuera de horario por una fuga. Nadie contesta y la llamada se pierde.',
       },
       {
-        title: 'Roger escribe al momento',
-        body: 'En segundos, Roger le manda un texto, antes de que pueda marcar el siguiente nombre de la lista.',
+        title: 'Roger escribe rápido',
+        body: 'Roger le manda un texto enseguida, para que sea menos probable que marque el siguiente nombre de la lista.',
       },
       {
         title: 'El prospecto queda calificado',
@@ -280,18 +281,18 @@ export const es: typeof en = {
       },
       {
         title: 'El prospecto te llega a ti',
-        body: 'Si tienes un enlace para agendar, Roger se lo manda para que el cliente aparte. Si no, tu equipo recibe un prospecto listo para agendar y la conversación completa.',
+        body: 'Si tienes un enlace para agendar, Roger se lo manda para que el cliente aparte. Si no, tu equipo recibe el prospecto y la conversación por texto.',
       },
     ],
     includedEyebrow: 'Qué incluye',
-    includedTitle: 'Lo que haría alguien en recepción, sin la nómina',
+    includedTitle: 'Ayuda con las llamadas perdidas, sin la nómina',
     includedDescription:
-      'Un solo sistema que acaba con la llamada perdida, el ida y vuelta del buzón y el desorden fuera de horario.',
+      'Un solo sistema para la llamada perdida, el ida y vuelta del buzón y el desorden fuera de horario.',
     included: [
       'Guion de texto de regreso a la medida de tu oficio',
       'Calificación según tu zona de servicio',
-      'Texto de confirmación al momento de que la solicitud llegó',
-      'Avisos al momento con la conversación completa',
+      'Texto de confirmación de que la solicitud llegó',
+      'Avisos del prospecto con la conversación por texto',
       'Responde por texto en el idioma de quien escribió',
     ],
   },
@@ -299,55 +300,55 @@ export const es: typeof en = {
     eyebrow: 'Precios',
     title: 'Precio fijo. Sin cuentas raras por llamada perdida.',
     description:
-      'Con un solo trabajo agendado suele salir el mes. Cada plan incluye la instalación, el ajuste y el texto de regreso, pendiente de día y de noche.',
+      'Con un solo trabajo agendado puede salir el mes. Cada plan incluye la instalación, el ajuste y el texto de regreso por llamada perdida, también de noche y en fin de semana.',
     plans: [
       {
-        name: 'Base Dispatch',
+        name: 'Base',
         tag: 'Para empezar',
         price: '$299',
         cadence: '/mes',
         setup: '$699 de instalación, una sola vez',
         blurb:
-          'Texto automático al momento por cada llamada perdida y cada consulta en la web, con seguimiento completo en el CRM.',
+          'Texto automático para llamadas perdidas y consultas en la web, con seguimiento completo en el CRM.',
         features: [
-          'Texto automático al momento por cada llamada perdida y cada consulta en la web',
+          'Texto automático para llamadas perdidas y consultas en la web',
           'Seguimiento completo de prospectos y CRM',
           'Cuota mensual estándar de mensajes',
           'Un número de teléfono dedicado',
         ],
-        cta: 'Empezar con Base Dispatch',
+        cta: 'Empezar con Base',
       },
       {
-        name: 'Pro Dispatch',
+        name: 'Pro',
         tag: 'El más pedido',
         price: '$499',
         cadence: '/mes',
         setup: '$899 de instalación, una sola vez',
         blurb:
-          'Todo lo de Base Dispatch, más un seguimiento después de la tormenta para los oficios que dependen del clima.',
+          'Todo lo de Base, más un seguimiento después de la tormenta para los oficios que dependen del clima.',
         features: [
-          'Todo lo de Base Dispatch',
+          'Todo lo de Base',
           'Seguimiento después de la tormenta para oficios que dependen del clima',
           'Cuota de mensajes más alta',
           'Soporte prioritario',
         ],
-        cta: 'Empezar con Pro Dispatch',
+        cta: 'Empezar con Pro',
       },
       {
-        name: 'Elite Full Stack',
+        name: 'Elite',
         tag: 'Cobertura completa',
         price: '$799',
         cadence: '/mes',
         setup: '$1,199 de instalación, una sola vez',
         blurb:
-          'Todo lo de Pro Dispatch, más un aviso por teléfono a tu equipo cuando el prospecto es urgente.',
+          'Todo lo de Pro, más un aviso por teléfono a tu equipo cuando el prospecto es urgente.',
         features: [
-          'Todo lo de Pro Dispatch',
+          'Todo lo de Pro',
           'Aviso por teléfono a tu equipo cuando el prospecto es urgente',
           'El tope de cuota más alto',
           'Acompañamiento dedicado al empezar',
         ],
-        cta: 'Empezar con Elite Full Stack',
+        cta: 'Empezar con Elite',
       },
     ],
     overageTitle: 'Mensajes extra',
@@ -360,20 +361,20 @@ export const es: typeof en = {
     questions: '¿Dudas? Háblanos',
     ctaTitle: '¿No sabes qué plan te queda?',
     ctaSubtitle:
-      'Cuéntanos tu volumen de llamadas y tu oficio. Te recomendamos la configuración correcta y te enseñamos una demo en vivo.',
+      'Cuéntanos tu volumen de llamadas y tu oficio. Te recomendamos la configuración correcta y te apartamos un lugar en la lista de espera.',
   },
   roger: {
     eyebrow: 'Conoce a Roger',
-    title: 'El que no deja ir una llamada perdida',
+    title: 'El que le escribe a tus llamadas perdidas',
     description: 'Roger es quien escribe cuando tu teléfono se queda sin contestar.',
     alt: 'Roger',
     paragraphs: [
-      'El nombre viene de un código viejo de radio: ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja una llamada perdida sin un texto de regreso.',
-      'En cuanto una llamada a tu negocio se queda sin contestar, Roger le manda un texto a esa persona en segundos, antes de que marque el siguiente nombre de la lista. Hace las preguntas de tu oficio, junta los datos que necesitas y te entrega el prospecto, todo antes de que el teléfono hubiera sonado una cuarta vez.',
-      'Roger no contesta la llamada en vivo y no agenda la cita. Eso es de frente, y así está pensado. Lo que sí hace es escribir más rápido que un buzón de voz, y sale más barato que tener a alguien de tiempo completo en recepción. No tiene día libre.',
+      'El nombre viene de un código viejo de radio: ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja que una llamada perdida se enfríe.',
+      'Cuando una llamada a tu negocio se queda sin contestar, Roger le manda un texto rápido a esa persona, para que sea menos probable que marque el siguiente nombre de la lista. Hace unas preguntas de tu oficio, junta los datos que necesitas y te pasa el prospecto.',
+      'Roger no contesta la llamada en vivo y no agenda la cita. Eso es de frente, y así está pensado. Lo que sí hace es escribir más rápido que un buzón de voz, y sale más barato que tener a alguien de tiempo completo en recepción.',
     ],
-    ctaTitle: 'Mira a Roger atrapar una llamada perdida',
-    ctaSubtitle: 'Agenda una demo y ve exactamente cómo funciona.',
+    ctaTitle: 'Sé de los primeros en probar a Roger',
+    ctaSubtitle: 'Únete a la lista de espera y te avisamos cuando Roger esté listo para tu negocio.',
   },
   faq: {
     eyebrow: 'Preguntas',
@@ -382,15 +383,15 @@ export const es: typeof en = {
     items: [
       {
         q: '¿Roger reemplaza a mi recepcionista?',
-        a: 'No del todo. Roger se encarga, por texto, de las llamadas que nadie pudo tomar: fuera de horario o en medio de un trabajo. Las convierte en prospectos listos para que tú agendes. Está pensado para lo que se habría ido al buzón, no para reemplazar una recepción que ya tienes cubierta.',
+        a: 'No del todo. Roger le escribe a las llamadas que nadie pudo tomar, fuera de horario o en medio de un trabajo, hace unas preguntas y te pasa el prospecto. Está pensado para lo que se habría ido al buzón, no para reemplazar una recepción que ya tienes cubierta.',
       },
       {
         q: '¿Roger contesta el teléfono en vivo?',
-        a: 'No, y lo decimos de frente. Roger trabaja solo por texto. En cuanto una llamada a tu negocio se queda sin contestar, le escribe a ese cliente en segundos, hace las preguntas de tu oficio y te deja el prospecto. Hoy no hay una conversación de voz en vivo. Tampoco agenda la cita por ti.',
+        a: 'No, y lo decimos de frente. Roger trabaja solo por texto. Cuando una llamada a tu negocio se queda sin contestar, le escribe a ese cliente, hace las preguntas de tu oficio y te pasa el prospecto. Hoy no hay una conversación de voz en vivo. Tampoco agenda la cita por ti.',
       },
       {
         q: '¿Qué pasa fuera de horario o en fin de semana?',
-        a: 'Lo mismo que en el día. Roger no tiene horario de oficina. Está pendiente de las llamadas perdidas las 24 horas, los 365 días, incluyendo noches, fines de semana y días festivos. Lo que hace es escribir. No contesta la llamada.',
+        a: 'Lo mismo que en el día. Roger está hecho para escribirle a las llamadas perdidas también de noche, en fin de semana y en días festivos. Lo que hace es escribir. No contesta la llamada.',
       },
       {
         q: '¿Tengo que cambiar mi número?',
@@ -398,11 +399,11 @@ export const es: typeof en = {
       },
       {
         q: '¿Qué tan rápido escribe Roger?',
-        a: 'En segundos después de que la llamada se queda sin contestar, mucho antes de que la mayoría se rinda y marque el siguiente negocio de la lista.',
+        a: 'Rápido. Roger manda el texto en cuanto entra la llamada perdida, para que quien llamó sepa de ti mientras sigue buscando.',
       },
       {
         q: '¿Y si el cliente quiere el precio de una vez?',
-        a: 'Roger nunca da un precio cerrado ni una hora de llegada por texto. Califica el tipo de servicio, la ubicación y la urgencia, y deja al prospecto listo para agendar. Después te lo pasa con todos los datos para que tú des seguimiento con números de verdad. La cita la agendas tú, o el cliente, si le mandas tu enlace.',
+        a: 'Roger no da un precio cerrado ni una hora de llegada por texto. Pregunta el tipo de servicio, la ubicación y la urgencia. Después te pasa el prospecto con todos los datos para que tú des seguimiento con números de verdad. La cita la agendas tú, o el cliente, si le mandas tu enlace.',
       },
       {
         q: '¿Hay contrato largo?',
@@ -410,25 +411,25 @@ export const es: typeof en = {
       },
     ],
     ctaTitle: '¿Sigues con dudas?',
-    ctaSubtitle: 'Agenda una demo y te explicamos, paso a paso, cómo quedaría en tu negocio.',
+    ctaSubtitle: 'Únete a la lista de espera y te explicamos, paso a paso, cómo quedaría en tu negocio.',
   },
   contact: {
-    eyebrow: 'Agenda una demo',
-    title: 'Mira a Roger atrapar una llamada perdida',
+    eyebrow: 'Únete a la lista de espera',
+    title: 'Sé de los primeros en probar a Roger',
     description:
-      'Cuéntanos de tu negocio y armamos una demo en vivo para tu oficio. Vas a ver exactamente cómo Roger le escribe a quien llamó.',
-    heading: 'Vamos a dejarte en el aire',
+      'Roger todavía no está lanzado. Cuéntanos de tu negocio, te apartamos un lugar y te buscamos cuando esté listo para tu oficio.',
+    heading: 'Vamos a ponerte en la lista',
     intro:
-      'Llena el formulario y te buscamos para cuadrar la demo. ¿Prefieres hablar primero? Aquí abajo están los datos.',
+      'Llena el formulario y te buscamos para el acceso anticipado. ¿Prefieres hablar primero? Aquí abajo están los datos.',
     cards: [
       { label: 'Correo', value: 'garry@tenfoursystems.com', href: 'mailto:garry@tenfoursystems.com' },
       { label: 'Teléfono', value: '(972) 349 5808', href: 'tel:+19723495808' },
       { label: 'Ubicación', value: 'Terrell, Texas', href: '' },
-      { label: 'Cobertura del texto', value: '24 / 7 / 365', href: '' },
+      { label: 'Hecho para', value: 'Llamadas perdidas fuera de horario', href: '' },
     ],
-    online: 'Texto de regreso en línea',
+    online: 'Muy pronto',
     onlineBody:
-      'Quien te llame ya no va a caer en el buzón. Desde el momento en que quedas activo, cada llamada perdida recibe un texto, entre semana, de noche y en fin de semana.',
+      'Roger se está preparando para el lanzamiento. Cuando tu línea quede lista, las llamadas perdidas reciben un texto, entre semana, de noche y en fin de semana.',
   },
   form: {
     first: 'Nombre',
@@ -452,13 +453,13 @@ export const es: typeof en = {
     consent:
       'Al marcar esta casilla, acepto recibir mensajes de texto automáticos de TenFour Systems en el número que indiqué, sobre mi consulta de servicio, la programación de citas y actualizaciones de seguimiento. La frecuencia de los mensajes varía. El consentimiento no es condición de compra. Pueden aplicar tarifas de mensajes y datos. Responde HELP para ayuda o STOP para cancelar. Consulta nuestra {{privacy}} y los {{terms}}.',
     sending: 'Enviando',
-    submit: 'Pedir mi demo',
+    submit: 'Únete a la lista de espera',
     error:
       'Algo salió mal. Escríbele a garry@tenfoursystems.com o llama al (972) 349 5808.',
     fine: 'Sin spam. Sin compromiso. Respondemos rápido.',
     doneTitle: 'Mensaje recibido. Ten four.',
     doneBody:
-      'Gracias por escribirnos. Te contactamos pronto para armar tu demo en vivo y dejar el texto de regreso pendiente de tus llamadas.',
+      'Gracias por escribirnos. Ya estás en la lista, y te contactamos para el acceso anticipado.',
     another: 'Enviar otra solicitud',
     honeypot: 'Sitio web de la empresa',
   },
@@ -466,10 +467,10 @@ export const es: typeof en = {
     title: 'Parece que esta página se perdió.',
     body: 'Algo así como una llamada que nadie alcanzó. A diferencia de esta página, Roger ya te habría mandado un texto.',
     home: 'Volver al inicio',
-    demo: 'Agenda una demo',
+    demo: 'Únete a la lista de espera',
   },
   serviceArea: {
-    ctaSubtitle: 'Agenda una demo y mira qué tan rápido Roger atrapa una llamada perdida.',
+    ctaSubtitle: 'Únete a la lista de espera y sé de los primeros contratistas en probar a Roger.',
   },
   privacy: {
     title: 'Política de privacidad',
@@ -560,7 +561,7 @@ export const es: typeof en = {
       {
         heading: '3. Mensajes de texto',
         paragraphs: [
-          'TenFour Systems envía mensajes de texto bajo el nombre de programa TenFour Systems / mensajes de texto de Roger. Si usted pide una demo, estos mensajes son la respuesta a esa solicitud, sobre su consulta de servicio, la programación de citas y actualizaciones de seguimiento. Para los negocios clientes, Roger le escribe a quien llamó y no logró comunicarse.',
+          'TenFour Systems envía mensajes de texto bajo el nombre de programa TenFour Systems / mensajes de texto de Roger. Si usted se une a la lista de espera o pregunta por el acceso anticipado, estos mensajes son la respuesta a esa solicitud, sobre su consulta de servicio, la programación de citas y actualizaciones de seguimiento. Para los negocios clientes, Roger le escribe a quien llamó y no logró comunicarse.',
           'La frecuencia de los mensajes varía. Pueden aplicar tarifas de mensajes y datos. El consentimiento no es condición de compra. Responda STOP para cancelar y HELP para pedir ayuda. Para soporte, escriba a {{email}} o llame al (972) 349 5808. Las compañías de teléfono no son responsables de mensajes retrasados o no entregados. Consulte nuestra {{privacy}}.',
           'Los negocios clientes que usan Roger son responsables de tener el consentimiento correcto para escribirle a quien los llamó y a sus contactos, incluyendo mensajes de seguimiento, y aceptan cumplir la TCPA y las reglas de las compañías de teléfono.',
         ],

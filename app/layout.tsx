@@ -1,7 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
-import { Space_Grotesk, Geist_Mono, Bebas_Neue } from 'next/font/google'
+import {
+  Space_Grotesk,
+  Geist_Mono,
+  Bebas_Neue,
+  Big_Shoulders_Stencil,
+  Big_Shoulders,
+  Barlow,
+  Overpass_Mono,
+} from 'next/font/google'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { HtmlLang } from '@/components/html-lang'
@@ -29,11 +37,40 @@ const bebasNeue = Bebas_Neue({
   display: 'swap',
 })
 
+// Work truck look: stencil headlines and wordmark, condensed subheads,
+// road sign body text and a highway style mono for dispatch readouts.
+const bigShouldersStencil = Big_Shoulders_Stencil({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  variable: '--ff-stencil',
+  display: 'swap',
+})
+
+const bigShoulders = Big_Shoulders({
+  subsets: ['latin'],
+  axes: ['opsz'],
+  variable: '--ff-condensed',
+  display: 'swap',
+})
+
+const barlow = Barlow({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--ff-barlow',
+  display: 'swap',
+})
+
+const overpassMono = Overpass_Mono({
+  subsets: ['latin'],
+  variable: '--ff-overpass',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tenfoursystems.com'),
-  title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+  title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
   description:
-    "TenFour Systems answers every missed call and qualifies the lead, then sends your booking link or a ready to book lead. We work the second shift so you don't have to.",
+    "TenFour Systems texts back your missed calls, asks a few questions, and sends the lead to you. We work the second shift so you don't have to.",
   ...languageAlternates('/'),
   generator: 'v0.app',
   icons: {
@@ -47,9 +84,9 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   openGraph: {
-    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
     description:
-      "We catch every missed call and text your next customer back, before your competitor does.",
+      'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
     url: 'https://www.tenfoursystems.com',
     siteName: 'TenFour Systems',
     images: [
@@ -57,7 +94,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'TenFour Systems, the 24/7 AI dispatcher for home service businesses',
+        alt: 'TenFour Systems, missed call text back for home service businesses',
       },
     ],
     locale: 'en_US',
@@ -66,16 +103,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
     description:
-      "We catch every missed call and text your next customer back, before your competitor does.",
+      'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
     images: ['/og-image.png'],
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'dark light',
-  themeColor: '#041018',
+  themeColor: '#0f1011',
 }
 
 export default async function RootLayout({
@@ -89,7 +126,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable}`}
+      className={`${spaceGrotesk.variable} ${geistMono.variable} ${bebasNeue.variable} ${bigShouldersStencil.variable} ${bigShoulders.variable} ${barlow.variable} ${overpassMono.variable}`}
       suppressHydrationWarning
     >
       <head>

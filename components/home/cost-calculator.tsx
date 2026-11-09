@@ -28,9 +28,9 @@ function fmt(n: number) {
 
 export function CostCalculator() {
   const t = getCopy(useLocale()).calculator
-  const [calls, setCalls] = useState(6)
-  const [value, setValue] = useState(9000)
-  const [rate, setRate] = useState(30)
+  const [calls, setCalls] = useState(3)
+  const [value, setValue] = useState(1500)
+  const [rate, setRate] = useState(20)
 
   const monthly = calls * 4.33 * (rate / 100) * value
   const yearly = monthly * 12
@@ -47,7 +47,7 @@ export function CostCalculator() {
         <select
           id="trade"
           className={styles.select}
-          defaultValue={9000}
+          defaultValue=""
           onChange={(e) => {
             const newValue = Number(e.target.value)
             setValue(newValue)
@@ -55,6 +55,9 @@ export function CostCalculator() {
             track('calculator_trade_selected', { trade: trade?.id ?? 'unknown' })
           }}
         >
+          <option value="" disabled>
+            {t.choose}
+          </option>
           {TRADES.map((item, index) => (
             <option key={item.id} value={item.value}>
               {t.trades[index]}
@@ -134,6 +137,8 @@ export function CostCalculator() {
       <p className={styles.formula}>
         {t.formula}
       </p>
+
+      <p className={styles.formula}>{t.estimate}</p>
 
       <p className={styles.sources}>
         {t.sources}

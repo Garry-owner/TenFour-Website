@@ -5,7 +5,7 @@ import { languageAlternates } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Pricing. TenFour Systems',
   description:
-    'Straightforward pricing for the 24/7 AI dispatcher. Pick the tier that fits your call volume, no hidden fees.',
+    'Straightforward pricing for missed call text back. Pick the tier that fits your call volume, no hidden fees.',
   ...languageAlternates('/pricing'),
 }
 

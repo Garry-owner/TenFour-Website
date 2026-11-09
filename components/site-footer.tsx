@@ -13,12 +13,12 @@ export function SiteFooter() {
   const t = getCopy(locale).chrome
 
   return (
-    <footer className="border-t border-border bg-card/40">
+    <footer className="border-t-[3px] border-primary bg-background text-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <BrandLogo />
           <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{t.footerBlurb}</p>
-          <p className="font-mono text-xs uppercase tracking-widest text-primary">{t.footerTagline}</p>
+          <p className="font-condensed text-lg font-extrabold uppercase tracking-[0.03em] text-primary">{t.footerTagline}</p>
         </div>
 
         <div className="space-y-3">
@@ -111,9 +111,6 @@ export function SiteFooter() {
               {t.terms}
             </Link>
           </div>
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {t.status} <span className="text-[var(--signal)]">{t.operational}</span>
-          </p>
         </div>
       </div>
     </footer>
