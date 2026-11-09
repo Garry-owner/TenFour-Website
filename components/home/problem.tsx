@@ -1,34 +1,28 @@
-import { Reveal } from '@/components/home/reveal'
+import { HomeHeading } from '@/components/home/home-heading'
 import { getCopy } from '@/lib/copy'
 import type { Locale } from '@/lib/locale'
-import { cn } from '@/lib/utils'
-import styles from './industrial.module.css'
 
 export function Problem({ locale }: { locale: Locale }) {
   const t = getCopy(locale).problem
 
   return (
-    <section className={styles.problem}>
-      <div className={styles.wrap}>
-        <Reveal className={styles.problemHead}>
-          <span className={styles.eyebrow}>{t.eyebrow}</span>
-          <h2 className={cn(styles.stencil, styles.problemTitle)}>{t.title}</h2>
-          <p className={styles.lede}>{t.description}</p>
-        </Reveal>
+    <section className="border-b-2 border-border py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <HomeHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-        <div className={styles.ledger}>
-          {t.cards.map(({ stat, label, body }, index) => (
-            <Reveal key={label} className={styles.ledgerRow} fromRight={index === 1}>
-              <div className={styles.big}>{stat}</div>
-              <div>
-                <p className={styles.ledgerLabel}>{label}</p>
-                <p className={styles.ledgerBody}>{body}</p>
-              </div>
-            </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {t.cards.map(({ stat, label, body }) => (
+            <div key={label} className="border-2 border-border border-t-4 border-t-primary bg-card p-6">
+              <p className="font-stencil text-5xl font-black uppercase leading-none text-primary">{stat}</p>
+              <p className="mt-3 font-condensed text-xl font-extrabold uppercase tracking-[0.03em] text-foreground">
+                {label}
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{body}</p>
+            </div>
           ))}
         </div>
 
-        <p className={styles.note}>{t.note}</p>
+        <p className="mt-6 text-center font-dispatch text-xs text-muted-foreground">{t.note}</p>
       </div>
     </section>
   )

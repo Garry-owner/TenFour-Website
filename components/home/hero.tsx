@@ -1,56 +1,58 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import { MessageSquareText } from 'lucide-react'
-import { DispatchBoard } from '@/components/home/dispatch-board'
+import Image from 'next/image'
+import { CtaButton } from '@/components/cta-button'
+import { RaceTimer } from '@/components/home/race-timer'
 import { getCopy } from '@/lib/copy'
 import { lp, type Locale } from '@/lib/locale'
-import { cn } from '@/lib/utils'
-import styles from './industrial.module.css'
 
 export function Hero({ locale }: { locale: Locale }) {
   const t = getCopy(locale).hero
 
   return (
-    <section className={styles.hero}>
-      <div className={cn(styles.wrap, styles.heroGrid)}>
-        <span className={styles.badge}>
-          <span className={styles.led} aria-hidden="true" />
-          {t.badge}
-        </span>
+    <section className="border-b-4 border-primary">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-24">
+        <div className="flex flex-col gap-7">
+          <span className="inline-flex w-fit items-center gap-2 border-2 border-border px-3 py-1.5 font-dispatch text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-2.5 w-2.5 bg-primary" aria-hidden />
+            {t.badge}
+          </span>
 
-        <h1 className={cn(styles.stencil, styles.heroTitle)}>
-          {t.titleBefore}
-          <span className={styles.tape}>{t.titleEmphasis}</span>
-          {t.titleAfter}
-        </h1>
+          <h1 className="text-balance font-stencil text-5xl font-black uppercase leading-[0.92] sm:text-6xl lg:text-7xl">
+            {t.titleBefore}
+            <span className="text-primary">{t.titleEmphasis}</span>
+            {t.titleAfter}
+          </h1>
 
-        <DispatchBoard />
+          <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">{t.body}</p>
 
-        <p className={styles.heroBody}>{t.body}</p>
-
-        <div className={styles.roger}>
-          <Image src="/roger-avatar.png" alt={t.rogerAlt} width={48} height={48} />
-          <p>{t.roger}</p>
-        </div>
-
-        <div className={styles.ctas}>
-          <Link href={lp(locale, '/contact')} className={cn(styles.btn, styles.btnSolid)}>
-            <MessageSquareText aria-hidden="true" />
-            {t.primary}
-          </Link>
-          <Link href={lp(locale, '/how-it-works')} className={cn(styles.btn, styles.btnLine)}>
-            {t.secondary}
-          </Link>
-        </div>
-
-        <dl className={styles.stats}>
-          {t.stats.map(({ k, v }) => (
-            <div key={v}>
-              <dt>{k}</dt>
-              <dd>{v}</dd>
+          <div className="flex max-w-xl items-center gap-3 border-l-4 border-primary pl-4">
+            <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full">
+              <Image src="/roger-avatar.png" alt={t.rogerAlt} width={48} height={48} />
             </div>
-          ))}
-        </dl>
+            <p className="text-base leading-relaxed text-muted-foreground">{t.roger}</p>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <CtaButton href={lp(locale, '/contact')} size="lg">
+              <MessageSquareText className="h-4 w-4" />
+              {t.primary}
+            </CtaButton>
+            <CtaButton href={lp(locale, '/how-it-works')} variant="outline" size="lg">
+              {t.secondary}
+            </CtaButton>
+          </div>
+
+          <dl className="mt-2 grid grid-cols-3 gap-4 border-t-2 border-border pt-6">
+            {t.stats.map(({ k, v }) => (
+              <div key={v} className="flex flex-col gap-1">
+                <dt className="font-stencil text-3xl font-black uppercase leading-none text-primary sm:text-4xl">{k}</dt>
+                <dd className="font-dispatch text-xs uppercase tracking-[0.12em] text-muted-foreground">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <RaceTimer />
       </div>
     </section>
   )

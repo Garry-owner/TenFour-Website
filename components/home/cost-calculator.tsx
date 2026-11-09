@@ -36,107 +36,108 @@ export function CostCalculator() {
   const yearly = monthly * 12
 
   return (
-    <div className={styles.ticket}>
-      <div className={styles.info}>
-        <p className={styles.eyebrow}>{t.eyebrow}</p>
-        <h3 className={styles.heading}>{t.heading}</h3>
+    <div className={styles.card}>
+      <p className={styles.eyebrow}>{t.eyebrow}</p>
+      <h3 className={styles.heading}>{t.heading}</h3>
 
-        <div className={styles.results}>
-          <div className={styles.result}>
-            <p className={styles.resultLabel}>{t.month}</p>
-            <p className={styles.resultValue}>{fmt(monthly)}</p>
-          </div>
-          <div className={styles.result}>
-            <p className={styles.resultLabel}>{t.year}</p>
-            <p className={styles.resultValue}>{fmt(yearly)}</p>
-          </div>
-        </div>
-
-        <p className={styles.formula}>{t.formula}</p>
-        <p className={styles.sources}>{t.sources}</p>
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="trade">
+          {t.trade}
+        </label>
+        <select
+          id="trade"
+          className={styles.select}
+          defaultValue={9000}
+          onChange={(e) => {
+            const newValue = Number(e.target.value)
+            setValue(newValue)
+            const trade = TRADES.find((item) => item.value === newValue)
+            track('calculator_trade_selected', { trade: trade?.id ?? 'unknown' })
+          }}
+        >
+          {TRADES.map((item, index) => (
+            <option key={item.id} value={item.value}>
+              {t.trades[index]}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className={styles.fields}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="trade">
-            {t.trade}
+      <div className={styles.field}>
+        <div className={styles.fieldHeader}>
+          <label className={styles.label} htmlFor="calls">
+            {t.calls}
           </label>
-          <select
-            id="trade"
-            className={styles.select}
-            defaultValue={9000}
-            onChange={(e) => {
-              const newValue = Number(e.target.value)
-              setValue(newValue)
-              const trade = TRADES.find((item) => item.value === newValue)
-              track('calculator_trade_selected', { trade: trade?.id ?? 'unknown' })
-            }}
-          >
-            {TRADES.map((item, index) => (
-              <option key={item.id} value={item.value}>
-                {t.trades[index]}
-              </option>
-            ))}
-          </select>
+          <span className={styles.readout}>{calls}</span>
         </div>
+        <input
+          id="calls"
+          type="range"
+          min={1}
+          max={30}
+          step={1}
+          value={calls}
+          onChange={(e) => setCalls(Number(e.target.value))}
+          className={styles.slider}
+        />
+      </div>
 
-        <div className={styles.field}>
-          <div className={styles.fieldHeader}>
-            <label className={styles.label} htmlFor="calls">
-              {t.calls}
-            </label>
-            <span className={styles.readout}>{calls}</span>
-          </div>
-          <input
-            id="calls"
-            type="range"
-            min={1}
-            max={30}
-            step={1}
-            value={calls}
-            onChange={(e) => setCalls(Number(e.target.value))}
-            className={styles.slider}
-          />
+      <div className={styles.field}>
+        <div className={styles.fieldHeader}>
+          <label className={styles.label} htmlFor="value">
+            {t.value}
+          </label>
+          <span className={styles.readout}>{fmt(value)}</span>
         </div>
+        <input
+          id="value"
+          type="range"
+          min={100}
+          max={30000}
+          step={50}
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+          className={styles.slider}
+        />
+      </div>
 
-        <div className={styles.field}>
-          <div className={styles.fieldHeader}>
-            <label className={styles.label} htmlFor="value">
-              {t.value}
-            </label>
-            <span className={styles.readout}>{fmt(value)}</span>
-          </div>
-          <input
-            id="value"
-            type="range"
-            min={100}
-            max={30000}
-            step={50}
-            value={value}
-            onChange={(e) => setValue(Number(e.target.value))}
-            className={styles.slider}
-          />
+      <div className={styles.field}>
+        <div className={styles.fieldHeader}>
+          <label className={styles.label} htmlFor="rate">
+            {t.rate}
+          </label>
+          <span className={styles.readout}>{rate}%</span>
         </div>
+        <input
+          id="rate"
+          type="range"
+          min={10}
+          max={60}
+          step={5}
+          value={rate}
+          onChange={(e) => setRate(Number(e.target.value))}
+          className={styles.slider}
+        />
+      </div>
 
-        <div className={styles.field}>
-          <div className={styles.fieldHeader}>
-            <label className={styles.label} htmlFor="rate">
-              {t.rate}
-            </label>
-            <span className={styles.readout}>{rate}%</span>
-          </div>
-          <input
-            id="rate"
-            type="range"
-            min={10}
-            max={60}
-            step={5}
-            value={rate}
-            onChange={(e) => setRate(Number(e.target.value))}
-            className={styles.slider}
-          />
+      <div className={styles.results}>
+        <div>
+          <p className={styles.resultLabel}>{t.month}</p>
+          <p className={styles.resultValue}>{fmt(monthly)}</p>
+        </div>
+        <div>
+          <p className={styles.resultLabel}>{t.year}</p>
+          <p className={styles.resultValue}>{fmt(yearly)}</p>
         </div>
       </div>
+
+      <p className={styles.formula}>
+        {t.formula}
+      </p>
+
+      <p className={styles.sources}>
+        {t.sources}
+      </p>
     </div>
   )
 }
