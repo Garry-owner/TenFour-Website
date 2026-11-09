@@ -67,6 +67,8 @@ export function RaceTimer() {
       </div>
       <div className={styles.timerCaption}>{copy.caption}</div>
 
+      <p className={styles.exampleLabel}>{copy.example}</p>
+
       <div className={styles.timeline} aria-label={copy.sequence}>
         <div className={styles.timelineFill} style={{ height: `${percent}%` }} />
         {steps.map((s) => {

@@ -97,7 +97,20 @@
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
+}
+
+.exampleLabel {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  font-family: var(--font-dispatch);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
 .timeline {

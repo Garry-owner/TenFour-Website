@@ -187,7 +187,7 @@ export const es: typeof en = {
       'fórmula: (llamadas perdidas por semana × 4.33 semanas) × tasa de cierre × valor promedio del trabajo.',
     estimate: 'Es un cálculo aproximado, no una promesa. Tus números reales van a ser distintos.',
     sources:
-      'Los valores de trabajo son estimados con datos de precios de 2026, nacionales y de la región de Texas, de Angi, HomeAdvisor y Consumer Affairs. Tus trabajos reales pueden ser distintos. Mueve las barras para ajustarlas a tu negocio.',
+      'Los valores de trabajo son promedios aproximados. Mueve las barras para ajustarlas a tu negocio.',
     trades: [
       'Techos',
       'HVAC',
@@ -211,6 +211,7 @@ export const es: typeof en = {
     money: 'Hay dinero en juego.',
     ready: 'Prospecto enviado a ti.',
     caption: 'Tiempo desde que se perdió la llamada',
+    example: 'Ejemplo',
     sequence: 'Secuencia después de la llamada perdida',
     avoided: 'EVITADO',
     steps: [
@@ -302,7 +303,7 @@ export const es: typeof en = {
       'Con un solo trabajo agendado puede salir el mes. Cada plan incluye la instalación, el ajuste y el texto de regreso por llamada perdida, también de noche y en fin de semana.',
     plans: [
       {
-        name: 'Base Dispatch',
+        name: 'Base',
         tag: 'Para empezar',
         price: '$299',
         cadence: '/mes',
@@ -315,39 +316,39 @@ export const es: typeof en = {
           'Cuota mensual estándar de mensajes',
           'Un número de teléfono dedicado',
         ],
-        cta: 'Empezar con Base Dispatch',
+        cta: 'Empezar con Base',
       },
       {
-        name: 'Pro Dispatch',
+        name: 'Pro',
         tag: 'El más pedido',
         price: '$499',
         cadence: '/mes',
         setup: '$899 de instalación, una sola vez',
         blurb:
-          'Todo lo de Base Dispatch, más un seguimiento después de la tormenta para los oficios que dependen del clima.',
+          'Todo lo de Base, más un seguimiento después de la tormenta para los oficios que dependen del clima.',
         features: [
-          'Todo lo de Base Dispatch',
+          'Todo lo de Base',
           'Seguimiento después de la tormenta para oficios que dependen del clima',
           'Cuota de mensajes más alta',
           'Soporte prioritario',
         ],
-        cta: 'Empezar con Pro Dispatch',
+        cta: 'Empezar con Pro',
       },
       {
-        name: 'Elite Full Stack',
+        name: 'Elite',
         tag: 'Cobertura completa',
         price: '$799',
         cadence: '/mes',
         setup: '$1,199 de instalación, una sola vez',
         blurb:
-          'Todo lo de Pro Dispatch, más un aviso por teléfono a tu equipo cuando el prospecto es urgente.',
+          'Todo lo de Pro, más un aviso por teléfono a tu equipo cuando el prospecto es urgente.',
         features: [
-          'Todo lo de Pro Dispatch',
+          'Todo lo de Pro',
           'Aviso por teléfono a tu equipo cuando el prospecto es urgente',
           'El tope de cuota más alto',
           'Acompañamiento dedicado al empezar',
         ],
-        cta: 'Empezar con Elite Full Stack',
+        cta: 'Empezar con Elite',
       },
     ],
     overageTitle: 'Mensajes extra',
@@ -560,7 +561,7 @@ export const es: typeof en = {
       {
         heading: '3. Mensajes de texto',
         paragraphs: [
-          'TenFour Systems envía mensajes de texto bajo el nombre de programa TenFour Systems / mensajes de texto de Roger. Si usted pide una demo, estos mensajes son la respuesta a esa solicitud, sobre su consulta de servicio, la programación de citas y actualizaciones de seguimiento. Para los negocios clientes, Roger le escribe a quien llamó y no logró comunicarse.',
+          'TenFour Systems envía mensajes de texto bajo el nombre de programa TenFour Systems / mensajes de texto de Roger. Si usted se une a la lista de espera o pregunta por el acceso anticipado, estos mensajes son la respuesta a esa solicitud, sobre su consulta de servicio, la programación de citas y actualizaciones de seguimiento. Para los negocios clientes, Roger le escribe a quien llamó y no logró comunicarse.',
           'La frecuencia de los mensajes varía. Pueden aplicar tarifas de mensajes y datos. El consentimiento no es condición de compra. Responda STOP para cancelar y HELP para pedir ayuda. Para soporte, escriba a {{email}} o llame al (972) 349 5808. Las compañías de teléfono no son responsables de mensajes retrasados o no entregados. Consulte nuestra {{privacy}}.',
           'Los negocios clientes que usan Roger son responsables de tener el consentimiento correcto para escribirle a quien los llamó y a sus contactos, incluyendo mensajes de seguimiento, y aceptan cumplir la TCPA y las reglas de las compañías de teléfono.',
         ],

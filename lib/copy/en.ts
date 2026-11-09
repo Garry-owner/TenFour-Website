@@ -171,7 +171,7 @@ export const en = {
       'formula: (missed calls per week × 4.33 weeks) × close rate × average job value.',
     estimate: 'This is a rough estimate, not a promise. Your real numbers will be different.',
     sources:
-      'Job value estimates based on 2026 national and Texas-regional pricing data from Angi, HomeAdvisor, and Consumer Affairs. Your actual job values may differ, adjust the sliders to match your business.',
+      'Job values are rough averages. Adjust the sliders to match your business.',
     trades: [
       'Roofing',
       'HVAC',
@@ -195,6 +195,7 @@ export const en = {
     money: 'Money on the line.',
     ready: 'Lead sent to you.',
     caption: 'Time since the call was missed',
+    example: 'Example',
     sequence: 'Incident response sequence',
     avoided: 'AVOIDED',
     steps: [
@@ -285,7 +286,7 @@ export const en = {
       'One booked job can cover the month. Every plan includes setup, tuning, and missed call text back on nights and weekends.',
     plans: [
       {
-        name: 'Base Dispatch',
+        name: 'Base',
         tag: 'Get started',
         price: '$299',
         cadence: '/mo',
@@ -297,37 +298,37 @@ export const en = {
           'Standard monthly message quota',
           'One dedicated phone number',
         ],
-        cta: 'Start with Base Dispatch',
+        cta: 'Start with Base',
       },
       {
-        name: 'Pro Dispatch',
+        name: 'Pro',
         tag: 'Most popular',
         price: '$499',
         cadence: '/mo',
         setup: '$899 one time setup fee',
-        blurb: 'Everything in Base Dispatch, plus storm reactive follow up for weather driven trades.',
+        blurb: 'Everything in Base, plus storm reactive follow up for weather driven trades.',
         features: [
-          'Everything in Base Dispatch',
+          'Everything in Base',
           'Storm reactive re engagement for weather driven trades',
           'Higher message quota',
           'Priority support',
         ],
-        cta: 'Start with Pro Dispatch',
+        cta: 'Start with Pro',
       },
       {
-        name: 'Elite Full Stack',
+        name: 'Elite',
         tag: 'Full coverage',
         price: '$799',
         cadence: '/mo',
         setup: '$1,199 one time setup fee',
-        blurb: 'Everything in Pro Dispatch, plus an emergency phone alert for your most urgent leads.',
+        blurb: 'Everything in Pro, plus an emergency phone alert for your most urgent leads.',
         features: [
-          'Everything in Pro Dispatch',
+          'Everything in Pro',
           'Emergency phone call alert for urgent leads',
           'Highest quota ceiling',
           'Dedicated onboarding',
         ],
-        cta: 'Start with Elite Full Stack',
+        cta: 'Start with Elite',
       },
     ],
     overageTitle: 'Overage billing',
@@ -539,7 +540,7 @@ export const en = {
       {
         heading: '3. Text messages',
         paragraphs: [
-          'TenFour Systems sends text messages under the program name TenFour Systems / Roger text messages. If you ask for a demo, these messages are responses to that request, regarding your service inquiry, appointment scheduling, and follow-up updates. For client businesses, Roger replies to people who called and missed a connection.',
+          'TenFour Systems sends text messages under the program name TenFour Systems / Roger text messages. If you join the waitlist or ask about early access, these messages are responses to that request, regarding your service inquiry, appointment scheduling, and follow-up updates. For client businesses, Roger replies to people who called and missed a connection.',
           'Message frequency varies. Message and data rates may apply. Consent is not a condition of purchase. Reply STOP to opt out and HELP for help. For support, email {{email}} or call (972) 349 5808. Carriers are not liable for delayed or undelivered messages. See our {{privacy}}.',
           'Client businesses that use Roger are responsible for having proper consent to text their callers and contacts, including any re-engagement or follow-up messages, and agree to comply with the TCPA and carrier rules.',
         ],
