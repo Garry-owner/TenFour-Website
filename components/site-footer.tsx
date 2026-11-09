@@ -13,7 +13,7 @@ export function SiteFooter() {
   const t = getCopy(locale).chrome
 
   return (
-    <footer className="dark border-t-[3px] border-primary bg-background text-foreground">
+    <footer className="border-t-[3px] border-primary bg-background text-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <BrandLogo />

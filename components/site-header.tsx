@@ -22,7 +22,7 @@ export function SiteHeader() {
   const compact = locale === 'es' ? 'flex xl:hidden' : 'flex lg:hidden'
 
   return (
-    <header className="dark sticky top-0 z-50 border-b-[3px] border-primary bg-background text-foreground">
+    <header className="sticky top-0 z-50 border-b-[3px] border-primary bg-background text-foreground">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <BrandLogo />
 

@@ -9,10 +9,9 @@ import { HomeCta } from '@/components/home/home-cta'
 import type { Locale } from '@/lib/locale'
 
 // Same sections, in the same order, as the current site.
-// The homepage always uses the black theme so the orange reads the same everywhere.
 export function HomeView({ locale }: { locale: Locale }) {
   return (
-    <main className="dark bg-background font-barlow text-foreground">
+    <main className="bg-background font-barlow text-foreground">
       <Hero locale={locale} />
       <Industries locale={locale} />
       <Problem locale={locale} />
