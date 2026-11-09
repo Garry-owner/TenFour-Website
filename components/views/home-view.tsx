@@ -2,27 +2,38 @@ import { Hero } from '@/components/home/hero'
 import { Industries } from '@/components/home/industries'
 import { Problem } from '@/components/home/problem'
 import { Capabilities } from '@/components/home/capabilities'
-import { Steps } from '@/components/steps'
+import { HomeRoute } from '@/components/home/home-route'
 import { Proof } from '@/components/home/proof'
 import { CostCalculator } from '@/components/home/cost-calculator'
-import { CtaBand } from '@/components/cta-band'
+import { HomeCta } from '@/components/home/home-cta'
+import { Reveal } from '@/components/home/reveal'
 import type { Locale } from '@/lib/locale'
+import { cn } from '@/lib/utils'
+import styles from '@/components/home/industrial.module.css'
 
+// The homepage keeps its work truck look in both light and dark mode,
+// so it always uses the dark theme tokens inside.
 export function HomeView({ locale }: { locale: Locale }) {
   return (
-    <main>
+    <main className={cn('dark', styles.home)}>
       <Hero locale={locale} />
+      <div className={styles.hazard} aria-hidden="true" />
       <Industries locale={locale} />
       <Problem locale={locale} />
+      <div className={styles.hazard} aria-hidden="true" />
       <Capabilities locale={locale} />
-      <Steps locale={locale} />
+      <HomeRoute locale={locale} />
       <Proof locale={locale} />
-      <section className="border-b border-border py-20 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <CostCalculator />
+      <section className={styles.calc}>
+        <div className={styles.wrap}>
+          <Reveal>
+            <CostCalculator />
+          </Reveal>
         </div>
       </section>
-      <CtaBand locale={locale} />
+      <div className={styles.hazard} aria-hidden="true" />
+      <HomeCta locale={locale} />
+      <div className={styles.hazard} aria-hidden="true" />
     </main>
   )
 }

@@ -3,20 +3,20 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const ctaVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-md font-mono text-xs uppercase tracking-widest font-medium transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 rounded-none font-condensed text-base font-extrabold uppercase tracking-[0.06em] transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         primary:
-          'bg-primary text-primary-foreground hover:bg-primary/85 shadow-[0_0_0_1px_var(--primary)] hover:shadow-[0_0_24px_-4px_var(--primary)]',
+          'border-2 border-primary bg-primary text-primary-foreground shadow-[4px_4px_0_0_rgba(0,0,0,0.35)] hover:-translate-x-0.5 hover:-translate-y-0.5',
         outline:
-          'border border-border bg-transparent text-foreground hover:border-primary/60 hover:text-primary',
+          'border-2 border-primary bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground',
         ghost: 'text-muted-foreground hover:text-foreground',
       },
       size: {
         sm: 'h-9 px-4',
         default: 'h-11 px-6',
-        lg: 'h-12 px-8 text-sm',
+        lg: 'h-13 px-7 text-lg',
       },
     },
     defaultVariants: { variant: 'primary', size: 'default' },
