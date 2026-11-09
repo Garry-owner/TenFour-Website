@@ -4,7 +4,7 @@ import { languageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Meet Roger. TenFour Systems',
-  description: "The name behind TenFour's AI dispatcher, and where it comes from.",
+  description: 'Meet Roger, who texts back your missed calls, and learn where the name comes from.',
   ...languageAlternates('/roger'),
 }
 

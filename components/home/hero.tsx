@@ -42,7 +42,7 @@ export function Hero({ locale }: { locale: Locale }) {
             </CtaButton>
           </div>
 
-          <dl className="mt-2 grid grid-cols-3 gap-4 border-t-2 border-border pt-6">
+          <dl className="mt-2 grid grid-cols-2 gap-4 border-t-2 border-border pt-6">
             {t.stats.map(({ k, v }) => (
               <div key={v} className="flex flex-col gap-1">
                 <dt className="font-stencil text-3xl font-black uppercase leading-none text-primary sm:text-4xl">{k}</dt>

@@ -5,7 +5,7 @@ import { languageAlternates } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'About. TenFour Systems',
   description:
-    'TenFour Systems is a Terrell, Texas company on a mission to make sure no home-service business ever loses a job to a missed call again.',
+    'TenFour Systems is a Terrell, Texas company on a mission to help home-service businesses stop losing jobs to missed calls.',
   ...languageAlternates('/about'),
 }
 

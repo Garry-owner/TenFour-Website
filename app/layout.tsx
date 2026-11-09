@@ -68,9 +68,9 @@ const overpassMono = Overpass_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tenfoursystems.com'),
-  title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+  title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
   description:
-    "TenFour Systems answers every missed call and qualifies the lead, then sends your booking link or a ready to book lead. We work the second shift so you don't have to.",
+    "TenFour Systems texts back your missed calls, asks a few questions, and sends the lead to you. We work the second shift so you don't have to.",
   ...languageAlternates('/'),
   generator: 'v0.app',
   icons: {
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   openGraph: {
-    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
     description:
-      "We catch every missed call and text your next customer back, before your competitor does.",
+      'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
     url: 'https://www.tenfoursystems.com',
     siteName: 'TenFour Systems',
     images: [
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'TenFour Systems, the 24/7 AI dispatcher for home service businesses',
+        alt: 'TenFour Systems, missed call text back for home service businesses',
       },
     ],
     locale: 'en_US',
@@ -103,9 +103,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TenFour Systems. The 24/7 AI Dispatcher for Home Services',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
     description:
-      "We catch every missed call and text your next customer back, before your competitor does.",
+      'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
     images: ['/og-image.png'],
   },
 }

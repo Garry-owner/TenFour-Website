@@ -23,8 +23,8 @@ export function StructuredData() {
     inLanguage: locale === 'es' ? 'es' : 'en',
     description:
       locale === 'es'
-        ? 'TenFour Systems atrapa cada llamada perdida de los negocios de servicio en el hogar y le manda un texto al cliente antes de que llame a la competencia.'
-        : 'TenFour Systems catches every missed call for home-service businesses and texts the customer back before they call a competitor.',
+        ? 'TenFour Systems le manda un texto a las llamadas perdidas de los negocios de servicio en el hogar y le pasa el prospecto al dueño.'
+        : 'TenFour Systems texts back missed calls for home-service businesses and sends the lead to the owner.',
     url: absoluteUrl(locale, '/'),
     telephone: '+1-972-349-5808',
     email: 'garry@tenfoursystems.com',

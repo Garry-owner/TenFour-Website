@@ -48,12 +48,6 @@ export function SiteHeader() {
         </nav>
 
         <div className={cn('shrink-0 items-center gap-3', desktop)}>
-          <span className="hidden items-center gap-2 font-dispatch text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground lg:flex">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-2 w-2 rounded-full bg-[var(--signal)] animate-signal" />
-            </span>
-            {t.live}
-          </span>
           <LanguageSwitch />
           <ThemeToggle />
           <CtaButton href={lp(locale, '/contact')} size="sm">

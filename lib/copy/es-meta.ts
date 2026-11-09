@@ -2,17 +2,17 @@ export const esMeta = {
   home: {
     title: 'TenFour Systems. Texto de regreso por llamada perdida para servicios del hogar',
     description:
-      'Atrapamos cada llamada perdida de los negocios de servicio en el hogar, calificamos al prospecto y mandamos tu enlace para agendar, o te dejamos el cliente listo para que tú lo agendes. Cubrimos el segundo turno para que tú no tengas que hacerlo.',
+      'Le mandamos un texto a tus llamadas perdidas, hacemos unas preguntas y te pasamos el prospecto. Cubrimos el segundo turno para que tú no tengas que hacerlo.',
   },
   about: {
     title: 'Nosotros. TenFour Systems',
     description:
-      'TenFour Systems es una empresa de Terrell, Texas, con una misión: que ningún negocio de servicio en el hogar vuelva a perder un trabajo por una llamada perdida.',
+      'TenFour Systems es una empresa de Terrell, Texas, con una misión: ayudar a los negocios de servicio en el hogar a dejar de perder trabajos por llamadas perdidas.',
   },
   how: {
     title: 'Cómo funciona. TenFour Systems',
     description:
-      'Mira cómo TenFour atrapa una llamada perdida, califica al prospecto y manda tu enlace para agendar, o te deja el cliente listo para que tú lo agendes.',
+      'Mira cómo TenFour le manda un texto a una llamada perdida, hace unas preguntas y te pasa el prospecto.',
   },
   pricing: {
     title: 'Precios. TenFour Systems',
@@ -29,9 +29,9 @@ export const esMeta = {
     description: 'Preguntas comunes sobre cómo trabajan TenFour y Roger, en claro.',
   },
   contact: {
-    title: 'Agenda una demo. TenFour Systems',
+    title: 'Únete a la lista de espera. TenFour Systems',
     description:
-      'Agenda una demo en vivo de TenFour. Mira exactamente cómo Roger atrapa una llamada perdida y le escribe a tu siguiente cliente.',
+      'Únete a la lista de espera de TenFour. Roger le manda un texto a tus llamadas perdidas, hace unas preguntas y te pasa el prospecto.',
   },
   privacy: {
     title: 'Política de privacidad. TenFour Systems',

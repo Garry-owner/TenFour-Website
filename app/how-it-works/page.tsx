@@ -5,7 +5,7 @@ import { languageAlternates } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'How It Works. TenFour Systems',
   description:
-    'See exactly how TenFour catches a missed call, qualifies the lead, and sends your booking link or a ready to book lead.',
+    'See exactly how TenFour texts back a missed call, asks a few questions, and sends the lead to you.',
   ...languageAlternates('/how-it-works'),
 }
 

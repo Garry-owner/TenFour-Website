@@ -22,7 +22,17 @@ export function Problem({ locale }: { locale: Locale }) {
           ))}
         </div>
 
-        <p className="mt-6 text-center font-dispatch text-xs text-muted-foreground">{t.note}</p>
+        <p className="mt-6 text-center font-dispatch text-xs text-muted-foreground">
+          {t.note}{' '}
+          <a
+            href={t.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline underline-offset-4"
+          >
+            {t.sourceLabel}
+          </a>
+        </p>
       </div>
     </section>
   )

@@ -17,7 +17,7 @@ export function serviceAreaMetadata(locale: Locale, area: ServiceArea): Metadata
     )
   }
   return {
-    title: `${area.trade} Missed Call Dispatch in ${area.city}, TX. TenFour Systems`,
+    title: `${area.trade} Missed Call Text Back in ${area.city}, TX. TenFour Systems`,
     description: area.blurb,
     ...languageAlternates(path),
   }
@@ -33,7 +33,7 @@ export function ServiceAreaView({ locale, slug }: { locale: Locale; slug: string
   const title =
     locale === 'es'
       ? area.titleEs
-      : `Never miss another ${area.trade.toLowerCase()} call near ${area.landmark}`
+      : `Stop losing ${area.trade.toLowerCase()} calls near ${area.landmark}`
   const description = locale === 'es' ? area.blurbEs : area.blurb
   const ctaTitle =
     locale === 'es' ? area.ctaTitleEs : `Ready to stop losing ${area.city} jobs to voicemail?`

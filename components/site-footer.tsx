@@ -111,9 +111,6 @@ export function SiteFooter() {
               {t.terms}
             </Link>
           </div>
-          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {t.status} <span className="text-[var(--signal)]">{t.operational}</span>
-          </p>
         </div>
       </div>
     </footer>
