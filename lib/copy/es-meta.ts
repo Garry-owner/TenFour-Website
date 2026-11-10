@@ -1,6 +1,6 @@
 export const esMeta = {
   home: {
-    title: 'TenFour Systems. Texto de regreso por llamada perdida para servicios del hogar',
+    title: 'TenFour Systems. Texto de regreso por llamada perdida para servicios del hogar en DFW',
     description:
       'Le mandamos un texto a tus llamadas perdidas, hacemos unas preguntas y te pasamos el prospecto. Cubrimos el segundo turno para que tú no tengas que hacerlo.',
   },
