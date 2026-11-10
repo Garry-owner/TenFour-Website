@@ -15,7 +15,6 @@ export function HomeCta({ locale }: { locale: Locale }) {
           <CtaButton
             href={lp(locale, '/contact')}
             size="lg"
-            className="border-[#ff6b1a] bg-[#ff6b1a] text-[#0f1011]"
           >
             {t.book}
           </CtaButton>
