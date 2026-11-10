@@ -446,7 +446,7 @@ export const es: typeof en = {
     tradePlaceholder: 'Elige tu oficio',
     tradeOther: 'Otro / no aparece',
     businessType: '¿Qué tipo de negocio?',
-    businessTypePlaceholder: 'Tipo de negocio, no el nombre (como restaurante o tienda)',
+    businessTypePlaceholder: 'Como restaurante o tienda',
     timezone: '¿En qué zona horaria estás?',
     timezonePlaceholder: 'Elige tu zona horaria',
     zones: [

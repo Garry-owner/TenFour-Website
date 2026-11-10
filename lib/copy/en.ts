@@ -425,7 +425,7 @@ export const en = {
     tradePlaceholder: 'Select your trade',
     tradeOther: 'Other / not listed',
     businessType: 'What kind of business?',
-    businessTypePlaceholder: 'Type of business, not its name (like restaurant or retail store)',
+    businessTypePlaceholder: 'Like restaurant or retail store',
     timezone: 'What time zone are you in?',
     timezonePlaceholder: 'Select your time zone',
     zones: [
