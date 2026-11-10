@@ -421,6 +421,9 @@ export const en = {
     emailPlaceholder: 'you@business.com',
     message: 'What are you hoping to fix? (optional)',
     messagePlaceholder: 'We miss a lot of after hours calls during storm season.',
+    trade: 'What trade are you in?',
+    tradePlaceholder: 'Select your trade',
+    tradeOther: 'Other',
     timezone: 'What time zone are you in?',
     timezonePlaceholder: 'Select your time zone',
     zones: [

@@ -6,6 +6,7 @@ import { RichText } from '@/components/rich-text'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
 import { cn } from '@/lib/utils'
+import { TRADE_OTHER, TRADE_VALUES } from '@/lib/trades'
 
 const inputClass =
   'w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/40'
@@ -14,7 +15,14 @@ const labelClass = 'font-mono text-xs uppercase tracking-widest text-muted-foreg
 
 export function DemoForm() {
   const locale = useLocale()
-  const t = getCopy(locale).form
+  const copy = getCopy(locale)
+  const t = copy.form
+  // Labels follow the page language, but the value sent to Make.com is always
+  // the English trade name so Zoho stays consistent.
+  const tradeOptions = [
+    ...TRADE_VALUES.map((value, index) => ({ value, label: copy.calculator.trades[index] || value })),
+    { value: TRADE_OTHER, label: t.tradeOther },
+  ]
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -120,6 +128,20 @@ export function DemoForm() {
             className={inputClass}
           />
         </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="trade" className={labelClass}>
+          {t.trade}
+        </label>
+        <select id="trade" name="Trade" required className={inputClass}>
+          <option value="">{t.tradePlaceholder}</option>
+          {tradeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="flex flex-col gap-2">

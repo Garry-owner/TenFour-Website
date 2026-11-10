@@ -14,6 +14,8 @@
 // instance counts on its own. It stops casual floods but is not airtight. A
 // challenge such as Cloudflare Turnstile is the stronger next step.
 
+import { ALLOWED_TRADES } from '@/lib/trades'
+
 export const MAX_BODY_BYTES = 8 * 1024
 
 const ALLOWED_TIMEZONES = ['Eastern', 'Central', 'Mountain', 'Pacific']
@@ -44,6 +46,7 @@ export type CleanPayload = {
   'Email Address': string
   Message: string
   Fax: string
+  Trade: string
   consent_check?: string
 }
 
@@ -84,6 +87,11 @@ export function validatePayload(raw: unknown): ValidationResult {
   const email = asTrimmedString(body['Email Address'], 120)
   const message = asTrimmedString(body['Message'], 1000)
   const timezone = asTrimmedString(body['Fax'], 20)
+  // Trade is required on the form, but an older cached copy of the page may
+  // not send it. A missing or unknown trade is sent on as empty instead of
+  // blocking the lead, and Make.com falls back to a generic deal name.
+  const rawTrade = asTrimmedString(body['Trade'], 40)
+  const trade = ALLOWED_TRADES.includes(rawTrade) ? rawTrade : ''
 
   if (!firstName) return { ok: false, reason: 'first_name_missing' }
   if (!lastName) return { ok: false, reason: 'last_name_missing' }
@@ -109,6 +117,7 @@ export function validatePayload(raw: unknown): ValidationResult {
     'Email Address': email,
     Message: message,
     Fax: timezone,
+    Trade: trade,
   }
 
   // Only present when the box was ticked, exactly like the real form, because
