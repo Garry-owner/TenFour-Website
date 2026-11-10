@@ -10,7 +10,7 @@ const ctaVariants = cva(
         primary:
           'border-2 border-primary bg-primary text-primary-foreground shadow-[4px_4px_0_0_rgba(0,0,0,0.35)] hover:-translate-x-0.5 hover:-translate-y-0.5',
         outline:
-          'border-2 border-primary bg-transparent text-foreground hover:bg-primary hover:text-primary-foreground',
+          'border-2 border-foreground/40 bg-transparent text-foreground hover:border-foreground hover:bg-foreground hover:text-background',
         ghost: 'text-muted-foreground hover:text-foreground',
       },
       size: {

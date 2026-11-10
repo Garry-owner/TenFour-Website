@@ -42,7 +42,7 @@ export function AboutView({ locale }: { locale: Locale }) {
               const Icon = ICONS[index]
               return (
                 <div key={title} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-7">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-primary">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-foreground">
                     <Icon className="h-5 w-5" />
                   </span>
                   <h3 className="text-lg font-semibold tracking-tight">{title}</h3>

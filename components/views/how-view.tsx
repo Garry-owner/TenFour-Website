@@ -27,7 +27,7 @@ export function HowView({ locale }: { locale: Locale }) {
                   className="relative flex flex-col gap-4 rounded-lg border border-border bg-card p-6"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-primary">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-foreground">
                       <Icon className="h-5 w-5" />
                     </span>
                     <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">

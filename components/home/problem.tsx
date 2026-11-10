@@ -12,8 +12,8 @@ export function Problem({ locale }: { locale: Locale }) {
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {t.cards.map(({ stat, label, body }) => (
-            <div key={label} className="border-2 border-border border-t-4 border-t-primary bg-card p-6">
-              <p className="font-stencil text-5xl font-black uppercase leading-none text-primary">{stat}</p>
+            <div key={label} className="border-2 border-border border-t-4 border-t-muted-foreground bg-card p-6">
+              <p className="font-stencil text-5xl font-black uppercase leading-none text-foreground">{stat}</p>
               <p className="mt-3 font-condensed text-xl font-extrabold uppercase tracking-[0.03em] text-foreground">
                 {label}
               </p>

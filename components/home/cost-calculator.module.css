@@ -3,7 +3,7 @@
   margin: 0 auto;
   background: var(--card);
   border: 2px solid var(--border);
-  border-top: 4px solid var(--primary);
+  border-top: 4px solid var(--muted-foreground);
   border-radius: 0;
   padding: 28px 24px;
 }

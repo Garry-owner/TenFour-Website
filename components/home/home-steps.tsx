@@ -14,7 +14,7 @@ export function HomeSteps({ locale }: { locale: Locale }) {
         <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {t.items.map((step, index) => (
             <li key={step.title} className="flex flex-col gap-4 border-2 border-border bg-card p-6">
-              <span className="font-stencil text-4xl font-black leading-none text-primary">
+              <span className="font-stencil text-4xl font-black leading-none text-muted-foreground">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div className="h-[2px] w-full bg-border" aria-hidden />

@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import { track } from '@vercel/analytics'
+import { CtaButton } from '@/components/cta-button'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
+import { lp } from '@/lib/locale'
 import styles from './cost-calculator.module.css'
 
 const TRADES = [
@@ -27,7 +29,9 @@ function fmt(n: number) {
 }
 
 export function CostCalculator() {
-  const t = getCopy(useLocale()).calculator
+  const locale = useLocale()
+  const copy = getCopy(locale)
+  const t = copy.calculator
   const [calls, setCalls] = useState(3)
   const [value, setValue] = useState(1500)
   const [rate, setRate] = useState(20)
@@ -133,6 +137,15 @@ export function CostCalculator() {
           <p className={styles.resultValue}>{fmt(yearly)}</p>
         </div>
       </div>
+
+      <CtaButton
+        href={lp(locale, '/contact')}
+        size="lg"
+        className="mt-5 w-full sm:w-auto"
+        onClick={() => track('calculator_waitlist_click')}
+      >
+        {copy.cta.book}
+      </CtaButton>
 
       <p className={styles.formula}>
         {t.formula}
