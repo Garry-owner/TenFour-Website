@@ -17,7 +17,6 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="space-y-4">
           <BrandLogo />
-          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{t.footerBlurb}</p>
           <p className="font-condensed text-lg font-extrabold uppercase tracking-[0.03em] text-primary">{t.footerTagline}</p>
         </div>
 
