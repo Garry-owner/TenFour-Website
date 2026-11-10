@@ -24,6 +24,7 @@ export function DemoForm() {
     { value: TRADE_OTHER, label: t.tradeOther },
   ]
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
+  const [trade, setTrade] = useState('')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -45,6 +46,7 @@ export function DemoForm() {
       if (!res.ok) throw new Error('Server error')
       setStatus('done')
       form.reset()
+      setTrade('')
     } catch {
       setStatus('error')
     }
@@ -134,7 +136,14 @@ export function DemoForm() {
         <label htmlFor="trade" className={labelClass}>
           {t.trade}
         </label>
-        <select id="trade" name="Trade" required className={inputClass}>
+        <select
+          id="trade"
+          name="Trade"
+          required
+          value={trade}
+          onChange={(e) => setTrade(e.target.value)}
+          className={inputClass}
+        >
           <option value="">{t.tradePlaceholder}</option>
           {tradeOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -143,6 +152,22 @@ export function DemoForm() {
           ))}
         </select>
       </div>
+
+      {trade === TRADE_OTHER && (
+        <div className="flex flex-col gap-2">
+          <label htmlFor="business-type" className={labelClass}>
+            {t.businessType}
+          </label>
+          <input
+            id="business-type"
+            name="Business type"
+            required
+            maxLength={60}
+            placeholder={t.businessTypePlaceholder}
+            className={inputClass}
+          />
+        </div>
+      )}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className={labelClass}>

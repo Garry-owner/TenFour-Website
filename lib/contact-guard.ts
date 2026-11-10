@@ -14,7 +14,7 @@
 // instance counts on its own. It stops casual floods but is not airtight. A
 // challenge such as Cloudflare Turnstile is the stronger next step.
 
-import { ALLOWED_TRADES } from '@/lib/trades'
+import { ALLOWED_TRADES, TRADE_OTHER } from '@/lib/trades'
 
 export const MAX_BODY_BYTES = 8 * 1024
 
@@ -47,6 +47,7 @@ export type CleanPayload = {
   Message: string
   Fax: string
   Trade: string
+  'Business type': string
   consent_check?: string
 }
 
@@ -92,6 +93,10 @@ export function validatePayload(raw: unknown): ValidationResult {
   // blocking the lead, and Make.com falls back to a generic deal name.
   const rawTrade = asTrimmedString(body['Trade'], 40)
   const trade = ALLOWED_TRADES.includes(rawTrade) ? rawTrade : ''
+  // Write-in business type, only kept when the visitor picked Other. Angle
+  // brackets are dropped because the value is shown in alert emails.
+  const businessType =
+    trade === TRADE_OTHER ? asTrimmedString(body['Business type'], 60).replace(/[<>]/g, '') : ''
 
   if (!firstName) return { ok: false, reason: 'first_name_missing' }
   if (!lastName) return { ok: false, reason: 'last_name_missing' }
@@ -118,6 +123,7 @@ export function validatePayload(raw: unknown): ValidationResult {
     Message: message,
     Fax: timezone,
     Trade: trade,
+    'Business type': businessType,
   }
 
   // Only present when the box was ticked, exactly like the real form, because

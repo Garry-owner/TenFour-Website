@@ -444,7 +444,9 @@ export const es: typeof en = {
     messagePlaceholder: 'Se nos van muchas llamadas fuera de horario en temporada de tormentas.',
     trade: '¿A qué oficio te dedicas?',
     tradePlaceholder: 'Elige tu oficio',
-    tradeOther: 'Otro',
+    tradeOther: 'Otro / no aparece',
+    businessType: '¿Qué tipo de negocio?',
+    businessTypePlaceholder: 'Salón de uñas',
     timezone: '¿En qué zona horaria estás?',
     timezonePlaceholder: 'Elige tu zona horaria',
     zones: [
