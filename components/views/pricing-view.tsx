@@ -30,7 +30,7 @@ export function PricingView({ locale }: { locale: Locale }) {
                   )}
                 >
                   {featured && (
-                    <span className="absolute -top-3 left-8 rounded-full bg-primary px-3 py-1 font-mono text-[0.65rem] uppercase tracking-widest text-primary-foreground">
+                    <span className="absolute -top-3 left-8 rounded-full bg-[#ff6b1a] px-3 py-1 font-mono text-[0.65rem] uppercase tracking-widest text-[#0f1011]">
                       {plan.tag}
                     </span>
                   )}

@@ -164,7 +164,7 @@ export function DemoForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-6 font-mono text-xs uppercase tracking-widest font-medium text-primary-foreground transition-all hover:bg-primary/85 hover:shadow-[0_0_24px_-4px_var(--primary)] disabled:opacity-60"
+        className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#ff6b1a] px-6 font-mono text-xs uppercase tracking-widest font-medium text-[#0f1011] transition-all hover:bg-[#ff6b1a]/85 hover:shadow-[0_0_24px_-4px_#ff6b1a] disabled:opacity-60"
       >
         {status === 'submitting' ? (
           <>

@@ -60,7 +60,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center bg-primary text-primary-foreground"
+            className="inline-flex h-11 w-11 items-center justify-center bg-[#ff6b1a] text-[#0f1011]"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? t.closeMenu : t.openMenu}
             aria-expanded={open}

@@ -18,7 +18,7 @@ export function Steps({ locale, withHeading = true }: { locale: Locale; withHead
               key={step.title}
               className="relative flex flex-col gap-4 rounded-lg border border-border bg-card p-6"
             >
-              <span className="font-mono text-sm font-bold tracking-widest text-primary">
+              <span className="font-mono text-sm font-bold tracking-widest text-muted-foreground">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div className="h-px w-full bg-border" aria-hidden />

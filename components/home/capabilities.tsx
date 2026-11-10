@@ -25,7 +25,7 @@ export function Capabilities({ locale }: { locale: Locale }) {
             const Icon = ICONS[index]
             return (
               <div key={title} className="flex flex-col gap-4 bg-card p-7">
-                <span className="flex h-11 w-11 items-center justify-center bg-primary text-primary-foreground">
+                <span className="flex h-11 w-11 items-center justify-center border-2 border-border bg-background text-foreground">
                   <Icon className="h-5 w-5" />
                 </span>
                 <h3 className="font-condensed text-2xl font-extrabold uppercase leading-tight tracking-[0.02em]">
