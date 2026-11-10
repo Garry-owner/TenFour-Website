@@ -425,7 +425,7 @@ export const en = {
     tradePlaceholder: 'Select your trade',
     tradeOther: 'Other / not listed',
     businessType: 'What kind of business?',
-    businessTypePlaceholder: 'Nail salon',
+    businessTypePlaceholder: 'Type of business (what you do)',
     timezone: 'What time zone are you in?',
     timezonePlaceholder: 'Select your time zone',
     zones: [
