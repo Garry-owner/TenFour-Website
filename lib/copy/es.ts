@@ -41,7 +41,7 @@ export const es: typeof en = {
     titleBefore: 'Nosotros cubrimos el ',
     titleEmphasis: 'segundo turno',
     titleAfter: ' para que tú no tengas que hacerlo.',
-    body: 'TenFour Systems le manda un texto a tus llamadas perdidas, hecho para negocios de servicio en el hogar. Cuando no puedes contestar, Roger le escribe rápido a esa persona, para que sea menos probable que marque el siguiente nombre de la lista.',
+    body: 'Texto de regreso por llamada perdida para negocios de servicio en el hogar. Cuando no alcanzas a contestar, Roger le escribe a quien llamó, le hace unas preguntas y te pasa el prospecto.',
     rogerAlt: 'Roger',
     roger:
       'El nombre viene de un código viejo de radio, ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja que una llamada perdida se enfríe.',

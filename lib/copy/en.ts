@@ -39,7 +39,7 @@ export const en = {
     titleBefore: 'We work the ',
     titleEmphasis: 'second shift',
     titleAfter: " so you don't have to.",
-    body: "TenFour Systems texts back your missed calls, built for home-service businesses. When you can't pick up, Roger texts that caller back fast, so they're less likely to call the next name on their list.",
+    body: 'Missed call text back for home service businesses. When you miss a call, Roger texts the caller back, asks a few questions, and sends the lead to you.',
     rogerAlt: 'Roger',
     roger:
       "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a missed call go cold.",
