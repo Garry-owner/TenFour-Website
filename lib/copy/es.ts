@@ -300,7 +300,7 @@ export const es: typeof en = {
     eyebrow: 'Precios',
     title: 'Precio fijo. Sin cuentas raras por llamada perdida.',
     description:
-      'Con un solo trabajo agendado puede salir el mes. Cada plan incluye la instalación, el ajuste y el texto de regreso por llamada perdida, también de noche y en fin de semana.',
+      'Un solo trabajo que se te habría ido puede pagar el mes. Nosotros hacemos la instalación, y Roger le escribe a cada llamada perdida, de día o de noche.',
     plans: [
       {
         name: 'Base',

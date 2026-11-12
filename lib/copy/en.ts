@@ -283,7 +283,7 @@ export const en = {
     eyebrow: 'Pricing',
     title: 'Flat pricing. No missed-call math.',
     description:
-      'One booked job can cover the month. Every plan includes setup, tuning, and missed call text back on nights and weekends.',
+      'One job you would have missed can cover the month. We handle the setup, and Roger texts back every missed call, day or night.',
     plans: [
       {
         name: 'Base',
