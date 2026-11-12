@@ -307,7 +307,7 @@ export const es: typeof en = {
         tag: 'Para empezar',
         price: '$299',
         cadence: '/mes',
-        setup: '$699 de instalación, una sola vez',
+        setup: '$299 de instalación, una sola vez',
         blurb:
           'Texto automático para llamadas perdidas y consultas en la web, con seguimiento completo en el CRM.',
         features: [
@@ -323,7 +323,7 @@ export const es: typeof en = {
         tag: 'El más pedido',
         price: '$499',
         cadence: '/mes',
-        setup: '$899 de instalación, una sola vez',
+        setup: '$499 de instalación, una sola vez',
         blurb:
           'Todo lo de Base, más un seguimiento después de la tormenta para los oficios que dependen del clima.',
         features: [
@@ -337,9 +337,9 @@ export const es: typeof en = {
       {
         name: 'Elite',
         tag: 'Cobertura completa',
-        price: '$799',
+        price: '$699',
         cadence: '/mes',
-        setup: '$1,199 de instalación, una sola vez',
+        setup: '$699 de instalación, una sola vez',
         blurb:
           'Todo lo de Pro, más un aviso por teléfono a tu equipo cuando el prospecto es urgente.',
         features: [
@@ -354,10 +354,10 @@ export const es: typeof en = {
     overageTitle: 'Mensajes extra',
     overageBody:
       'Los mensajes que pasen de la cuota del mes se cobran a 5 centavos cada uno. Se registran solos y se cobran al cierre del mes. Sin sorpresas y sin que se corte el servicio.',
-    offerTitle: 'Oferta para clientes nuevos',
+    offerTitle: 'Oferta para los primeros clientes',
     offerBody:
-      'El primer mes va a la mitad de precio. Después de tres meses pagados completos, el cuarto mes es gratis. Es un regalo de bienvenida, de una sola vez, no un descuento de siempre.',
-    contracts: 'Sin contratos largos.',
+      'A nuestros primeros 10 clientes no les cobramos la instalación. A cambio, te pedimos una reseña honesta y permiso para compartir cuántos prospectos te salvó Roger. El plan mensual se paga completo desde el primer día.',
+    contracts: 'Mes a mes. Sin contratos.',
     questions: '¿Dudas? Háblanos',
     ctaTitle: '¿No sabes qué plan te queda?',
     ctaSubtitle:

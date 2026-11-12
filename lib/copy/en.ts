@@ -290,7 +290,7 @@ export const en = {
         tag: 'Get started',
         price: '$299',
         cadence: '/mo',
-        setup: '$699 one time setup fee',
+        setup: '$299 one time setup fee',
         blurb: 'Automated text response to missed calls and web inquiries, with full CRM tracking.',
         features: [
           'Automated text response to missed calls and web inquiries',
@@ -305,7 +305,7 @@ export const en = {
         tag: 'Most popular',
         price: '$499',
         cadence: '/mo',
-        setup: '$899 one time setup fee',
+        setup: '$499 one time setup fee',
         blurb: 'Everything in Base, plus storm reactive follow up for weather driven trades.',
         features: [
           'Everything in Base',
@@ -318,9 +318,9 @@ export const en = {
       {
         name: 'Elite',
         tag: 'Full coverage',
-        price: '$799',
+        price: '$699',
         cadence: '/mo',
-        setup: '$1,199 one time setup fee',
+        setup: '$699 one time setup fee',
         blurb: 'Everything in Pro, plus an emergency phone alert for your most urgent leads.',
         features: [
           'Everything in Pro',
@@ -334,10 +334,10 @@ export const en = {
     overageTitle: 'Overage billing',
     overageBody:
       "Messages beyond your plan's monthly quota are billed at 5 cents per message, logged automatically and billed at month end. No surprise overages, no service gaps.",
-    offerTitle: 'New client offer',
+    offerTitle: 'Founding client offer',
     offerBody:
-      'Your first month is billed at 50 percent off. After three full paid months, your fourth month is completely free. A one time welcome, not a recurring discount.',
-    contracts: 'No long term contracts.',
+      "We're waiving the setup fee for our first 10 clients. In return, we ask for an honest review and permission to share how many leads Roger saved you. Your monthly plan is full price from day one.",
+    contracts: 'Month to month. No contracts.',
     questions: 'Questions? Talk to us',
     ctaTitle: 'Not sure which plan fits?',
     ctaSubtitle:
