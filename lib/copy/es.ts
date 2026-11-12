@@ -300,7 +300,7 @@ export const es: typeof en = {
     eyebrow: 'Precios',
     title: 'Precio fijo. Sin cuentas raras por llamada perdida.',
     description:
-      'Un solo trabajo que se te habría ido puede pagar el mes. Nosotros hacemos la instalación, y Roger le escribe a cada llamada perdida, de día o de noche.',
+      'Un solo trabajo que se te habría ido puede pagar el mes. Nosotros hacemos la instalación. Roger no duerme, así que cada llamada perdida recibe un texto, de día o de noche.',
     plans: [
       {
         name: 'Base',
