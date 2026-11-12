@@ -72,7 +72,11 @@ export function PricingView({ locale }: { locale: Locale }) {
             })}
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-4xl gap-6 sm:grid-cols-2">
+          <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+            {t.setupNote}
+          </p>
+
+          <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
             <div className="rounded-xl border border-border bg-card p-6">
               <h3 className="font-mono text-xs uppercase tracking-widest text-primary">{t.overageTitle}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t.overageBody}</p>

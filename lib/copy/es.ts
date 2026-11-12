@@ -351,6 +351,8 @@ export const es: typeof en = {
         cta: 'Empezar con Elite',
       },
     ],
+    setupNote:
+      'La instalación equivale a un mes de tu plan. Incluye escribir tu mensaje de respuesta y tus preguntas, y probar todo en tu línea. Pro y Elite tienen más que armar y probar, como el seguimiento después de la tormenta y el aviso de prospectos urgentes.',
     overageTitle: 'Mensajes extra',
     overageBody:
       'Los mensajes que pasen de la cuota del mes se cobran a 5 centavos cada uno. Se registran solos y se cobran al cierre del mes. Sin sorpresas y sin que se corte el servicio.',

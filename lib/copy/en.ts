@@ -331,6 +331,8 @@ export const en = {
         cta: 'Start with Elite',
       },
     ],
+    setupNote:
+      'Setup equals one month of your plan. It covers writing your text-back script and questions, and testing everything on your line. Pro and Elite have more to build and test, like the after-storm follow-up and the urgent lead alert.',
     overageTitle: 'Overage billing',
     overageBody:
       "Messages beyond your plan's monthly quota are billed at 5 cents per message, logged automatically and billed at month end. No surprise overages, no service gaps.",
