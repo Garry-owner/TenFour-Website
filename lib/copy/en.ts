@@ -46,7 +46,7 @@ export const en = {
     primary: 'Join the Waitlist',
     secondary: 'See How It Works',
     stats: [
-      { k: 'Day or night', v: 'Covered' },
+      { k: 'Noon or midnight', v: 'Covered' },
       { k: 'Fast', v: 'Text-back speed' },
     ],
   },
