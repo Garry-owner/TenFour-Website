@@ -46,7 +46,7 @@ export const en = {
     primary: 'Join the Waitlist',
     secondary: 'See How It Works',
     stats: [
-      { k: 'Nights and weekends', v: 'Covered' },
+      { k: 'Noon or midnight', v: 'Covered' },
       { k: 'Fast', v: 'Text-back speed' },
     ],
   },
@@ -283,7 +283,7 @@ export const en = {
     eyebrow: 'Pricing',
     title: 'Flat pricing. No missed-call math.',
     description:
-      'One job you would have missed can cover the month. We handle the setup, and Roger texts back every missed call, day or night.',
+      'One job you would have missed can cover the month. We handle the setup. Roger never sleeps, so every missed call gets a text back, day or night.',
     plans: [
       {
         name: 'Base',
@@ -331,6 +331,8 @@ export const en = {
         cta: 'Start with Elite',
       },
     ],
+    setupNote:
+      'Setup equals one month of your plan. It covers writing your text-back script and questions, and testing everything on your line. Pro and Elite have more to build and test, like the after-storm follow-up and the urgent lead alert.',
     overageTitle: 'Overage billing',
     overageBody:
       "Messages beyond your plan's monthly quota are billed at 5 cents per message, logged automatically and billed at month end. No surprise overages, no service gaps.",

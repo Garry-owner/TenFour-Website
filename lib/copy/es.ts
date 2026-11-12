@@ -48,7 +48,7 @@ export const es: typeof en = {
     primary: 'Únete a la lista de espera',
     secondary: 'Mira cómo funciona',
     stats: [
-      { k: 'Noches y fines de semana', v: 'Cubiertos' },
+      { k: 'Mediodía o medianoche', v: 'Cubierto' },
       { k: 'Rápido', v: 'Velocidad del texto' },
     ],
   },
@@ -300,7 +300,7 @@ export const es: typeof en = {
     eyebrow: 'Precios',
     title: 'Precio fijo. Sin cuentas raras por llamada perdida.',
     description:
-      'Un solo trabajo que se te habría ido puede pagar el mes. Nosotros hacemos la instalación, y Roger le escribe a cada llamada perdida, de día o de noche.',
+      'Un solo trabajo que se te habría ido puede pagar el mes. Nosotros hacemos la instalación. Roger no duerme, así que cada llamada perdida recibe un texto, de día o de noche.',
     plans: [
       {
         name: 'Base',
@@ -351,6 +351,8 @@ export const es: typeof en = {
         cta: 'Empezar con Elite',
       },
     ],
+    setupNote:
+      'La instalación equivale a un mes de tu plan. Incluye escribir tu mensaje de respuesta y tus preguntas, y probar todo en tu línea. Pro y Elite tienen más que armar y probar, como el seguimiento después de la tormenta y el aviso de prospectos urgentes.',
     overageTitle: 'Mensajes extra',
     overageBody:
       'Los mensajes que pasen de la cuota del mes se cobran a 5 centavos cada uno. Se registran solos y se cobran al cierre del mes. Sin sorpresas y sin que se corte el servicio.',
