@@ -48,7 +48,7 @@ export const es: typeof en = {
     primary: 'Únete a la lista de espera',
     secondary: 'Mira cómo funciona',
     stats: [
-      { k: 'Noches y fines de semana', v: 'Cubiertos' },
+      { k: 'De día o de noche', v: 'Cubierto' },
       { k: 'Rápido', v: 'Velocidad del texto' },
     ],
   },
