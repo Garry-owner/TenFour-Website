@@ -122,6 +122,7 @@ export default async function RootLayout({
 }>) {
   const headerList = await headers()
   const lang = headerList.get('x-locale') === 'es' ? 'es' : 'en'
+  const admin = headerList.get('x-admin') === '1'
 
   return (
     <html
@@ -154,15 +155,23 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
-        <HtmlLang />
-        <StructuredData />
-        <SkipLink />
-        <SiteHeader />
-        <div id="main-content" className="flex-1">
-          {children}
-        </div>
-        <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {admin ? (
+          <div id="main-content" className="flex-1">
+            {children}
+          </div>
+        ) : (
+          <>
+            <HtmlLang />
+            <StructuredData />
+            <SkipLink />
+            <SiteHeader />
+            <div id="main-content" className="flex-1">
+              {children}
+            </div>
+            <SiteFooter />
+            {process.env.NODE_ENV === 'production' && <Analytics />}
+          </>
+        )}
       </body>
     </html>
   )

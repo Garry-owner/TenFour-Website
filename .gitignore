@@ -1,0 +1,11 @@
+node_modules
+.next
+.netlify
+out
+.env
+.env.*
+*.log
+.DS_Store
+AGENTS.md
+CLAUDE.md
+next-env.d.ts
