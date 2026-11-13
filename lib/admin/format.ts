@@ -77,10 +77,10 @@ export function planPrice(id: PlanId): string {
 }
 
 export function monthlyLabel(status: MonthlyStatus): string {
-  if (status === 'current') return 'Current'
   if (status === 'past_due') return 'Past due'
   if (status === 'paused') return 'Paused'
-  return 'Not started'
+  if (status === 'cancelled') return 'Cancelled'
+  return 'Active'
 }
 
 export function setupLabel(founding: boolean, setupPaid: boolean): string {

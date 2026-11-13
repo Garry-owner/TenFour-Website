@@ -454,6 +454,124 @@ export async function updateTestFlag(id: string, value: boolean): Promise<string
   return field.label
 }
 
+export function zohoMissingMessage(): string {
+  return 'Zoho is not connected. Set ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, and ZOHO_REFRESH_TOKEN. Nothing was changed.'
+}
+
+export type LeadWrite = {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  mobile: string
+  business: string
+  trade: string
+  city: string
+  state: string
+  message: string
+  amount: number | null
+  stage?: string
+  dealId?: string
+}
+
+function createdId(json: Record<string, unknown>): string {
+  const row = Array.isArray(json.data) ? (json.data[0] as Record<string, unknown> | undefined) : undefined
+  const details = row && typeof row.details === 'object' && row.details ? (row.details as Record<string, unknown>) : undefined
+  const id = str(details?.id) || str(row?.id)
+  if (!id) throw new BoardError('Zoho did not return the new record.', 'zoho')
+  return id
+}
+
+function requireLiveId(id: string) {
+  if (id.startsWith('example-')) throw new BoardError('This lead is example data. Nothing was changed.', 'input')
+  if (!/^[0-9]{5,32}$/.test(id)) throw new BoardError('That lead id is not a Zoho contact.', 'input')
+}
+
+async function contactPayload(input: LeadWrite): Promise<Record<string, unknown>> {
+  const meta = await fields()
+  const tradeField = meta.contacts.find((field) => field.apiName === 'Trade' || /^trade$/i.test(field.label))
+  const businessField = meta.contacts.find((field) => /^(business|company)$/i.test(field.apiName) || /^(business|company)$/i.test(field.label))
+  const payload: Record<string, unknown> = {
+    First_Name: input.firstName,
+    Last_Name: input.lastName || input.business || 'Lead',
+    Email: input.email,
+    Phone: input.phone,
+    Mobile: input.mobile,
+    Mailing_City: input.city,
+    Mailing_State: input.state,
+    Description: [input.message, input.business && !businessField ? `Business: ${input.business}` : '', input.trade && !tradeField ? `Trade: ${input.trade}` : '']
+      .filter(Boolean)
+      .join('\n'),
+    Lead_Source: 'Command center',
+  }
+  if (tradeField) payload[tradeField.apiName] = input.trade
+  if (businessField) payload[businessField.apiName] = input.business
+  return payload
+}
+
+export async function createLeadRecord(input: LeadWrite): Promise<{ contactId: string; dealId: string }> {
+  if (!zohoConfigured()) throw new BoardError(zohoMissingMessage(), 'zoho')
+  const contact = await zohoSend('/Contacts', 'POST', { data: [await contactPayload(input)] })
+  const contactId = createdId(contact)
+  const dealBody: Record<string, unknown> = {
+    Deal_Name: input.business || `${input.firstName} ${input.lastName}`.trim() || 'New lead',
+    Stage: input.stage || 'New Lead',
+    Description: input.message,
+    Contact_Name: contactId,
+    Lead_Source: 'Command center',
+    Account_Name: input.business || input.lastName || 'Lead',
+  }
+  if (input.amount != null) dealBody.Amount = input.amount
+  const deal = await zohoSend('/Deals', 'POST', { data: [dealBody] })
+  return { contactId, dealId: createdId(deal) }
+}
+
+export async function updateLeadRecord(id: string, input: LeadWrite): Promise<void> {
+  if (!zohoConfigured()) throw new BoardError(zohoMissingMessage(), 'zoho')
+  requireLiveId(id)
+  const payload = await contactPayload(input)
+  await zohoSend(`/Contacts/${id}`, 'PUT', { data: [{ id, ...payload }] })
+  if (input.dealId && /^[0-9]{5,32}$/.test(input.dealId)) {
+    const deal: Record<string, unknown> = {
+      id: input.dealId,
+      Deal_Name: input.business || `${input.firstName} ${input.lastName}`.trim() || 'Lead',
+      Description: input.message,
+      Account_Name: input.business || input.lastName,
+    }
+    if (input.stage) deal.Stage = input.stage
+    if (input.amount != null) deal.Amount = input.amount
+    await zohoSend(`/Deals/${input.dealId}`, 'PUT', { data: [deal] })
+  }
+}
+
+export async function updateZohoNote(noteId: string, body: string): Promise<void> {
+  if (!zohoConfigured()) throw new BoardError(zohoMissingMessage(), 'zoho')
+  if (!/^[0-9]{5,32}$/.test(noteId)) throw new BoardError('That note is not a Zoho note.', 'input')
+  const note = body.trim()
+  if (!note) throw new BoardError('Write a note before saving it.', 'input')
+  await zohoSend(`/Notes/${noteId}`, 'PUT', {
+    data: [{ id: noteId, Note_Title: 'Command center', Note_Content: note }],
+  })
+}
+
+export async function deleteZohoNote(noteId: string): Promise<void> {
+  if (!zohoConfigured()) throw new BoardError(zohoMissingMessage(), 'zoho')
+  if (!/^[0-9]{5,32}$/.test(noteId)) throw new BoardError('That note is not a Zoho note.', 'input')
+  await zohoSend(`/Notes/${noteId}`, 'DELETE')
+}
+
+export async function deleteLeadRecord(id: string): Promise<void> {
+  if (!zohoConfigured()) throw new BoardError(zohoMissingMessage(), 'zoho')
+  requireLiveId(id)
+  const detail = await loadLead(id)
+  for (const deal of detail.lead?.deals || []) {
+    if (/^[0-9]{5,32}$/.test(deal.id)) {
+      await zohoSend(`/Deals/${deal.id}`, 'DELETE').catch(() => undefined)
+    }
+  }
+  await zohoSend(`/Contacts/${id}`, 'DELETE')
+}
+
 export async function zohoLamp(): Promise<{ state: 'ready' | 'missing' | 'fault'; detail: string }> {
   if (!zohoConfigured()) {
     return { state: 'missing', detail: 'Zoho credentials are not set.' }

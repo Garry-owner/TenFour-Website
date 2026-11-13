@@ -1,22 +1,23 @@
 import { desc, eq } from 'drizzle-orm'
-import { clients, glanceNotes } from '@/db/schema'
+import { auditLog, clients, glanceNotes, rogerSettings } from '@/db/schema'
 import { getDb } from '@/db'
 import { BoardError } from '@/lib/admin/guard'
 import { FOUNDING_SEATS, PLANS } from '@/lib/admin/constants'
 import { formatMonthChicago } from '@/lib/admin/format'
+import { normalizeMonthly, phoneKey } from '@/lib/admin/policies'
 import type {
+  AuditEntry,
   ClientRecord,
   Feed,
   GlanceNote,
-  MonthlyStatus,
   PlanId,
   ReportBoard,
+  RogerSettings,
 } from '@/lib/admin/types'
 
 type Database = ReturnType<typeof getDb>
 
 const PLANS_SET = new Set<PlanId>(PLANS.map((plan) => plan.id))
-const STATUSES = new Set<MonthlyStatus>(['not_started', 'current', 'past_due', 'paused'])
 
 function storeMessage(err: unknown): string {
   const raw = err instanceof Error ? err.message : ''
@@ -49,13 +50,8 @@ function isPlan(value: string): value is PlanId {
   return PLANS_SET.has(value as PlanId)
 }
 
-function isStatus(value: string): value is MonthlyStatus {
-  return STATUSES.has(value as MonthlyStatus)
-}
-
 function mapClient(row: typeof clients.$inferSelect): ClientRecord {
   const plan = isPlan(row.plan) ? row.plan : 'base'
-  const monthlyStatus = isStatus(row.monthlyStatus) ? row.monthlyStatus : 'not_started'
   return {
     id: row.id,
     businessName: row.businessName,
@@ -65,13 +61,34 @@ function mapClient(row: typeof clients.$inferSelect): ClientRecord {
     trade: row.trade,
     plan,
     setupPaid: row.setupPaid,
-    monthlyStatus,
+    monthlyStatus: normalizeMonthly(row.monthlyStatus),
     founding: row.founding,
     bookingLink: row.bookingLink,
     notes: row.notes,
+    startDate: row.startDate,
+    ownerCell: row.ownerCell,
+    serviceArea: row.serviceArea,
+    hours: row.hours,
+    city: row.city,
+    zohoContactId: row.zohoContactId,
+    zohoDealId: row.zohoDealId,
     createdAt: iso(row.createdAt),
     updatedAt: iso(row.updatedAt),
   }
+}
+
+async function audit(
+  db: Database,
+  entry: { action: string; entityType: string; entityId: string; summary: string; before?: unknown; after?: unknown },
+) {
+  await db.insert(auditLog).values({
+    action: entry.action,
+    entityType: entry.entityType,
+    entityId: entry.entityId,
+    summary: entry.summary,
+    before: entry.before ?? null,
+    after: entry.after ?? null,
+  })
 }
 
 function mapNote(
@@ -112,8 +129,7 @@ function cleanClient(input: Record<string, unknown>, partial = false): Partial<C
   const plan = typeof input.plan === 'string' ? input.plan : ''
   if (!partial && !isPlan(plan)) throw new BoardError('Plan has to be Base, Pro, or Elite.', 'input')
   if (plan && !isPlan(plan)) throw new BoardError('Plan has to be Base, Pro, or Elite.', 'input')
-  const monthlyStatus = typeof input.monthlyStatus === 'string' ? input.monthlyStatus : ''
-  if (monthlyStatus && !isStatus(monthlyStatus)) throw new BoardError('That monthly status is not on the board.', 'input')
+  const monthlyStatus = typeof input.monthlyStatus === 'string' ? normalizeMonthly(input.monthlyStatus) : 'active'
   const email = typeof input.email === 'string' ? input.email.trim().slice(0, 160) : ''
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new BoardError('That email does not look usable.', 'input')
@@ -132,11 +148,55 @@ function cleanClient(input: Record<string, unknown>, partial = false): Partial<C
   if (!partial || 'trade' in input) next.trade = typeof input.trade === 'string' ? input.trade.trim().slice(0, 80) : ''
   if (!partial || 'plan' in input) next.plan = plan
   if (!partial || 'setupPaid' in input) next.setupPaid = input.setupPaid === true
-  if (!partial || 'monthlyStatus' in input) next.monthlyStatus = monthlyStatus || 'not_started'
+  if (!partial || 'monthlyStatus' in input) next.monthlyStatus = monthlyStatus || 'active'
   if (!partial || 'founding' in input) next.founding = input.founding === true
   if (!partial || 'bookingLink' in input) next.bookingLink = bookingLink
   if (!partial || 'notes' in input) next.notes = typeof input.notes === 'string' ? input.notes.trim().slice(0, 2000) : ''
+  if (!partial || 'startDate' in input) {
+    const start = typeof input.startDate === 'string' ? input.startDate.trim() : ''
+    next.startDate = /^\d{4}-\d{2}-\d{2}$/.test(start) ? start : null
+  }
+  if (!partial || 'ownerCell' in input) {
+    next.ownerCell = typeof input.ownerCell === 'string' ? input.ownerCell.trim().slice(0, 30) : ''
+  }
+  if (!partial || 'serviceArea' in input) {
+    next.serviceArea = typeof input.serviceArea === 'string' ? input.serviceArea.trim().slice(0, 200) : ''
+  }
+  if (!partial || 'hours' in input) next.hours = typeof input.hours === 'string' ? input.hours.trim().slice(0, 200) : ''
+  if (!partial || 'city' in input) next.city = typeof input.city === 'string' ? input.city.trim().slice(0, 80) : ''
+  if ('zohoContactId' in input) {
+    const zoho = typeof input.zohoContactId === 'string' ? input.zohoContactId.trim() : ''
+    next.zohoContactId = /^[0-9]{5,32}$/.test(zoho) ? zoho : null
+  }
+  if ('zohoDealId' in input) {
+    const zoho = typeof input.zohoDealId === 'string' ? input.zohoDealId.trim() : ''
+    next.zohoDealId = /^[0-9]{5,32}$/.test(zoho) ? zoho : null
+  }
   return next
+}
+
+function clientValues(data: Partial<ClientRecord>) {
+  return {
+    businessName: data.businessName || '',
+    contactName: data.contactName || '',
+    phone: data.phone || '',
+    email: data.email || '',
+    trade: data.trade || '',
+    plan: data.plan || 'base',
+    setupPaid: Boolean(data.setupPaid),
+    monthlyStatus: data.monthlyStatus || 'active',
+    founding: Boolean(data.founding),
+    bookingLink: data.bookingLink || '',
+    notes: data.notes || '',
+    startDate: data.startDate || null,
+    ownerCell: data.ownerCell || '',
+    serviceArea: data.serviceArea || '',
+    hours: data.hours || '',
+    city: data.city || '',
+    updatedAt: new Date(),
+    ...(data.zohoContactId !== undefined ? { zohoContactId: data.zohoContactId } : {}),
+    ...(data.zohoDealId !== undefined ? { zohoDealId: data.zohoDealId } : {}),
+  }
 }
 
 function isUuid(id: string): boolean {
@@ -146,24 +206,16 @@ function isUuid(id: string): boolean {
 export async function createClient(input: Record<string, unknown>): Promise<ClientRecord> {
   const data = cleanClient(input)
   return withDb(async (db) => {
-    const [row] = await db
-      .insert(clients)
-      .values({
-        businessName: data.businessName || '',
-        contactName: data.contactName || '',
-        phone: data.phone || '',
-        email: data.email || '',
-        trade: data.trade || '',
-        plan: data.plan || 'base',
-        setupPaid: Boolean(data.setupPaid),
-        monthlyStatus: data.monthlyStatus || 'not_started',
-        founding: Boolean(data.founding),
-        bookingLink: data.bookingLink || '',
-        notes: data.notes || '',
-        updatedAt: new Date(),
-      })
-      .returning()
-    return mapClient(row)
+    const [row] = await db.insert(clients).values(clientValues(data)).returning()
+    const client = mapClient(row)
+    await audit(db, {
+      action: 'create',
+      entityType: 'client',
+      entityId: client.id,
+      summary: `Added client ${client.businessName}`,
+      after: client,
+    })
+    return client
   })
 }
 
@@ -171,34 +223,35 @@ export async function updateClient(id: string, input: Record<string, unknown>): 
   if (!isUuid(id)) throw new BoardError('That client is not on the private board.', 'input')
   const data = cleanClient(input)
   return withDb(async (db) => {
-    const [row] = await db
-      .update(clients)
-      .set({
-        businessName: data.businessName || '',
-        contactName: data.contactName || '',
-        phone: data.phone || '',
-        email: data.email || '',
-        trade: data.trade || '',
-        plan: data.plan || 'base',
-        setupPaid: Boolean(data.setupPaid),
-        monthlyStatus: data.monthlyStatus || 'not_started',
-        founding: Boolean(data.founding),
-        bookingLink: data.bookingLink || '',
-        notes: data.notes || '',
-        updatedAt: new Date(),
-      })
-      .where(eq(clients.id, id))
-      .returning()
-    if (!row) throw new BoardError('That client is not on the private board.', 'input')
-    return mapClient(row)
+    const [previous] = await db.select().from(clients).where(eq(clients.id, id)).limit(1)
+    if (!previous) throw new BoardError('That client is not on the private board.', 'input')
+    const [row] = await db.update(clients).set(clientValues(data)).where(eq(clients.id, id)).returning()
+    const client = mapClient(row)
+    await audit(db, {
+      action: 'update',
+      entityType: 'client',
+      entityId: id,
+      summary: `Edited client ${client.businessName}`,
+      before: mapClient(previous),
+      after: client,
+    })
+    return client
   })
 }
 
 export async function deleteClient(id: string): Promise<void> {
   if (!isUuid(id)) throw new BoardError('That client is not on the private board.', 'input')
   await withDb(async (db) => {
-    const rows = await db.delete(clients).where(eq(clients.id, id)).returning({ id: clients.id })
-    if (!rows.length) throw new BoardError('That client is not on the private board.', 'input')
+    const [previous] = await db.select().from(clients).where(eq(clients.id, id)).limit(1)
+    if (!previous) throw new BoardError('That client is not on the private board.', 'input')
+    await db.delete(clients).where(eq(clients.id, id))
+    await audit(db, {
+      action: 'delete',
+      entityType: 'client',
+      entityId: id,
+      summary: `Removed client ${previous.businessName}`,
+      before: mapClient(previous),
+    })
   })
 }
 
@@ -263,7 +316,15 @@ export async function createNote(input: Record<string, unknown>): Promise<Glance
       })
       .returning()
     const names = await noteNames(db)
-    return mapNote(row, names)
+    const note = mapNote(row, names)
+    await audit(db, {
+      action: 'create',
+      entityType: 'note',
+      entityId: note.id,
+      summary: 'Added a glance note',
+      after: note,
+    })
+    return note
   })
 }
 
@@ -298,7 +359,15 @@ export async function updateNote(id: string, input: Record<string, unknown>): Pr
       .returning()
     if (!row) throw new BoardError('That note is not on the board.', 'input')
     const names = await noteNames(db)
-    return mapNote(row, names)
+    const note = mapNote(row, names)
+    await audit(db, {
+      action: 'update',
+      entityType: 'note',
+      entityId: note.id,
+      summary: 'Edited a glance note',
+      after: note,
+    })
+    return note
   })
 }
 
@@ -344,6 +413,114 @@ export async function loadReport(): Promise<ReportBoard> {
     })),
     counting: false,
   }
+}
+
+function mapRoger(row: typeof rogerSettings.$inferSelect): RogerSettings {
+  return {
+    clientId: row.clientId,
+    enabled: row.enabled,
+    textBack: row.textBack,
+    questions: row.questions,
+    leadPhone: row.leadPhone,
+    leadEmail: row.leadEmail,
+    bookingLink: row.bookingLink,
+    updatedAt: iso(row.updatedAt),
+  }
+}
+
+export async function loadRoger(clientId: string): Promise<RogerSettings | null> {
+  if (!isUuid(clientId)) return null
+  try {
+    return await withDb(async (db) => {
+      const [row] = await db.select().from(rogerSettings).where(eq(rogerSettings.clientId, clientId)).limit(1)
+      return row ? mapRoger(row) : null
+    })
+  } catch {
+    return null
+  }
+}
+
+export async function saveRoger(clientId: string, input: Record<string, unknown>): Promise<RogerSettings> {
+  if (!isUuid(clientId)) throw new BoardError('That client is not on the private board.', 'input')
+  const bookingLink = typeof input.bookingLink === 'string' ? input.bookingLink.trim().slice(0, 300) : ''
+  if (bookingLink && !/^https?:\/\//i.test(bookingLink)) {
+    throw new BoardError('A booking link needs to start with http:// or https://.', 'input')
+  }
+  const leadEmail = typeof input.leadEmail === 'string' ? input.leadEmail.trim().slice(0, 160) : ''
+  if (leadEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadEmail)) {
+    throw new BoardError('That lead email does not look usable.', 'input')
+  }
+  const next = {
+    enabled: input.enabled === true,
+    textBack: typeof input.textBack === 'string' ? input.textBack.trim().slice(0, 1000) : '',
+    questions: typeof input.questions === 'string' ? input.questions.trim().slice(0, 2000) : '',
+    leadPhone: typeof input.leadPhone === 'string' ? input.leadPhone.trim().slice(0, 30) : '',
+    leadEmail,
+    bookingLink,
+    updatedAt: new Date(),
+  }
+  return withDb(async (db) => {
+    const [client] = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1)
+    if (!client) throw new BoardError('That client is not on the private board.', 'input')
+    const [previous] = await db.select().from(rogerSettings).where(eq(rogerSettings.clientId, clientId)).limit(1)
+    const [row] = previous
+      ? await db.update(rogerSettings).set(next).where(eq(rogerSettings.clientId, clientId)).returning()
+      : await db.insert(rogerSettings).values({ clientId, ...next }).returning()
+    const saved = mapRoger(row)
+    await audit(db, {
+      action: 'update',
+      entityType: 'roger',
+      entityId: clientId,
+      summary: `Saved Roger settings for ${client.businessName}`,
+      before: previous ? mapRoger(previous) : null,
+      after: saved,
+    })
+    return saved
+  })
+}
+
+export async function findClientByPhone(phone: string): Promise<ClientRecord | null> {
+  const key = phoneKey(phone)
+  if (key.length < 7) return null
+  const feed = await loadClients()
+  return (
+    feed.items.find((client) => phoneKey(client.phone) === key || phoneKey(client.ownerCell) === key) || null
+  )
+}
+
+export async function loadAudit(): Promise<Feed<AuditEntry>> {
+  try {
+    const items = await withDb(async (db) => {
+      const rows = await db.select().from(auditLog).orderBy(desc(auditLog.at)).limit(80)
+      return rows.map((row) => ({
+        id: row.id,
+        at: iso(row.at),
+        action: row.action,
+        entityType: row.entityType,
+        entityId: row.entityId,
+        summary: row.summary,
+        before: row.before,
+        after: row.after,
+      }))
+    })
+    return { state: 'live', notice: null, items }
+  } catch (err) {
+    const message = err instanceof BoardError ? err.message : 'The activity log could not be read.'
+    return { state: /not ready/i.test(message) ? 'offline' : 'error', notice: message, items: [] }
+  }
+}
+
+export async function recordAudit(entry: {
+  action: string
+  entityType: string
+  entityId: string
+  summary: string
+  before?: unknown
+  after?: unknown
+}) {
+  await withDb(async (db) => {
+    await audit(db, entry)
+  })
 }
 
 export async function storeLamp(): Promise<{ state: 'ready' | 'missing' | 'fault'; detail: string }> {

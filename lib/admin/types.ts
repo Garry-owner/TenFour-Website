@@ -93,7 +93,7 @@ export type CallLog = {
 }
 
 export type PlanId = 'base' | 'pro' | 'elite'
-export type MonthlyStatus = 'not_started' | 'current' | 'past_due' | 'paused'
+export type MonthlyStatus = 'active' | 'past_due' | 'paused' | 'cancelled'
 
 export type ClientRecord = {
   id: string
@@ -108,8 +108,45 @@ export type ClientRecord = {
   founding: boolean
   bookingLink: string
   notes: string
+  startDate: string | null
+  ownerCell: string
+  serviceArea: string
+  hours: string
+  city: string
+  zohoContactId: string | null
+  zohoDealId: string | null
   createdAt: string
   updatedAt: string
+}
+
+export type RogerSettings = {
+  clientId: string
+  enabled: boolean
+  textBack: string
+  questions: string
+  leadPhone: string
+  leadEmail: string
+  bookingLink: string
+  updatedAt: string
+}
+
+export type AuditEntry = {
+  id: string
+  at: string
+  action: string
+  entityType: string
+  entityId: string
+  summary: string
+  before: unknown
+  after: unknown
+}
+
+export type SearchHit = {
+  kind: 'client' | 'lead'
+  id: string
+  title: string
+  detail: string
+  href: string
 }
 
 export type GlanceNote = {
@@ -148,6 +185,7 @@ export type ScenarioCard = {
   liveName: string | null
   status: 'active' | 'inactive' | 'unknown' | 'fault'
   notice: string | null
+  lastRun: string | null
 }
 
 export type ReportRow = {

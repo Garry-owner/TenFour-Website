@@ -1,5 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { NoteForm } from '@/components/admin/note-form'
+import { useToast } from '@/components/admin/toast'
+import { sendJson } from '@/components/admin/ui'
 import { FeedBanner, Panel } from '@/components/admin/ui'
 import { CALL_LIMITATION, OUTCOME_PICKED } from '@/lib/admin/constants'
 import { formatCentral, formatPhone, formatSeconds, placeLine, sourceStamp, telHref } from '@/lib/admin/format'
@@ -20,6 +26,9 @@ export function CallDetailBoard({
   clients: Feed<ClientRecord>
   leadsLive: boolean
 }) {
+  const router = useRouter()
+  const toast = useToast()
+  const [opening, setOpening] = useState(false)
   if (!call) {
     return (
       <div className="flex flex-col gap-3">
@@ -87,6 +96,25 @@ export function CallDetailBoard({
           </div>
         </dl>
       </Panel>
+      <button
+        type="button"
+        className="admin-btn"
+        disabled={opening}
+        onClick={async () => {
+          setOpening(true)
+          const result = await sendJson('/api/admin/customers/from-call', 'POST', { callSid: call.callSid })
+          setOpening(false)
+          const created = result as { clientId?: string }
+          if (result.ok && created.clientId) {
+            toast(result.message || 'Customer opened.')
+            router.push(`/admin/customers/client/${created.clientId}`)
+            return
+          }
+          toast(result.message || 'Nothing was created.', false)
+        }}
+      >
+        {opening ? 'Opening' : 'Open this customer'}
+      </button>
       <Panel>
         <h2 className="admin-title mb-3 text-3xl">Glance log</h2>
         <NoteForm

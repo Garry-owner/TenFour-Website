@@ -50,7 +50,7 @@ export function GlanceBoard({
           <ul className="flex flex-col gap-2">
             {callbacks.slice(0, 4).map((lead) => (
               <li key={lead.id}>
-                <Link className="admin-card" href={`/admin/leads/${lead.id}`}>
+                <Link className="admin-card" href={`/admin/customers/lead/${lead.id}`}>
                   <span className="flex items-center justify-between gap-2">
                     <span className="admin-title text-2xl">{leadName(lead.firstName, lead.lastName)}</span>
                     {lead.obviousTest && <span className="admin-stamp admin-stamp-tilt">Test</span>}

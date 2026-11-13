@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { formatCentral } from '@/lib/admin/format'
 import { FeedBanner, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import type { ScenarioCard } from '@/lib/admin/types'
 
@@ -8,12 +9,17 @@ export function MakeBoard({
   connected,
   notice,
   items,
+  initialConfirm = null,
 }: {
   connected: boolean
   notice: string | null
   items: ScenarioCard[]
+  initialConfirm?: string | null
 }) {
-  const [picked, setPicked] = useState<ScenarioCard | null>(null)
+  const preset = items.find((item) => String(item.id) === initialConfirm && item.control !== 'locked')
+  const [picked, setPicked] = useState<{ scenario: ScenarioCard; on: boolean } | null>(
+    preset ? { scenario: preset, on: preset.status !== 'active' } : null,
+  )
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -23,8 +29,7 @@ export function MakeBoard({
         <p className="admin-kicker">Make · us2</p>
         <h1 className="admin-title text-6xl">Breakers</h1>
         <p className="mt-2 text-sm leading-relaxed">
-          Status is a live read when Make is connected. Pause and resume are drawn here and do not call Make in this
-          preview.
+          Turn on and turn off call Make after you confirm the scenario by name. Scenario 6998096 stays off.
         </p>
       </div>
       <FeedBanner notice={notice} />
@@ -42,13 +47,19 @@ export function MakeBoard({
               </div>
               <p className="mt-2 text-sm leading-relaxed">{scenario.detail}</p>
               {scenario.liveName && <p className="admin-kicker mt-2">{scenario.liveName}</p>}
+              {scenario.lastRun && <p className="admin-kicker mt-2">Last run {formatCentral(scenario.lastRun)}</p>}
               {scenario.notice && <p className="mt-2 text-sm">{scenario.notice}</p>}
               {scenario.control === 'locked' ? (
-                <p className="admin-stamp mt-3">Bolted off</p>
+                <p className="admin-stamp mt-3">Stays off</p>
               ) : (
-                <button type="button" className="admin-btn mt-3" onClick={() => setPicked(scenario)}>
-                  {scenario.status === 'active' ? 'Pause' : 'Resume'} · not live
-                </button>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <button type="button" className="admin-btn" onClick={() => setPicked({ scenario, on: true })}>
+                    Turn on
+                  </button>
+                  <button type="button" className="admin-btn admin-btn-ghost" onClick={() => setPicked({ scenario, on: false })}>
+                    Turn off
+                  </button>
+                </div>
               )}
             </Panel>
           </li>
@@ -57,21 +68,20 @@ export function MakeBoard({
       {!connected && <p className="admin-kicker">Connect MAKE_API_TOKEN to replace “unknown” with live status.</p>}
       {picked && (
         <Sheet
-          title="Not live yet"
-          body={`“${picked.boardName}” stays as it is in Make. This preview will not pause, resume, or edit scenario ${picked.id}.`}
-          confirmLabel="Leave it in Make"
-          cancelLabel="Close"
+          title={picked.on ? 'Turn on' : 'Turn off'}
+          body={`${picked.on ? 'Turn on' : 'Turn off'} “${picked.scenario.boardName}” (scenario ${picked.scenario.id}). This calls Make.`}
+          confirmLabel={picked.on ? 'Turn it on' : 'Turn it off'}
           busy={busy}
           onClose={() => setPicked(null)}
           onConfirm={async () => {
             setBusy(true)
             const result = await sendJson('/api/admin/make/control', 'POST', {
-              scenarioId: picked.id,
-              action: picked.status === 'active' ? 'pause' : 'resume',
+              scenarioId: picked.scenario.id,
+              action: picked.on ? 'on' : 'off',
               confirm: true,
             })
             setBusy(false)
-            setMessage(result.message)
+            setMessage(result.ok ? `${picked.scenario.boardName} is ${picked.on ? 'on' : 'off'}.` : result.message)
             setPicked(null)
           }}
         />

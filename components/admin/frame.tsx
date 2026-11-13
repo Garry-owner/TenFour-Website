@@ -7,6 +7,8 @@ import { BookText, HardHat, House, LogOut, Moon, Phone, SlidersHorizontal, Sun, 
 import { LogoStacked } from '@/components/brand-logo'
 import { formatClock } from '@/lib/admin/format'
 import type { Connections } from '@/lib/admin/types'
+import { SearchBar } from '@/components/admin/search-bar'
+import { ToastProvider } from '@/components/admin/toast'
 import { sendJson } from '@/components/admin/ui'
 
 const NAV = [
@@ -94,10 +96,13 @@ export function AdminFrame({
               <Lamp name="Twilio" state={lamps?.twilio} detail={lamps?.detail.twilio} />
               <Lamp name="Store" state={lamps?.store} detail={lamps?.detail.store} />
             </div>
+            <SearchBar />
           </header>
-          <main id="admin-main" className="admin-main">
-            {children}
-          </main>
+          <ToastProvider>
+            <main id="admin-main" className="admin-main">
+              {children}
+            </main>
+          </ToastProvider>
           <nav className="admin-nav" aria-label="Command center">
             {NAV.map((item) => {
               const Icon = item.icon
@@ -130,6 +135,9 @@ export function AdminFrame({
                 </div>
                 <Link className="admin-btn admin-btn-ghost" href="/admin/report" onClick={() => setOpen(false)}>
                   Monthly report
+                </Link>
+                <Link className="admin-btn admin-btn-ghost" href="/admin/activity" onClick={() => setOpen(false)}>
+                  Activity
                 </Link>
                 <Link className="admin-btn admin-btn-ghost" href="/admin/make" onClick={() => setOpen(false)}>
                   <SlidersHorizontal size={18} aria-hidden="true" /> Make

@@ -1,37 +1,32 @@
 import { NextResponse } from 'next/server'
-import { MAKE_SCENARIOS } from '@/lib/admin/constants'
-import { guardAdmin, readJson } from '@/lib/admin/guard'
+import { boardErrorResponse, guardAdmin, readJson } from '@/lib/admin/guard'
+import { setScenarioPower } from '@/lib/admin/make'
+import { recordAudit } from '@/lib/admin/store'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
-// Pause and resume are drawn on the board and intentionally do not call Make.
 export async function POST(request: Request) {
   const denied = await guardAdmin(request, true)
   if (denied) return denied
-  let body: Record<string, unknown> = {}
   try {
-    body = await readJson(request)
-  } catch {
-    body = {}
+    const body = await readJson(request)
+    if (body.confirm !== true) {
+      return NextResponse.json({ ok: false, message: 'Confirm before turning a scenario on or off.' }, { status: 400 })
+    }
+    const id = Number(body.scenarioId)
+    if (body.action !== 'on' && body.action !== 'off') {
+      return NextResponse.json({ ok: false, message: 'Choose turn on or turn off.' }, { status: 400 })
+    }
+    await setScenarioPower(id, body.action === 'on')
+    await recordAudit({
+      action: body.action === 'on' ? 'turn-on' : 'turn-off',
+      entityType: 'scenario',
+      entityId: String(id),
+      summary: `${body.action === 'on' ? 'Turned on' : 'Turned off'} Make scenario ${id}`,
+    }).catch(() => undefined)
+    return NextResponse.json({ ok: true, sent: true })
+  } catch (err) {
+    return boardErrorResponse(err)
   }
-  const id = Number(body.scenarioId)
-  const known = MAKE_SCENARIOS.find((scenario) => scenario.id === id)
-  if (!known) {
-    return NextResponse.json({ ok: false, live: false, message: 'That scenario is not on this board.' }, { status: 404 })
-  }
-  if (known.control === 'locked') {
-    return NextResponse.json(
-      { ok: false, live: false, message: 'The call log backfill stays inactive. This board will not turn it on.' },
-      { status: 409 },
-    )
-  }
-  return NextResponse.json(
-    {
-      ok: false,
-      live: false,
-      message: 'Pause and resume are on the board and are not live in this preview. Nothing was sent to Make.',
-    },
-    { status: 409 },
-  )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 
 export function Panel({
@@ -81,6 +82,8 @@ export function Sheet({
 }) {
   const titleId = useId()
   const cancelRef = useRef<HTMLButtonElement>(null)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   useEffect(() => {
     cancelRef.current?.focus()
     const onKey = (event: KeyboardEvent) => {
@@ -89,7 +92,9 @@ export function Sheet({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
-  return (
+  if (!mounted) return null
+  const root = document.querySelector('.admin-deck') || document.body
+  return createPortal(
     <div className="admin-sheet" role="presentation" onClick={onClose}>
       <div
         className="admin-sheet-card flex flex-col gap-4"
@@ -111,7 +116,8 @@ export function Sheet({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    root,
   )
 }
 

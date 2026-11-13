@@ -399,6 +399,58 @@ body:has(.admin-deck.admin-day) {
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 28%, transparent);
 }
 
+.admin-search {
+  position: relative;
+  grid-column: 1 / -1;
+}
+
+.admin-search-results {
+  position: absolute;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 18rem;
+  overflow: auto;
+  border: 2px solid var(--primary);
+  background: var(--card);
+  padding: 0.6rem;
+}
+
+.admin-search-results a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 3rem;
+  padding: 0.45rem;
+  text-decoration: none;
+}
+
+.admin-toast {
+  position: fixed;
+  z-index: 80;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(5.4rem + env(safe-area-inset-bottom));
+  border: 2px solid var(--primary);
+  background: var(--card);
+  color: var(--foreground);
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.admin-toast-ok {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.admin-toast-bad {
+  border-style: dashed;
+}
+
 .admin-banner {
   border: 2px dashed var(--primary);
   background: color-mix(in srgb, var(--primary) 12%, var(--card));
@@ -461,8 +513,8 @@ body:has(.admin-deck.admin-day) {
 }
 
 @keyframes admin-rise {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes admin-shake {

@@ -28,17 +28,24 @@ export const PLANS: { id: PlanId; name: string; setup: number; month: number }[]
 ]
 
 export const MONTHLY_STATUSES = [
-  { id: 'not_started', label: 'Not started' },
-  { id: 'current', label: 'Current' },
+  { id: 'active', label: 'Active' },
   { id: 'past_due', label: 'Past due' },
   { id: 'paused', label: 'Paused' },
+  { id: 'cancelled', label: 'Cancelled' },
 ] as const
+
+export const MAKE_TEAM_ID = 1521970
+export const MAKE_ORG_ID = 5580107
+export const BLOCKED_SCENARIO_ID = 6998096
+
+export const ROGER_SAVED_LINE =
+  'These are saved settings. Wiring them to the live text-back happens later. Roger still never answers calls and never books appointments.'
 
 export const FOUNDING_SEATS = 10
 
 // Make team TenFour Systems. These ids are the board's allowlist.
 // The backfill scenario stays inactive and has no resume control.
-export const MAKE_SCENARIOS: Omit<ScenarioCard, 'liveName' | 'status' | 'notice'>[] = [
+export const MAKE_SCENARIOS: Omit<ScenarioCard, 'liveName' | 'status' | 'notice' | 'lastRun'>[] = [
   {
     id: 3767837,
     boardName: 'Lead ingestion',

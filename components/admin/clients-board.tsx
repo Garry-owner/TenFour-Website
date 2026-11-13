@@ -15,17 +15,22 @@ const EMPTY = {
   trade: '',
   plan: 'base' as PlanId,
   setupPaid: false,
-  monthlyStatus: 'not_started' as MonthlyStatus,
+  monthlyStatus: 'active' as MonthlyStatus,
   founding: false,
   bookingLink: '',
   notes: '',
+  startDate: '',
+  ownerCell: '',
+  serviceArea: '',
+  hours: '',
+  city: '',
 }
 
-export function ClientsBoard({ feed }: { feed: Feed<ClientRecord> }) {
+export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRecord>; startOpen?: boolean }) {
   const router = useRouter()
   const [draft, setDraft] = useState(EMPTY)
   const [editing, setEditing] = useState<string | null>(null)
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(startOpen)
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
   const [removeId, setRemoveId] = useState<ClientRecord | null>(null)
@@ -53,6 +58,11 @@ export function ClientsBoard({ feed }: { feed: Feed<ClientRecord> }) {
       founding: client.founding,
       bookingLink: client.bookingLink,
       notes: client.notes,
+      startDate: client.startDate || '',
+      ownerCell: client.ownerCell,
+      serviceArea: client.serviceArea,
+      hours: client.hours,
+      city: client.city,
     })
     setOpen(true)
     setMessage('')
@@ -200,6 +210,21 @@ export function ClientsBoard({ feed }: { feed: Feed<ClientRecord> }) {
           </fieldset>
           <Field label="Booking link">
             <input className="admin-field" inputMode="url" value={draft.bookingLink} onChange={(event) => setDraft({ ...draft, bookingLink: event.target.value })} placeholder="https://" />
+          </Field>
+          <Field label="Owner cell">
+            <input className="admin-field" inputMode="tel" value={draft.ownerCell} onChange={(event) => setDraft({ ...draft, ownerCell: event.target.value })} />
+          </Field>
+          <Field label="City">
+            <input className="admin-field" value={draft.city} onChange={(event) => setDraft({ ...draft, city: event.target.value })} />
+          </Field>
+          <Field label="Service area">
+            <input className="admin-field" value={draft.serviceArea} onChange={(event) => setDraft({ ...draft, serviceArea: event.target.value })} />
+          </Field>
+          <Field label="Hours">
+            <input className="admin-field" value={draft.hours} onChange={(event) => setDraft({ ...draft, hours: event.target.value })} />
+          </Field>
+          <Field label="Start date">
+            <input className="admin-field" type="date" value={draft.startDate} onChange={(event) => setDraft({ ...draft, startDate: event.target.value })} />
           </Field>
           <Field label="Notes">
             <textarea className="admin-area" value={draft.notes} onChange={(event) => setDraft({ ...draft, notes: event.target.value })} />

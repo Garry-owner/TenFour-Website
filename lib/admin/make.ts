@@ -1,5 +1,6 @@
 import { exampleCalls, EXAMPLE_CALL_NOTICE } from '@/lib/admin/call-examples'
-import { CALL_LOG_STORE_ID, MAKE_SCENARIOS } from '@/lib/admin/constants'
+import { BLOCKED_SCENARIO_ID, CALL_LOG_STORE_ID, MAKE_ORG_ID, MAKE_SCENARIOS, MAKE_TEAM_ID } from '@/lib/admin/constants'
+import { scenarioTogglePlan } from '@/lib/admin/policies'
 import { BoardError, fetchTimeout } from '@/lib/admin/guard'
 import type { CallLog, Feed, ScenarioCard } from '@/lib/admin/types'
 
@@ -139,40 +140,95 @@ function scenarioName(json: Record<string, unknown>): string | null {
   return str(scenario.name) || null
 }
 
+async function lastRun(id: number): Promise<string | null> {
+  try {
+    const json = await makeGet(`/scenarios/${id}/logs?pg[limit]=1&pg[sortDir]=desc`)
+    const logs = (json.scenarioLogs || json.logs || []) as unknown[]
+    const first = Array.isArray(logs) ? logs[0] : null
+    if (!first || typeof first !== 'object') return null
+    const row = first as Record<string, unknown>
+    return str(row.timestamp) || str(row.date) || str(row.created) || null
+  } catch {
+    return null
+  }
+}
+
+function cardFromScenario(row: Record<string, unknown>): ScenarioCard {
+  const id = Number(row.id)
+  const known = MAKE_SCENARIOS.find((scenario) => scenario.id === id)
+  const locked = id === BLOCKED_SCENARIO_ID || known?.control === 'locked'
+  return {
+    id,
+    boardName: known?.boardName || str(row.name) || `Scenario ${id}`,
+    detail: known?.detail || 'Make scenario on the TenFour team.',
+    control: locked ? 'locked' : 'ready',
+    liveName: str(row.name) || null,
+    status: scenarioStatus({ scenario: row }),
+    notice: locked ? 'This scenario stays off.' : null,
+    lastRun: null,
+  }
+}
+
 export async function loadScenarios(): Promise<{ connected: boolean; notice: string | null; items: ScenarioCard[] }> {
   if (!makeConfigured()) {
     return {
       connected: false,
-      notice: 'Make is not connected. Status below is the last known design, not a live read.',
+      notice: 'MAKE_API_TOKEN is not set. Turn on and turn off will not call Make until it is.',
       items: MAKE_SCENARIOS.map((scenario) => ({
         ...scenario,
         liveName: null,
         status: 'unknown',
-        notice: null,
+        notice: scenario.control === 'locked' ? 'This scenario stays off.' : null,
+        lastRun: null,
       })),
     }
   }
-  const items = await Promise.all(
-    MAKE_SCENARIOS.map(async (scenario): Promise<ScenarioCard> => {
-      try {
-        const json = await makeGet(`/scenarios/${scenario.id}`)
-        return {
-          ...scenario,
-          liveName: scenarioName(json),
-          status: scenarioStatus(json),
-          notice: null,
-        }
-      } catch (err) {
-        return {
-          ...scenario,
-          liveName: null,
-          status: 'fault',
-          notice: err instanceof BoardError ? err.message : 'Make could not be read.',
-        }
+  try {
+    let json: Record<string, unknown>
+    try {
+      json = await makeGet(`/scenarios?teamId=${MAKE_TEAM_ID}&organizationId=${MAKE_ORG_ID}&pg[limit]=50`)
+    } catch {
+      json = await makeGet(`/scenarios?teamId=${MAKE_TEAM_ID}&pg[limit]=50`)
+    }
+    const rows = (json.scenarios || []) as unknown[]
+    const items = rows.flatMap((row) => (row && typeof row === 'object' ? [cardFromScenario(row as Record<string, unknown>)] : []))
+    for (const known of MAKE_SCENARIOS) {
+      if (!items.some((item) => item.id === known.id)) {
+        items.push({ ...known, liveName: null, status: 'unknown', notice: known.control === 'locked' ? 'This scenario stays off.' : null, lastRun: null })
       }
-    }),
-  )
-  return { connected: true, notice: null, items }
+    }
+    const withRuns = await Promise.all(
+      items.slice(0, 20).map(async (item) => ({ ...item, lastRun: await lastRun(item.id) })),
+    )
+    return { connected: true, notice: null, items: [...withRuns, ...items.slice(20)] }
+  } catch (err) {
+    return {
+      connected: true,
+      notice: err instanceof BoardError ? err.message : 'Make could not list scenarios.',
+      items: MAKE_SCENARIOS.map((scenario) => ({
+        ...scenario,
+        liveName: null,
+        status: 'fault',
+        notice: null,
+        lastRun: null,
+      })),
+    }
+  }
+}
+
+export async function setScenarioPower(id: number, on: boolean): Promise<void> {
+  const plan = scenarioTogglePlan(id, on, process.env.MAKE_API_TOKEN)
+  if (!plan.ok) throw new BoardError(plan.message, 'make')
+  let response: Response
+  try {
+    response = await fetchTimeout(plan.url, {
+      method: plan.method,
+      headers: { Authorization: `Token ${plan.token}`, 'Content-Type': 'application/json' },
+    })
+  } catch {
+    throw new BoardError('Make could not be reached. Nothing was changed.', 'make')
+  }
+  if (!response.ok) throw new BoardError('Make refused the change. Nothing else was edited.', 'make')
 }
 
 export async function makeLamp(): Promise<{ state: 'ready' | 'missing' | 'fault'; detail: string }> {
