@@ -29,6 +29,7 @@ export function AdminFrame({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const shareCard = pathname.startsWith('/admin/report/share')
   const router = useRouter()
   const [mode, setMode] = useState(shift)
   const [open, setOpen] = useState(false)
@@ -79,6 +80,7 @@ export function AdminFrame({
           <a className="admin-skip" href="#admin-main">
             Skip to the board
           </a>
+          {!shareCard && (
           <header className="admin-top">
             <Link href="/admin" aria-label="TenFour command center">
               <LogoStacked className="admin-logo" />
@@ -98,11 +100,13 @@ export function AdminFrame({
             </div>
             <SearchBar />
           </header>
+          )}
           <ToastProvider>
-            <main id="admin-main" className="admin-main">
+            <main id="admin-main" className={shareCard ? 'admin-main admin-main-share' : 'admin-main'}>
               {children}
             </main>
           </ToastProvider>
+          {!shareCard && (
           <nav className="admin-nav" aria-label="Command center">
             {NAV.map((item) => {
               const Icon = item.icon
@@ -115,6 +119,7 @@ export function AdminFrame({
               )
             })}
           </nav>
+          )}
           {open && (
             <div className="admin-sheet" role="presentation" onClick={() => setOpen(false)}>
               <div

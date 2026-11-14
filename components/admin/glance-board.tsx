@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { CaughtPanel } from '@/components/admin/caught-panel'
 import { NoteForm } from '@/components/admin/note-form'
 import { CountUp, FeedBanner, Panel } from '@/components/admin/ui'
 import { ROGER_LINE } from '@/lib/admin/constants'
@@ -29,6 +30,7 @@ export function GlanceBoard({
         <h1 className="admin-title relative mt-1 text-6xl">Glance</h1>
       </div>
       <p className="admin-roger">{ROGER_LINE}</p>
+      <CaughtPanel calls={calls} clients={clients} mode="glance" />
       <FeedBanner notice={leads.notice} />
       {calls.notice && calls.notice !== leads.notice ? <FeedBanner notice={calls.notice} /> : null}
       <div className="grid grid-cols-2 gap-2">

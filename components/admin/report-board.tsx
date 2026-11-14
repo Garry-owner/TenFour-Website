@@ -8,7 +8,7 @@ export function ReportBoardView({ report }: { report: ReportBoard }) {
     <div className="admin-rise flex flex-col gap-4">
       <div>
         <p className="admin-kicker">{report.monthLabel}</p>
-        <h1 className="admin-title text-6xl">Report</h1>
+        <h2 className="admin-title text-4xl">Saved leads</h2>
       </div>
       <p className="admin-roger">{ROGER_LINE}</p>
       <FeedBanner notice={report.notice} />

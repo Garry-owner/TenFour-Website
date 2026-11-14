@@ -55,7 +55,7 @@ export function telHref(raw: string): string | null {
 }
 
 export function formatSeconds(value: number | null): string {
-  if (value == null) return '—'
+  if (value == null) return 'none'
   const minutes = Math.floor(value / 60)
   const seconds = value % 60
   if (minutes <= 0) return `${seconds}s`

@@ -175,6 +175,18 @@ body:has(.admin-deck.admin-day) {
   box-shadow: inset 0 0 0 2px var(--background);
 }
 
+.admin-main-share {
+  padding-bottom: 1.5rem;
+}
+
+.admin-share {
+  display: flex;
+  min-height: calc(100dvh - 3rem);
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
 .admin-main {
   width: min(100%, 72rem);
   margin: 0 auto;

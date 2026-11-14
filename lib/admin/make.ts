@@ -81,6 +81,8 @@ function parseCall(record: unknown): CallLog | null {
     totalSeconds: seconds(data.total_seconds),
     alertText: str(data.alert_text),
     source: str(data.source),
+    to: str(data.to),
+    clientId: str(data.client_id),
   }
 }
 

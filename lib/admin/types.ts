@@ -90,6 +90,8 @@ export type CallLog = {
   totalSeconds: number | null
   alertText: string
   source: string
+  to: string
+  clientId: string
 }
 
 export type PlanId = 'base' | 'pro' | 'elite'
