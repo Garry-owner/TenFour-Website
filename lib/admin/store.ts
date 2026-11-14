@@ -478,22 +478,23 @@ export async function saveRoger(clientId: string, input: Record<string, unknown>
   if (leadEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadEmail)) {
     throw new BoardError('That lead email does not look usable.', 'input')
   }
-  const next = {
-    enabled: input.enabled === true,
-    textBack: typeof input.textBack === 'string' ? input.textBack.trim().slice(0, 1000) : '',
-    questions: typeof input.questions === 'string' ? input.questions.trim().slice(0, 2000) : '',
-    leadPhone: typeof input.leadPhone === 'string' ? input.leadPhone.trim().slice(0, 30) : '',
-    leadEmail,
-    bookingLink,
-    updatedAt: new Date(),
-  }
+  // Only the fields that were sent are changed, so copying a template
+  // never wipes the alert phone, email, or booking link.
+  const next: Partial<typeof rogerSettings.$inferInsert> = { updatedAt: new Date() }
+  if (typeof input.enabled === 'boolean') next.enabled = input.enabled
+  if (typeof input.textBack === 'string') next.textBack = input.textBack.trim().slice(0, 1000)
+  if (typeof input.questions === 'string') next.questions = input.questions.trim().slice(0, 2000)
+  if (typeof input.leadPhone === 'string') next.leadPhone = input.leadPhone.trim().slice(0, 30)
+  if (typeof input.leadEmail === 'string') next.leadEmail = leadEmail
+  if (typeof input.bookingLink === 'string') next.bookingLink = bookingLink
+  if (input.alertLanguage === 'en' || input.alertLanguage === 'es') next.alertLanguage = input.alertLanguage
   return withDb(async (db) => {
     const [client] = await db.select().from(clients).where(eq(clients.id, clientId)).limit(1)
     if (!client) throw new BoardError('That client is not on the private board.', 'input')
     const [previous] = await db.select().from(rogerSettings).where(eq(rogerSettings.clientId, clientId)).limit(1)
     const [row] = previous
       ? await db.update(rogerSettings).set(next).where(eq(rogerSettings.clientId, clientId)).returning()
-      : await db.insert(rogerSettings).values({ clientId, ...next }).returning()
+      : await db.insert(rogerSettings).values({ ...next, clientId }).returning()
     const saved = mapRoger(row)
     await audit(db, {
       action: 'update',

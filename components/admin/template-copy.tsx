@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { fillScript } from '@/lib/admin/templates'
 
 export function TemplateCopy({
@@ -14,6 +15,7 @@ export function TemplateCopy({
 }) {
   const [clientId, setClientId] = useState(clients[0]?.id || '')
   const toast = useToast()
+  const confirm = useConfirm()
   return (
     <div className="flex flex-col gap-3">
       <label className="admin-muted">Copy onto
@@ -32,16 +34,13 @@ export function TemplateCopy({
             onClick={async () => {
               const client = clients.find((item) => item.id === clientId)
               if (!client) return toast('Add a client first. Nothing was copied.', false)
+              if (!(await confirm('Copy this template', `This replaces the text-back and questions for ${client.name} with the ${script.trade} template. Alert phone, email, and booking link stay as they are. Nothing is sent.`))) return
               const result = await sendJson('/api/admin/desk', 'POST', {
                 action: 'texts',
                 clientId: client.id,
-                enabled: true,
                 textBack: fillScript(script.greeting, client.name, ''),
                 questions: fillScript(script.questions, client.name, ''),
-                leadPhone: '',
-                leadEmail: '',
-                bookingLink: '',
-                alertLanguage: 'en',
+                confirm: true,
               })
               toast(result.ok ? `Copied onto ${client.name}.` : result.message, result.ok)
             }}

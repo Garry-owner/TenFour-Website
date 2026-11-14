@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Sheet, sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { heatMap } from '@/lib/admin/insights'
 import { TRADE_SCRIPTS, fillScript } from '@/lib/admin/templates'
 import { formatCentral, formatPhone, monthlyLabel, moneyGrouped, planName, setupLabel } from '@/lib/admin/format'
@@ -12,8 +13,19 @@ import type { DeskPayload } from '@/lib/admin/load-desk'
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
+const CONFIRM_TEXT: Record<string, { title: string; body: string }> = {
+  billing: { title: 'Save job value', body: 'This saves the average job value used for money caught.' },
+  settings: { title: 'Save client settings', body: 'This saves the booking link, hours, alert phone, alert email, and alert language on the board. Nothing is sent.' },
+  texts: { title: 'Save Roger texts', body: 'This saves the greeting and questions on the board. Roger is not texting live yet.' },
+  onboard: { title: 'Update onboarding', body: 'This updates the onboarding checklist.' },
+  referral: { title: 'Save this', body: 'This saves it on the client record. Nothing is sent.' },
+  holiday: { title: 'Add closed date', body: 'Roger will use the closed message on that date once he is live.' },
+  'portal-code': { title: 'Save portal code', body: 'This replaces any old portal code. You will not see the code again.' },
+}
+
 export function ClientDesk({ data }: { data: DeskPayload }) {
   const toast = useToast()
+  const confirmBox = useConfirm()
   const router = useRouter()
   const client = data.client
   const roger = data.roger
@@ -44,14 +56,26 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
   const missed = data.calls.filter((call) => call.outcome === 'Missed').slice(0, 4)
   const monthCaught = data.calls.filter((call) => call.outcome === 'Missed').length
 
+  // Sends after a confirm has already been shown (the ask sheet below).
+  async function send(action: string, extra: Record<string, unknown>, ok: string) {
+    if (client.example) {
+      toast('This is example data. Nothing was saved.', false)
+      return
+    }
+    const result = await sendJson('/api/admin/desk', 'POST', { action, clientId: client.id, ...extra, confirm: true })
+    toast(result.ok ? result.message || ok : result.message, result.ok)
+    if (result.ok) router.refresh()
+  }
+
+  // Every save on this screen asks first, then sends.
   async function run(action: string, extra: Record<string, unknown>, ok: string) {
     if (client.example) {
       toast('This is example data. Nothing was saved.', false)
       return
     }
-    const result = await sendJson('/api/admin/desk', 'POST', { action, clientId: client.id, ...extra })
-    toast(result.ok ? result.message || ok : result.message, result.ok)
-    if (result.ok) router.refresh()
+    const step = CONFIRM_TEXT[action] || { title: 'Save this change', body: 'This saves the change on the private board. Nothing is sent.' }
+    if (!(await confirmBox(step.title, `${step.body} Client: ${client.businessName}.`))) return
+    await send(action, extra, ok)
   }
 
   function ask(title: string, body: string, runAction: () => Promise<void>) {
@@ -117,7 +141,7 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
         <button
           type="button"
           className="admin-btn"
-          onClick={() => ask(roger?.enabled === false ? 'Resume Roger' : 'Pause Roger', 'This saves the pause on the board. Roger is not texting live yet.', () => run('pause', { confirm: true, enabled: roger?.enabled === false, pausedUntil: pauseDate }, 'Saved.'))}
+          onClick={() => ask(roger?.enabled === false ? 'Resume Roger' : 'Pause Roger', 'This saves the pause on the board. Roger is not texting live yet.', () => send('pause', { confirm: true, enabled: roger?.enabled === false, pausedUntil: pauseDate }, 'Saved.'))}
         >
           {roger?.enabled === false ? 'Resume Roger' : 'Pause Roger'}
         </button>
@@ -235,7 +259,7 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
               type="button"
               className="admin-btn"
               disabled={!data.wired.sms}
-              onClick={() => ask('Send your text', `This texts ${formatPhone(thread)} from ${formatPhone(client.phone)} and pauses Roger on that thread.`, () => run('takeover', { confirm: true, caller: thread, from: client.phone, body: takeover }, 'Sent.'))}
+              onClick={() => ask('Send your text', `This texts ${formatPhone(thread)} from ${formatPhone(client.phone)} and pauses Roger on that thread.`, () => send('takeover', { confirm: true, caller: thread, from: client.phone, body: takeover }, 'Sent.'))}
             >
               Take over this thread
             </button>
@@ -250,7 +274,7 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
         {data.optOuts.length === 0 ? <p>No STOP opt-outs.</p> : data.optOuts.map((row) => <p key={row.phone} className="admin-pii">{formatPhone(row.phone)}</p>)}
         {data.blocks.map((row) => <p key={row.id} className="admin-pii">{formatPhone(row.phone)} {row.reason}</p>)}
         <input className="admin-field" value={blockPhone} onChange={(event) => setBlockPhone(event.target.value)} placeholder="Number to block" />
-        <button type="button" className="admin-btn" onClick={() => ask('Block this number', 'This blocks it on the board. Twilio is not changed.', () => run('block', { confirm: true, phone: blockPhone, reason: 'Spam' }, 'Blocked.'))}>Block number</button>
+        <button type="button" className="admin-btn" onClick={() => ask('Block this number', 'This blocks it on the board. Twilio is not changed.', () => send('block', { confirm: true, phone: blockPhone, reason: 'Spam' }, 'Blocked.'))}>Block number</button>
       </section>
 
       <section className="admin-panel flex flex-col gap-2">
@@ -263,6 +287,7 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
           className="admin-btn"
           onClick={async () => {
             if (client.example) return toast('This is example data. Nothing was saved.', false)
+            if (!(await confirmBox('Save reminder', `This saves the reminder on ${client.businessName}. It shows on Home when it is due. Nothing is sent.`))) return
             const result = await sendJson('/api/admin/notes', 'POST', { body: note, clientId: client.id, clientLabel: client.businessName, dueOn: due })
             toast(result.ok ? 'Reminder saved.' : result.message, result.ok)
             if (result.ok) router.refresh()
@@ -329,8 +354,8 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
         <p className="admin-muted">Mark the latest missed caller booked or lost. That feeds money caught.</p>
         {missed[0] ? (
           <div className="flex gap-2">
-            <button type="button" className="admin-btn" onClick={() => ask('Mark booked', 'This records a booked job for money caught.', () => run('outcome', { caller: missed[0].caller, outcome: 'booked' }, 'Saved.'))}>Booked</button>
-            <button type="button" className="admin-btn admin-btn-ghost" onClick={() => ask('Mark lost', 'This records the lead as lost.', () => run('outcome', { caller: missed[0].caller, outcome: 'lost' }, 'Saved.'))}>Lost</button>
+            <button type="button" className="admin-btn" onClick={() => ask('Mark booked', 'This records a booked job for money caught.', () => send('outcome', { caller: missed[0].caller, outcome: 'booked' }, 'Saved.'))}>Booked</button>
+            <button type="button" className="admin-btn admin-btn-ghost" onClick={() => ask('Mark lost', 'This records the lead as lost.', () => send('outcome', { caller: missed[0].caller, outcome: 'lost' }, 'Saved.'))}>Lost</button>
           </div>
         ) : <p>No missed caller to mark.</p>}
         <input className="admin-field" value={reviewUrl} onChange={(event) => setReviewUrl(event.target.value)} placeholder="Google review link" />
@@ -338,25 +363,26 @@ export function ClientDesk({ data }: { data: DeskPayload }) {
         <button
           type="button"
           className="admin-btn admin-btn-ghost"
-          disabled={!data.reviewAllowed || !data.wired.sms || !missed[0]}
-          onClick={() => missed[0] && ask('Send review link', `This texts ${formatPhone(missed[0].caller)} the review link.`, () => run('review-request', { confirm: true, caller: missed[0].caller, from: client.phone, reviewUrl }, 'Sent.'))}
+          disabled={!data.reviewAllowed || !data.wired.sms || !missed[0] || !reviewUrl}
+          onClick={() => missed[0] && ask('Send review link', `This texts ${formatPhone(missed[0].caller)} the review link.`, () => send('review-request', { confirm: true, caller: missed[0].caller, from: client.phone, reviewUrl }, 'Sent.'))}
         >
           Ask for a review
         </button>
-        {!data.reviewAllowed && <p className="admin-muted">This plan does not include review requests.</p>}
+        {!data.reviewAllowed && <p className="admin-muted">Review requests are for Pro and Elite only.</p>}
+        {data.reviewAllowed && !reviewUrl && <p className="admin-muted">Save a Google review link first.</p>}
         {data.reviewAllowed && !data.wired.sms && <p className="admin-muted">Texting is not connected. Nothing will be sent.</p>}
       </section>
 
       <section className="admin-panel flex flex-col gap-2">
         <h2>Send a test</h2>
         <p className="admin-muted">A fake missed call, clearly marked as a test. The button stays off until ROGER_TEST_URL is set.</p>
-        <button type="button" className="admin-btn" disabled={!data.wired.test} onClick={() => ask('Send a test', 'This fires a fake missed call marked as a test.', () => run('test', { confirm: true }, 'Sent.'))}>Send a test</button>
+        <button type="button" className="admin-btn" disabled={!data.wired.test} onClick={() => ask('Send a test', 'This fires a fake missed call marked as a test.', () => send('test', { confirm: true }, 'Sent.'))}>Send a test</button>
       </section>
 
       <section className="admin-panel flex flex-col gap-2">
         <h2>Resend a lead</h2>
         <p className="admin-muted">Sends the latest missed caller to the client again. Nothing goes out until resend is connected.</p>
-        <button type="button" className="admin-btn" disabled={!data.wired.resend || !missed[0]} onClick={() => ask('Resend this lead', 'Confirm to send it again.', () => run('resend', { confirm: true, caller: missed[0]?.caller }, 'Sent.'))}>Resend lead</button>
+        <button type="button" className="admin-btn" disabled={!data.wired.resend || !missed[0]} onClick={() => ask('Resend this lead', 'Confirm to send it again.', () => send('resend', { confirm: true, caller: missed[0]?.caller }, 'Sent.'))}>Resend lead</button>
         {!data.wired.resend && <p className="admin-muted">Resend is not connected. Nothing will be sent.</p>}
       </section>
 

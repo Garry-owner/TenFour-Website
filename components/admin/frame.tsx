@@ -8,6 +8,7 @@ import { LogoMark } from '@/components/brand-logo'
 import { SearchBar } from '@/components/admin/search-bar'
 import { PwaBadge } from '@/components/admin/pwa'
 import { ToastProvider } from '@/components/admin/toast'
+import { ConfirmProvider } from '@/components/admin/confirm'
 import { sendJson } from '@/components/admin/ui'
 import type { Connections, LampState } from '@/lib/admin/types'
 
@@ -95,9 +96,11 @@ export function AdminFrame({
           {safe && !shareCard && <p className="admin-safe-note">Privacy blur is on. Other names and numbers are hidden.</p>}
           <PwaBadge />
           <ToastProvider>
-            <main id="admin-main" className={shareCard ? 'admin-main admin-main-share' : 'admin-main'}>
-              {children}
-            </main>
+            <ConfirmProvider>
+              <main id="admin-main" className={shareCard ? 'admin-main admin-main-share' : 'admin-main'}>
+                {children}
+              </main>
+            </ConfirmProvider>
           </ToastProvider>
           {!shareCard && (
             <nav className="admin-nav" aria-label="Command center">

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import type { AlertPrefs } from '@/lib/admin/types'
 
 const ROWS: { key: keyof AlertPrefs; label: string }[] = [
@@ -20,12 +21,14 @@ const ROWS: { key: keyof AlertPrefs; label: string }[] = [
 export function AlertsForm({ alerts, live }: { alerts: AlertPrefs; live: boolean }) {
   const [value, setValue] = useState(alerts)
   const toast = useToast()
+  const confirm = useConfirm()
   return (
     <form
       className="admin-rise flex flex-col gap-3"
       onSubmit={async (event) => {
         event.preventDefault()
-        const result = await sendJson('/api/admin/desk', 'POST', { action: 'alerts', alerts: value })
+        if (!(await confirm('Save alert choices', 'This saves how you want to hear about problems. Nothing is sent.'))) return
+        const result = await sendJson('/api/admin/desk', 'POST', { action: 'alerts', alerts: value, confirm: true })
         toast(result.ok ? 'Choices saved. Nothing was sent.' : result.message, result.ok)
       }}
     >

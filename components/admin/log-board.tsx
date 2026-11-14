@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { NoteForm } from '@/components/admin/note-form'
+import { useConfirm } from '@/components/admin/confirm'
 import { FeedBanner, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { formatCentral } from '@/lib/admin/format'
 import type { ClientRecord, Feed, GlanceNote, Lead } from '@/lib/admin/types'
@@ -19,6 +20,7 @@ export function LogBoard({
   leadsLive: boolean
 }) {
   const router = useRouter()
+  const confirm = useConfirm()
   const [editing, setEditing] = useState<GlanceNote | null>(null)
   const [body, setBody] = useState('')
   const [message, setMessage] = useState('')
@@ -34,6 +36,7 @@ export function LogBoard({
   async function save(event: React.FormEvent) {
     event.preventDefault()
     if (!editing) return
+    if (!(await confirm('Save note', 'This saves your change to the note.'))) return
     setBusy(true)
     const result = await sendJson(`/api/admin/notes/${editing.id}`, 'PATCH', {
       body,

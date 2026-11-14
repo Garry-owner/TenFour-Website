@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { FeedBanner, Field, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { FOUNDING_LINE, FOUNDING_REVIEW, FOUNDING_SEATS, MONTHLY_STATUSES, PLANS } from '@/lib/admin/constants'
 import { formatPhone, monthlyLabel, planName, planPrice, setupLabel, telHref } from '@/lib/admin/format'
@@ -29,6 +30,7 @@ const EMPTY = {
 
 export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRecord>; startOpen?: boolean }) {
   const router = useRouter()
+  const confirm = useConfirm()
   const [draft, setDraft] = useState(EMPTY)
   const [editing, setEditing] = useState<string | null>(null)
   const [open, setOpen] = useState(startOpen)
@@ -75,6 +77,7 @@ export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRec
       setMessage('The private store is not ready, so this client was not saved.')
       return
     }
+    if (!(await confirm('Save client', 'This saves the client on your private board.'))) return
     setBusy(true)
     const result = editing
       ? await sendJson(`/api/admin/clients/${editing}`, 'PATCH', draft)
@@ -272,6 +275,7 @@ export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRec
 
 function QuickAdd({ live }: { live: boolean }) {
   const router = useRouter()
+  const confirm = useConfirm()
   const toast = useToast()
   const [open, setOpen] = useState(false)
   const [businessName, setBusinessName] = useState('')
@@ -285,6 +289,7 @@ function QuickAdd({ live }: { live: boolean }) {
       className="admin-panel flex flex-col gap-2"
       onSubmit={async (event) => {
         event.preventDefault()
+        if (!(await confirm('Quick add client', 'This saves the client on your private board. Zoho is only touched if it is connected.'))) return
         const result = await sendJson('/api/admin/clients', 'POST', { quick: true, confirm: true, businessName, phone, plan, contactName: businessName })
         toast(result.message || (result.ok ? 'Client saved.' : 'Not saved.'), result.ok)
         if (result.ok) router.refresh()

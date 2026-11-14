@@ -2,10 +2,13 @@
 
 import { useState } from 'react'
 import { sendJson } from '@/components/admin/ui'
+import { useConfirm } from '@/components/admin/confirm'
 
 export function PortalOutcome({ caller, token }: { caller: string; token: string }) {
   const [message, setMessage] = useState('')
+  const confirm = useConfirm()
   async function mark(outcome: 'booked' | 'lost') {
+    if (!(await confirm(outcome === 'booked' ? 'Mark booked' : 'Mark lost', `Mark ${caller} as ${outcome === 'booked' ? 'a booked job' : 'lost'}?`))) return
     const result = await sendJson('/api/portal/outcome', 'POST', { token, outcome, confirm: true })
     setMessage(result.ok ? (outcome === 'booked' ? 'Marked booked.' : 'Marked lost.') : result.message)
   }

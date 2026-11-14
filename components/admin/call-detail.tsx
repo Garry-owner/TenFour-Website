@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { NoteForm } from '@/components/admin/note-form'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { sendJson } from '@/components/admin/ui'
 import { FeedBanner, Panel } from '@/components/admin/ui'
 import { CALL_LIMITATION, OUTCOME_PICKED } from '@/lib/admin/constants'
@@ -28,6 +29,7 @@ export function CallDetailBoard({
 }) {
   const router = useRouter()
   const toast = useToast()
+  const confirm = useConfirm()
   const [opening, setOpening] = useState(false)
   if (!call) {
     return (
@@ -101,6 +103,7 @@ export function CallDetailBoard({
         className="admin-btn"
         disabled={opening}
         onClick={async () => {
+          if (!(await confirm('Open customer', 'This finds or saves this caller as a customer on your private board.'))) return
           setOpening(true)
           const result = await sendJson('/api/admin/customers/from-call', 'POST', { callSid: call.callSid })
           setOpening(false)

@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server'
 import { matchPortal } from '@/lib/admin/desk-store'
-import { boardErrorResponse, readJson } from '@/lib/admin/guard'
+import { boardErrorResponse, clientIp, loginLimited, readJson } from '@/lib/admin/guard'
 import { PORTAL_COOKIE, createPortalToken } from '@/lib/admin/portal-token'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
+  if (loginLimited(`portal:${clientIp(request)}`)) {
+    return NextResponse.json({ ok: false, message: 'Too many tries. Wait a few minutes and try again.' }, { status: 429 })
+  }
   try {
     const body = await readJson(request)
     const phone = typeof body.phone === 'string' ? body.phone : ''

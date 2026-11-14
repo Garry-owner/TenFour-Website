@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { NoteForm } from '@/components/admin/note-form'
+import { useConfirm } from '@/components/admin/confirm'
 import { FeedBanner, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { formatCentral, formatPhone, leadName, telHref } from '@/lib/admin/format'
 import type { ClientRecord, Feed, GlanceNote, LeadDetail, StageChoice } from '@/lib/admin/types'
@@ -46,6 +47,7 @@ function LeadTicket({
   clients: Feed<ClientRecord>
 }) {
   const router = useRouter()
+  const confirm = useConfirm()
   const [sheet, setSheet] = useState<null | { title: string; body: string; confirm: string; run: () => Promise<void> }>(null)
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState('')
@@ -124,6 +126,7 @@ function LeadTicket({
       setMessage('Zoho is not connected. This note was not saved there. Use the glance log if the private store is up.')
       return
     }
+    if (!(await confirm('Save note in Zoho', 'This adds the note to the Zoho contact.'))) return
     setBusy(true)
     const result = await sendJson(`/api/admin/leads/${lead.id}/note`, 'POST', { body: note })
     setBusy(false)

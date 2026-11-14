@@ -3,10 +3,12 @@
 import { useState } from 'react'
 import { sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import type { ThreadMessage } from '@/lib/admin/types'
 
 export function ReviewQueue({ items, example }: { items: ThreadMessage[]; example: boolean }) {
   const toast = useToast()
+  const confirm = useConfirm()
   const [fix, setFix] = useState<Record<string, string>>({})
   return (
     <div className="admin-rise flex flex-col gap-4">
@@ -23,7 +25,8 @@ export function ReviewQueue({ items, example }: { items: ThreadMessage[]; exampl
             className="admin-btn"
             onClick={async () => {
               if (example) return toast('Example only. Nothing was saved.', false)
-              const result = await sendJson('/api/admin/desk', 'POST', { action: 'review', messageId: item.id, status: 'approved' })
+              if (!(await confirm('Approve this text', 'Mark this Spanish text as checked. Nothing is sent.'))) return
+              const result = await sendJson('/api/admin/desk', 'POST', { action: 'review', messageId: item.id, status: 'approved', confirm: true })
               toast(result.ok ? 'Approved.' : result.message, result.ok)
             }}
           >
@@ -34,7 +37,8 @@ export function ReviewQueue({ items, example }: { items: ThreadMessage[]; exampl
             className="admin-btn admin-btn-ghost"
             onClick={async () => {
               if (example) return toast('Example only. Nothing was saved.', false)
-              const result = await sendJson('/api/admin/desk', 'POST', { action: 'review', messageId: item.id, status: 'fixed', bodyEn: fix[item.id] || item.bodyEn })
+              if (!(await confirm('Save the fix', 'Save your English line for this text. Nothing is sent.'))) return
+              const result = await sendJson('/api/admin/desk', 'POST', { action: 'review', messageId: item.id, status: 'fixed', bodyEn: fix[item.id] || item.bodyEn, confirm: true })
               toast(result.ok ? 'English line saved.' : result.message, result.ok)
             }}
           >

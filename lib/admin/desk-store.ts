@@ -7,6 +7,9 @@ import { BoardError } from '@/lib/admin/guard'
 import { phoneKey } from '@/lib/admin/policies'
 import type { AlertPrefs, BlockedNumber, Holiday, LeadOutcome, OptOut, PlanGates, ThreadHold, ThreadMessage } from '@/lib/admin/types'
 
+// About 15 Pro clients. Change it any time on the Revenue page.
+const DEFAULT_QUIT_GOAL = 7500
+
 type Database = ReturnType<typeof getDb>
 
 function iso(value: Date | string | null): string {
@@ -47,10 +50,10 @@ export async function loadBoardConfig(): Promise<BoardConfig> {
     return await withDb(async (db) => {
       const [row] = await db.select().from(boardSettings).where(eq(boardSettings.id, 'board')).limit(1)
       if (!row) {
-        return { quitGoal: 10000, gates: DEFAULT_GATES, alerts: DEFAULT_ALERTS, closedMessage: '', live: true }
+        return { quitGoal: DEFAULT_QUIT_GOAL, gates: DEFAULT_GATES, alerts: DEFAULT_ALERTS, closedMessage: '', live: true }
       }
       return {
-        quitGoal: row.quitGoal || 10000,
+        quitGoal: row.quitGoal || DEFAULT_QUIT_GOAL,
         gates: mergeGates(row.gates),
         alerts: mergeAlerts(row.alertPrefs),
         closedMessage: row.closedMessage,
@@ -58,7 +61,7 @@ export async function loadBoardConfig(): Promise<BoardConfig> {
       }
     })
   } catch {
-    return { quitGoal: 10000, gates: DEFAULT_GATES, alerts: DEFAULT_ALERTS, closedMessage: '', live: false }
+    return { quitGoal: DEFAULT_QUIT_GOAL, gates: DEFAULT_GATES, alerts: DEFAULT_ALERTS, closedMessage: '', live: false }
   }
 }
 

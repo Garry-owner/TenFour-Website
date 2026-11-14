@@ -1,5 +1,6 @@
 import { GlanceBoard } from '@/components/admin/glance-board'
 import { cancellationWarnings, repeatCallers, revenueSnapshot } from '@/lib/admin/insights'
+import { todayChicago } from '@/lib/admin/caught'
 import { moneyGrouped } from '@/lib/admin/format'
 import { listMessages, loadBoardConfig } from '@/lib/admin/desk-store'
 import { loadCalls, loadScenarios, makeLamp } from '@/lib/admin/make'
@@ -26,7 +27,7 @@ export default async function AdminHomePage() {
   const liveClients = clients.items.filter((client) => !client.example)
   const revenue = revenueSnapshot(liveClients, config.quitGoal)
   const width = revenue.goal > 0 ? Math.min(100, Math.round((revenue.mrr / revenue.goal) * 100)) : 0
-  const today = new Date().toISOString().slice(0, 10)
+  const today = todayChicago()
   return (
     <GlanceBoard
       leads={leads.feed}

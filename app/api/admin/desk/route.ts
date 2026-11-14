@@ -4,6 +4,7 @@ import {
   addHoliday,
   holdThread,
   listMessages,
+  loadBoardConfig,
   patchClientFields,
   removeBlock,
   removeHoliday,
@@ -14,10 +15,11 @@ import {
   setReview,
   setRogerPause,
 } from '@/lib/admin/desk-store'
-import { mergeAlerts, mergeGates } from '@/lib/admin/gates'
+import { mergeAlerts, mergeGates, planAllows } from '@/lib/admin/gates'
 import { boardErrorResponse, guardAdmin, readJson } from '@/lib/admin/guard'
 import { isExampleClientId } from '@/lib/admin/example-client'
-import { recordAudit, saveRoger } from '@/lib/admin/store'
+import { loadClients, recordAudit, saveRoger } from '@/lib/admin/store'
+import type { PlanId } from '@/lib/admin/types'
 import { postWired, sendEmail, sendSms, wires } from '@/lib/admin/wired'
 
 export const dynamic = 'force-dynamic'
@@ -30,6 +32,12 @@ function needConfirm(body: Record<string, unknown>) {
   return null
 }
 
+async function clientPlan(clientId: string): Promise<PlanId | null> {
+  const clients = await loadClients()
+  const client = clients.items.find((item) => item.id === clientId && !item.example)
+  return client ? client.plan : null
+}
+
 export async function POST(request: Request) {
   const denied = await guardAdmin(request, true)
   if (denied) return denied
@@ -39,6 +47,11 @@ export async function POST(request: Request) {
     const clientId = typeof body.clientId === 'string' ? body.clientId : ''
     if (clientId && isExampleClientId(clientId) && action !== 'gates' && action !== 'goal' && action !== 'alerts') {
       return NextResponse.json({ ok: false, message: 'This is example data. Nothing was saved.' }, { status: 409 })
+    }
+    // Every change from the board needs its confirm step. Only the read of text threads skips it.
+    if (action !== 'messages') {
+      const blocked = needConfirm(body)
+      if (blocked) return blocked
     }
     if (action === 'pause') {
       const blocked = needConfirm(body)
@@ -147,7 +160,17 @@ export async function POST(request: Request) {
       if (blocked) return blocked
       const to = typeof body.caller === 'string' ? body.caller : ''
       const from = typeof body.from === 'string' ? body.from : ''
-      const link = typeof body.reviewUrl === 'string' ? body.reviewUrl : ''
+      const link = typeof body.reviewUrl === 'string' ? body.reviewUrl.trim() : ''
+      // Review requests are Pro and Elite only (Garry, Nov 14). Checked here too, not only on the screen.
+      const plan = await clientPlan(clientId)
+      if (!plan) return NextResponse.json({ ok: false, message: 'That client is not on the private board. Nothing was sent.' }, { status: 404 })
+      const config = await loadBoardConfig()
+      if (!planAllows(config.gates, plan, 'reviews')) {
+        return NextResponse.json({ ok: false, message: 'Review requests are for Pro and Elite only. Nothing was sent.' }, { status: 403 })
+      }
+      if (!/^https?:\/\//i.test(link)) {
+        return NextResponse.json({ ok: false, message: 'Save a Google review link first. Nothing was sent.' }, { status: 400 })
+      }
       await sendSms(from, to, `Thanks for booking. If you have a minute, a review helps: ${link}`)
       await recordAudit({ action: 'send', entityType: 'client', entityId: clientId, summary: 'Sent a review request' })
       return NextResponse.json({ ok: true, message: 'Review request sent.' })

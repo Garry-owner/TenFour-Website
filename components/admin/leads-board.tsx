@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { FeedBanner } from '@/components/admin/ui'
 import { formatCentral, formatPhone, leadName } from '@/lib/admin/format'
 import type { Lead, LeadBoard } from '@/lib/admin/types'
@@ -14,6 +15,7 @@ const FILTERS = ['All', 'Callback', 'Test', 'Consented', 'No consent'] as const
 export function LeadsBoard({ board }: { board: LeadBoard }) {
   const router = useRouter()
   const toast = useToast()
+  const confirm = useConfirm()
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>('All')
   const [query, setQuery] = useState('')
   const [creating, setCreating] = useState(false)
@@ -51,6 +53,7 @@ export function LeadsBoard({ board }: { board: LeadBoard }) {
           className="admin-panel flex flex-col gap-3"
           onSubmit={async (event) => {
             event.preventDefault()
+            if (!(await confirm('Create lead', 'This creates a new contact and deal in Zoho.'))) return
             const result = await sendJson('/api/admin/leads', 'POST', draft)
             const created = result as { contactId?: string }
             toast(result.ok ? 'Lead created in Zoho.' : result.message, result.ok)

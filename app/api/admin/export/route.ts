@@ -11,9 +11,16 @@ import { loadLeads } from '@/lib/admin/zoho'
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
+function safeCell(cell: string): string {
+  // Phone numbers like +1 555 0100 stay as they are. Anything else that
+  // starts like a formula gets a leading quote so a spreadsheet shows it as text.
+  if (/^[=@\t\r]/.test(cell) || (/^[+-]/.test(cell) && !/^[+-]?[\d\s().-]+$/.test(cell))) return `'${cell}`
+  return cell
+}
+
 function csv(rows: string[][]): string {
   return rows
-    .map((row) => row.map((cell) => `"${cell.replaceAll('"', '""')}"`).join(','))
+    .map((row) => row.map((cell) => `"${safeCell(cell).replaceAll('"', '""')}"`).join(','))
     .join('\n')
 }
 

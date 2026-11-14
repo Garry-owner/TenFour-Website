@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Field, sendJson } from '@/components/admin/ui'
+import { useConfirm } from '@/components/admin/confirm'
 import type { ClientRecord, Lead } from '@/lib/admin/types'
 import { leadName } from '@/lib/admin/format'
 
@@ -20,6 +21,7 @@ export function NoteForm({
   preset?: { leadId?: string; leadLabel?: string; callSid?: string; callLabel?: string; clientId?: string }
 }) {
   const router = useRouter()
+  const confirm = useConfirm()
   const [body, setBody] = useState('')
   const [leadId, setLeadId] = useState(preset?.leadId && leadsLive ? preset.leadId : '')
   const [clientId, setClientId] = useState(preset?.clientId || '')
@@ -32,6 +34,7 @@ export function NoteForm({
       setMessage('The private store is not ready on this deploy. The note was not saved.')
       return
     }
+    if (!(await confirm('Log note', 'This saves the note in your glance log.'))) return
     setBusy(true)
     const lead = leads.find((item) => item.id === leadId)
     const client = clients.find((item) => item.id === clientId)

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Field, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
+import { useConfirm } from '@/components/admin/confirm'
 import { MONTHLY_STATUSES, PLANS, ROGER_SAVED_LINE } from '@/lib/admin/constants'
 import { formatCentral, formatPhone, formatSeconds, leadName, monthlyLabel, planName, telHref } from '@/lib/admin/format'
 import type { CustomerBundle } from '@/lib/admin/customer'
@@ -26,6 +27,7 @@ export function CustomerRecord({
 }) {
   const router = useRouter()
   const toast = useToast()
+  const confirm = useConfirm()
   const lead = bundle.lead?.lead || null
   const client = bundle.client
   const [edit, setEdit] = useState<EditMode>(
@@ -93,6 +95,7 @@ export function CustomerRecord({
       )
       return
     }
+    if (!(await confirm('Save in Zoho', 'This saves the contact and deal changes in Zoho.'))) return
     setBusy(true)
     const result = await sendJson(`/api/admin/leads/${lead.id}`, 'PATCH', { ...contact, ...deal })
     setBusy(false)
@@ -108,6 +111,7 @@ export function CustomerRecord({
       toast(bundle.storeNotice || 'The private store is not ready. Nothing was changed.', false)
       return
     }
+    if (!(await confirm('Save client', 'This saves the client on your private board.'))) return
     setBusy(true)
     const payload = {
       ...planForm,
@@ -136,6 +140,7 @@ export function CustomerRecord({
       toast(bundle.storeNotice || 'The private store is not ready. Nothing was changed.', false)
       return
     }
+    if (!(await confirm('Save Roger settings', 'This saves the Roger settings on your private board. Nothing is sent and the live text-back is not changed.'))) return
     setBusy(true)
     const result = await sendJson(`/api/admin/roger/${client.id}`, 'PUT', roger)
     setBusy(false)
@@ -151,6 +156,7 @@ export function CustomerRecord({
       toast(bundle.storeNotice || 'The private store is not ready. Nothing was changed.', false)
       return
     }
+    if (!(await confirm('Log note', 'This saves the note in your glance log.'))) return
     setBusy(true)
     const result = await sendJson('/api/admin/notes', 'POST', {
       body: note,
@@ -173,6 +179,7 @@ export function CustomerRecord({
       toast('Zoho is not connected. Set ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, and ZOHO_REFRESH_TOKEN. Nothing was changed.', false)
       return
     }
+    if (!(await confirm('Create in Zoho', 'This creates a new contact and deal in Zoho.'))) return
     setBusy(true)
     const result = await sendJson('/api/admin/leads', 'POST', { ...contact, ...deal })
     setBusy(false)
@@ -417,6 +424,7 @@ export function CustomerRecord({
               toast('Zoho is not connected. Nothing was changed.', false)
               return
             }
+            if (!(await confirm('Save Zoho note', 'This changes the note in Zoho.'))) return
             setBusy(true)
             const result = await sendJson(`/api/admin/notes/zoho/${zohoNote.id}`, 'PATCH', { body: zohoNote.body })
             setBusy(false)

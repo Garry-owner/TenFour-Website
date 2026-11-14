@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { ConfirmProvider } from '@/components/admin/confirm'
+import { ToastProvider } from '@/components/admin/toast'
 import '../admin/admin.css'
 
 export const metadata: Metadata = {
@@ -7,5 +9,13 @@ export const metadata: Metadata = {
 }
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {
-  return <div className="admin-deck admin-night"><main className="admin-main">{children}</main></div>
+  return (
+    <div className="admin-deck admin-night">
+      <ToastProvider>
+        <ConfirmProvider>
+          <main className="admin-main">{children}</main>
+        </ConfirmProvider>
+      </ToastProvider>
+    </div>
+  )
 }
