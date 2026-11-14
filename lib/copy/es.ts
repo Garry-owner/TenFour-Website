@@ -530,7 +530,7 @@ export const es: typeof en = {
         id: 'cookies',
         heading: '8. Cookies y analítica',
         paragraphs: [
-          'Este sitio usa Vercel Web Analytics para saber qué páginas se visitan y cómo se usa la calculadora del costo de las llamadas perdidas. Vercel Web Analytics no usa cookies. No usamos cookies de publicidad.',
+          'Este sitio web está alojado en Netlify. No usamos una herramienta de analítica de visitantes ni cookies de publicidad.',
         ],
       },
       {

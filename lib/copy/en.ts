@@ -509,7 +509,7 @@ export const en = {
         id: 'cookies',
         heading: '8. Cookies and analytics',
         paragraphs: [
-          'This website uses Vercel Web Analytics to understand which pages are visited and how the missed-call cost calculator is used. Vercel Web Analytics does not use cookies. We do not use advertising cookies.',
+          'This website is hosted on Netlify. We do not use a visitor analytics tool or advertising cookies.',
         ],
       },
       {

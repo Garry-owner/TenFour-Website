@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import {
@@ -162,7 +161,6 @@ export default async function RootLayout({
           {children}
         </div>
         <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
