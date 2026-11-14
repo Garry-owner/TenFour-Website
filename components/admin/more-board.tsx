@@ -10,9 +10,16 @@ import type { Connections, LampState } from '@/lib/admin/types'
 
 const LINKS = [
   { href: '/admin/log', label: 'Glance log', detail: 'Private notes' },
+  { href: '/admin/activity', label: 'Change history', detail: 'Who changed what, and when' },
+  { href: '/admin/pipeline', label: 'Pipeline', detail: 'New, texted, booked, lost' },
+  { href: '/admin/revenue', label: 'Revenue', detail: 'Monthly revenue and the quit driving goal' },
+  { href: '/admin/report', label: 'Reports', detail: 'Missed calls and a client date range' },
+  { href: '/admin/lookup', label: 'Number lookup', detail: 'Which client owns a phone number' },
+  { href: '/admin/review', label: 'Spanish review', detail: 'Texts waiting for a person' },
+  { href: '/admin/templates', label: 'Roger scripts', detail: 'Starter texts for 14 trades' },
+  { href: '/admin/plans', label: 'Plan features', detail: 'What Base, Pro, and Elite include' },
+  { href: '/admin/alerts', label: 'Owner alerts', detail: 'How you want to hear about problems' },
   { href: '/admin/make', label: 'Make breakers', detail: 'Turn scenarios on or off' },
-  { href: '/admin/report', label: 'Report', detail: 'Missed calls caught' },
-  { href: '/admin/activity', label: 'Activity', detail: 'What changed, and when' },
 ]
 
 export function MoreBoard({ shift }: { shift: 'day' | 'night' }) {

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CaughtPanel } from '@/components/admin/caught-panel'
 import { ReportBoardView } from '@/components/admin/report-board'
 import { loadCalls } from '@/lib/admin/make'
@@ -29,6 +30,7 @@ export default async function ReportPage({
         selectedClient={query.client || null}
       />
       <ReportBoardView report={report} />
+      <Link className="admin-link" href="/admin/report/client">Build a client report for any dates</Link>
     </div>
   )
 }

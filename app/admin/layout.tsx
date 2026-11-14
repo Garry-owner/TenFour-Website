@@ -15,6 +15,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Command center',
   robots: { index: false, follow: false, nocache: true },
+  manifest: '/admin/manifest.webmanifest',
+  appleWebApp: { capable: true, title: 'TenFour', statusBarStyle: 'black-translucent' },
+  icons: { icon: '/admin/icon-192.png', apple: '/admin/icon-192.png' },
 }
 
 export const dynamic = 'force-dynamic'

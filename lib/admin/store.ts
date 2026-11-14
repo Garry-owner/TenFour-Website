@@ -72,6 +72,19 @@ function mapClient(row: typeof clients.$inferSelect): ClientRecord {
     city: row.city,
     zohoContactId: row.zohoContactId,
     zohoDealId: row.zohoDealId,
+    nextChargeDate: row.nextChargeDate,
+    onboardForm: row.onboardForm,
+    onboardNumber: row.onboardNumber,
+    onboardA2p: row.onboardA2p,
+    onboardTest: row.onboardTest,
+    onboardLive: row.onboardLive,
+    onboardStuck: row.onboardStuck,
+    avgJobCents: row.avgJobCents,
+    referredBy: row.referredBy,
+    referralCredit: row.referralCredit,
+    reviewUrl: row.reviewUrl,
+    portalEnabled: Boolean(row.portalCodeHash),
+    example: false,
     createdAt: iso(row.createdAt),
     updatedAt: iso(row.updatedAt),
   }
@@ -86,6 +99,7 @@ async function audit(
     entityType: entry.entityType,
     entityId: entry.entityId,
     summary: entry.summary,
+    actor: 'You',
     before: entry.before ?? null,
     after: entry.after ?? null,
   })
@@ -104,6 +118,7 @@ function mapNote(
     clientLabel: (row.clientId && names.get(row.clientId)) || row.clientLabel,
     callSid: row.callSid,
     callLabel: row.callLabel,
+    dueOn: row.dueOn,
     createdAt: iso(row.createdAt),
     updatedAt: iso(row.updatedAt),
   }
@@ -262,6 +277,14 @@ function tie(value: unknown, pattern: RegExp): string | null {
   return trimmed
 }
 
+function dateField(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  if (!trimmed) return null
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) throw new BoardError('Use a real date.', 'input')
+  return trimmed
+}
+
 function label(value: unknown): string | null {
   if (typeof value !== 'string') return null
   const trimmed = value.trim().slice(0, 160)
@@ -295,6 +318,7 @@ export async function createNote(input: Record<string, unknown>): Promise<Glance
   const leadId = tie(input.leadId, /^[A-Za-z0-9_-]{1,40}$/)
   const callSid = tie(input.callSid, /^[A-Za-z0-9]{10,64}$/)
   const clientId = tie(input.clientId, /^[0-9a-f-]{36}$/i)
+  const due = dateField(input.dueOn)
   return withDb(async (db) => {
     let clientLabel = label(input.clientLabel)
     if (clientId) {
@@ -312,6 +336,7 @@ export async function createNote(input: Record<string, unknown>): Promise<Glance
         clientLabel,
         callSid,
         callLabel: label(input.callLabel),
+        dueOn: due,
         updatedAt: new Date(),
       })
       .returning()
@@ -424,6 +449,9 @@ function mapRoger(row: typeof rogerSettings.$inferSelect): RogerSettings {
     leadPhone: row.leadPhone,
     leadEmail: row.leadEmail,
     bookingLink: row.bookingLink,
+    pausedUntil: row.pausedUntil,
+    alertLanguage: row.alertLanguage || 'en',
+    closedMessage: row.closedMessage,
     updatedAt: iso(row.updatedAt),
   }
 }
@@ -479,6 +507,19 @@ export async function saveRoger(clientId: string, input: Record<string, unknown>
   })
 }
 
+export async function attachZoho(id: string, contactId: string, dealId: string): Promise<void> {
+  if (!isUuid(id)) throw new BoardError('That client is not on the private board.', 'input')
+  await withDb(async (db) => {
+    await db.update(clients).set({ zohoContactId: contactId, zohoDealId: dealId, updatedAt: new Date() }).where(eq(clients.id, id))
+    await audit(db, {
+      action: 'update',
+      entityType: 'client',
+      entityId: id,
+      summary: 'Linked the client to Zoho',
+    })
+  })
+}
+
 export async function findClientByPhone(phone: string): Promise<ClientRecord | null> {
   const key = phoneKey(phone)
   if (key.length < 7) return null
@@ -499,6 +540,7 @@ export async function loadAudit(): Promise<Feed<AuditEntry>> {
         entityType: row.entityType,
         entityId: row.entityId,
         summary: row.summary,
+        actor: row.actor || 'You',
         before: row.before,
         after: row.after,
       }))

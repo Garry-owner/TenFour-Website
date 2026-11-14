@@ -9,13 +9,14 @@ export function middleware(request: NextRequest) {
   requestHeaders.set('x-locale', locale)
   requestHeaders.set('x-pathname', pathname)
   const adminPage = pathname === '/admin' || pathname.startsWith('/admin/')
-  requestHeaders.set('x-admin', adminPage ? '1' : '0')
+  const portalPage = pathname === '/portal' || pathname.startsWith('/portal/')
+  requestHeaders.set('x-admin', adminPage || portalPage ? '1' : '0')
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   })
   response.headers.set('Content-Language', locale)
-  if (adminPage || pathname.startsWith('/api/admin')) {
+  if (adminPage || portalPage || pathname.startsWith('/api/admin') || pathname.startsWith('/api/portal')) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow')
     response.headers.set('Cache-Control', 'private, no-store')
   }

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useToast } from '@/components/admin/toast'
 import { FeedBanner, Field, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { FOUNDING_LINE, FOUNDING_REVIEW, FOUNDING_SEATS, MONTHLY_STATUSES, PLANS } from '@/lib/admin/constants'
 import { formatPhone, monthlyLabel, planName, planPrice, setupLabel, telHref } from '@/lib/admin/format'
@@ -105,6 +106,7 @@ export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRec
         {founding}
         <span className="text-lg font-normal"> / {FOUNDING_SEATS} founding</span>
       </p>
+      <QuickAdd live={live} />
       <FeedBanner notice={feed.notice} />
       {feed.items.length === 0 && (
         <Panel>
@@ -265,5 +267,38 @@ export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRec
         />
       )}
     </div>
+  )
+}
+
+function QuickAdd({ live }: { live: boolean }) {
+  const router = useRouter()
+  const toast = useToast()
+  const [open, setOpen] = useState(false)
+  const [businessName, setBusinessName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [plan, setPlan] = useState<PlanId>('base')
+  if (!open) {
+    return <button type="button" className="admin-btn" onClick={() => setOpen(true)}>Quick add a client</button>
+  }
+  return (
+    <form
+      className="admin-panel flex flex-col gap-2"
+      onSubmit={async (event) => {
+        event.preventDefault()
+        const result = await sendJson('/api/admin/clients', 'POST', { quick: true, confirm: true, businessName, phone, plan, contactName: businessName })
+        toast(result.message || (result.ok ? 'Client saved.' : 'Not saved.'), result.ok)
+        if (result.ok) router.refresh()
+      }}
+    >
+      <h2>Quick add</h2>
+      <p className="admin-muted">Saves the client here. Zoho is created only when Zoho is connected, and only after you confirm.</p>
+      {!live && <p className="admin-muted">The private store is not ready, so this will not save.</p>}
+      <input className="admin-field" value={businessName} onChange={(event) => setBusinessName(event.target.value)} placeholder="Business name" required />
+      <input className="admin-field" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Business phone" inputMode="tel" />
+      <select className="admin-field" value={plan} onChange={(event) => setPlan(event.target.value as PlanId)}>
+        {PLANS.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+      </select>
+      <button className="admin-btn" type="submit">Confirm and save</button>
+    </form>
   )
 }

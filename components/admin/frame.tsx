@@ -1,12 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Ellipsis, HardHat, House, Phone, Users } from 'lucide-react'
+import { Ellipsis, Eye, EyeOff, HardHat, House, LogOut, Phone, Users } from 'lucide-react'
 import { LogoMark } from '@/components/brand-logo'
 import { SearchBar } from '@/components/admin/search-bar'
+import { PwaBadge } from '@/components/admin/pwa'
 import { ToastProvider } from '@/components/admin/toast'
+import { sendJson } from '@/components/admin/ui'
 import type { Connections, LampState } from '@/lib/admin/types'
 
 const NAV = [
@@ -17,7 +19,7 @@ const NAV = [
   { href: '/admin/more', label: 'More', icon: Ellipsis },
 ]
 
-const MORE_PREFIXES = ['/admin/more', '/admin/log', '/admin/make', '/admin/report', '/admin/activity', '/admin/search']
+const MORE_PREFIXES = ['/admin/more', '/admin/log', '/admin/make', '/admin/report', '/admin/activity', '/admin/search', '/admin/pipeline', '/admin/revenue', '/admin/lookup', '/admin/review', '/admin/templates', '/admin/alerts', '/admin/plans']
 
 export function AdminFrame({
   authed,
@@ -29,8 +31,14 @@ export function AdminFrame({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
+  const router = useRouter()
   const shareCard = pathname.startsWith('/admin/report/share')
   const [lamps, setLamps] = useState<Connections | null>(null)
+  const [safe, setSafe] = useState(false)
+
+  useEffect(() => {
+    setSafe(window.localStorage.getItem('tenfour_safe') === 'on')
+  }, [])
 
   useEffect(() => {
     if (!authed) return
@@ -48,8 +56,20 @@ export function AdminFrame({
 
   const dot = overall(lamps)
 
+  function toggleSafe() {
+    const next = !safe
+    setSafe(next)
+    window.localStorage.setItem('tenfour_safe', next ? 'on' : 'off')
+  }
+
+  async function signOut() {
+    await sendJson('/api/admin/logout', 'POST', {})
+    router.replace('/admin/login')
+    router.refresh()
+  }
+
   return (
-    <div className={`admin-deck ${shift === 'day' ? 'admin-day' : 'admin-night'}`}>
+    <div className={`admin-deck ${shift === 'day' ? 'admin-day' : 'admin-night'}`} data-safe={safe ? 'on' : 'off'}>
       {authed ? (
         <>
           <a className="admin-skip" href="#admin-main">
@@ -61,11 +81,19 @@ export function AdminFrame({
                 <LogoMark />
               </Link>
               <SearchBar />
+              <button type="button" className="admin-icon-btn" aria-pressed={safe} aria-label="Hide other names and numbers" onClick={toggleSafe}>
+                {safe ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+              <button type="button" className="admin-icon-btn" aria-label="Sign out" onClick={signOut}>
+                <LogOut size={18} />
+              </button>
               <Link className="admin-status-link" href="/admin/more" data-state={dot} aria-label="Connection status">
                 <span className="admin-status-dot" />
               </Link>
             </header>
           )}
+          {safe && !shareCard && <p className="admin-safe-note">Privacy blur is on. Other names and numbers are hidden.</p>}
+          <PwaBadge />
           <ToastProvider>
             <main id="admin-main" className={shareCard ? 'admin-main admin-main-share' : 'admin-main'}>
               {children}

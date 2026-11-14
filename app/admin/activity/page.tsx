@@ -23,7 +23,7 @@ export default async function ActivityPage() {
               <span className="admin-kicker">{formatCentral(entry.at)}</span>
               <span className="admin-title text-2xl">{entry.summary}</span>
               <span className="admin-kicker">
-                {entry.action} · {entry.entityType}
+                {entry.actor || 'You'} · {entry.action} · {entry.entityType}
               </span>
             </li>
           ))}

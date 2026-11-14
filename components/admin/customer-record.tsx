@@ -9,6 +9,8 @@ import { useToast } from '@/components/admin/toast'
 import { MONTHLY_STATUSES, PLANS, ROGER_SAVED_LINE } from '@/lib/admin/constants'
 import { formatCentral, formatPhone, formatSeconds, leadName, monthlyLabel, planName, telHref } from '@/lib/admin/format'
 import type { CustomerBundle } from '@/lib/admin/customer'
+import type { DeskPayload } from '@/lib/admin/load-desk'
+import { ClientDesk } from '@/components/admin/client-desk'
 import type { MonthlyStatus, PlanId } from '@/lib/admin/types'
 
 type EditMode = 'contact' | 'deal' | 'client' | 'roger' | 'note' | null
@@ -16,9 +18,11 @@ type EditMode = 'contact' | 'deal' | 'client' | 'roger' | 'note' | null
 export function CustomerRecord({
   bundle,
   initialEdit,
+  desk = null,
 }: {
   bundle: CustomerBundle
   initialEdit: string | null
+  desk?: DeskPayload | null
 }) {
   const router = useRouter()
   const toast = useToast()
@@ -185,6 +189,7 @@ export function CustomerRecord({
         {lead?.example && <span className="admin-pill">Example</span>}
         {lead?.obviousTest && <span className="admin-pill admin-pill-solid">Test</span>}
       </div>
+      {desk && <ClientDesk data={desk} />}
       {phone && (
         <a className="admin-btn" href={phone}>
           Call {formatPhone(contact.phone)}

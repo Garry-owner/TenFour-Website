@@ -1,23 +1,25 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
-import { AlertCircle, Power, UserRound } from 'lucide-react'
+import { AlertCircle, PhoneIncoming, Power, UserRound } from 'lucide-react'
 import { CaughtPanel } from '@/components/admin/caught-panel'
 import { FeedBanner } from '@/components/admin/ui'
 import { EXAMPLE_TRACKED, caughtReport, todayChicago } from '@/lib/admin/caught'
 import { PLANS } from '@/lib/admin/constants'
 import { formatBoardDate, formatPhone, greetingChicago, leadName, moneyGrouped, relativeShort } from '@/lib/admin/format'
-import type { CallLog, ClientRecord, Feed, Lead, ScenarioCard } from '@/lib/admin/types'
+import type { CallLog, ClientRecord, Feed, Lead, LampState, ScenarioCard } from '@/lib/admin/types'
 
 export function GlanceBoard({
   leads,
   calls,
   clients,
   scenarios,
+  signals,
 }: {
   leads: Feed<Lead>
   calls: Feed<CallLog>
   clients: Feed<ClientRecord>
   scenarios: ScenarioCard[]
+  signals: HomeSignals
 }) {
   const now = new Date()
   const today = todayChicago(now)
@@ -35,7 +37,7 @@ export function GlanceBoard({
   const missedTexted = caughtReport(calls.items, tracked, 'day', today).clientTotal
   const active = clients.items.filter((client) => client.monthlyStatus === 'active')
   const revenue = active.reduce((sum, client) => sum + (PLANS.find((plan) => plan.id === client.plan)?.month || 0), 0)
-  const attention = attentionRows(leads.items, clients.items, scenarios, now)
+  const attention = attentionRows(leads.items, clients.items, scenarios, now, signals)
   const recent = [...leads.items].sort((a, b) => time(b.createdAt) - time(a.createdAt)).slice(0, 4)
   const problem = example ? null : leads.notice || calls.notice || (clients.state !== 'live' ? clients.notice : null)
 
@@ -49,6 +51,37 @@ export function GlanceBoard({
         </p>
       </div>
       {problem && <FeedBanner notice={problem} />}
+      <section className="admin-panel">
+        <h2>System health</h2>
+        <p className="admin-muted">Green means the read check passed. Red means it is off or it failed.</p>
+        <div className="admin-lights">
+          <Light name="Twilio" state={signals.health.twilio} />
+          <Light name="Make" state={signals.health.make} />
+          <Light name="Zoho" state={signals.health.zoho} />
+          <Light name="Backup" state={signals.health.backup} />
+        </div>
+      </section>
+      <section className="admin-panel">
+        <div className="admin-section">
+          <h2>Quit driving goal</h2>
+          <Link className="admin-link" href="/admin/revenue">Edit</Link>
+        </div>
+        <p className="admin-num admin-num-accent">{signals.revenue}</p>
+        <p className="admin-muted">Monthly revenue from active clients. Goal {signals.goal}.</p>
+        <div className="admin-bar" aria-hidden="true"><span style={{ width: signals.goalWidth }} /></div>
+      </section>
+      {signals.reminders.length > 0 && (
+        <section>
+          <div className="admin-section"><h2>Due reminders</h2></div>
+          <div className="admin-list">
+            {signals.reminders.map((item) => (
+              <Link key={item.id} className="admin-row" href={item.href}>
+                <span className="admin-row-copy"><strong>{item.title}</strong><span>{item.due}</span></span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
       <div className="grid grid-cols-2 gap-2.5">
         <Stat value={String(newToday)} label="New leads today" />
         <Stat value={String(missedTexted)} label="Missed calls texted" />
@@ -129,6 +162,25 @@ export function GlanceBoard({
   )
 }
 
+function Light({ name, state }: { name: string; state: LampState }) {
+  return (
+    <span className="admin-light">
+      <i data-state={state === 'ready' ? 'ready' : 'down'} />
+      {name}
+    </span>
+  )
+}
+
+export type HomeSignals = {
+  health: { twilio: LampState; make: LampState; zoho: LampState; backup: LampState }
+  revenue: string
+  goal: string
+  goalWidth: string
+  reminders: { id: string; title: string; due: string; href: string }[]
+  warnings: { id: string; name: string; reason: string; href: string }[]
+  repeats: { id: string; name: string; caller: string; count: number; href: string }[]
+}
+
 function Stat({ value, label, accent = false }: { value: string; label: string; accent?: boolean }) {
   return (
     <article className="admin-stat">
@@ -138,7 +190,7 @@ function Stat({ value, label, accent = false }: { value: string; label: string; 
   )
 }
 
-function attentionRows(leads: Lead[], clients: ClientRecord[], scenarios: ScenarioCard[], now: Date) {
+function attentionRows(leads: Lead[], clients: ClientRecord[], scenarios: ScenarioCard[], now: Date, signals: HomeSignals) {
   const rows: { id: string; href: string; title: string; subtitle: string; meta: string; icon: ReactNode }[] = []
   const fresh = leads
     .filter((lead) => lead.bucket === 'new' || lead.needsCallback)
@@ -175,7 +227,27 @@ function attentionRows(leads: Lead[], clients: ClientRecord[], scenarios: Scenar
       icon: <Power size={16} aria-hidden="true" />,
     })
   }
-  return rows.slice(0, 4)
+  for (const warning of signals.warnings) {
+    rows.push({
+      id: warning.id,
+      href: warning.href,
+      title: warning.reason,
+      subtitle: warning.name,
+      meta: '',
+      icon: <AlertCircle size={16} aria-hidden="true" />,
+    })
+  }
+  for (const repeat of signals.repeats) {
+    rows.push({
+      id: repeat.id,
+      href: repeat.href,
+      title: 'Repeat caller',
+      subtitle: `${repeat.name}, ${repeat.caller}, ${repeat.count} times this week`,
+      meta: '',
+      icon: <PhoneIncoming size={16} aria-hidden="true" />,
+    })
+  }
+  return rows.slice(0, 6)
 }
 
 function leadStatus(lead: Lead): { label: string; hot: boolean } {

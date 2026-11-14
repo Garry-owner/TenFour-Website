@@ -117,6 +117,19 @@ export type ClientRecord = {
   city: string
   zohoContactId: string | null
   zohoDealId: string | null
+  nextChargeDate: string | null
+  onboardForm: boolean
+  onboardNumber: boolean
+  onboardA2p: boolean
+  onboardTest: boolean
+  onboardLive: boolean
+  onboardStuck: boolean
+  avgJobCents: number
+  referredBy: string
+  referralCredit: string
+  reviewUrl: string
+  portalEnabled: boolean
+  example?: boolean
   createdAt: string
   updatedAt: string
 }
@@ -129,6 +142,9 @@ export type RogerSettings = {
   leadPhone: string
   leadEmail: string
   bookingLink: string
+  pausedUntil: string | null
+  alertLanguage: string
+  closedMessage: string
   updatedAt: string
 }
 
@@ -139,12 +155,13 @@ export type AuditEntry = {
   entityType: string
   entityId: string
   summary: string
+  actor: string
   before: unknown
   after: unknown
 }
 
 export type SearchHit = {
-  kind: 'client' | 'lead'
+  kind: 'client' | 'lead' | 'caller' | 'note' | 'history' | 'message'
   id: string
   title: string
   detail: string
@@ -160,8 +177,78 @@ export type GlanceNote = {
   clientLabel: string | null
   callSid: string | null
   callLabel: string | null
+  dueOn: string | null
   createdAt: string
   updatedAt: string
+}
+
+export type PlanFeature = 'portal' | 'leads' | 'reports' | 'pdf' | 'money' | 'reviews'
+
+export type PlanGates = Record<'base' | 'pro' | 'elite', Record<PlanFeature, boolean>>
+
+export type AlertPrefs = {
+  pushFailure: boolean
+  textFailure: boolean
+  emailFailure: boolean
+  pushPaused: boolean
+  textPaused: boolean
+  emailPaused: boolean
+  pushPayment: boolean
+  textPayment: boolean
+  emailPayment: boolean
+}
+
+export type BlockedNumber = {
+  id: string
+  clientId: string
+  phone: string
+  reason: string
+  createdAt: string
+}
+
+export type OptOut = {
+  id: string
+  clientId: string
+  phone: string
+  source: string
+  at: string
+}
+
+export type ThreadMessage = {
+  id: string
+  clientId: string
+  caller: string
+  direction: 'in' | 'out'
+  body: string
+  bodyEn: string
+  language: string
+  reviewStatus: string
+  opened: boolean
+  at: string
+  example?: boolean
+}
+
+export type Holiday = {
+  id: string
+  clientId: string
+  onDate: string
+  label: string
+}
+
+export type LeadOutcome = {
+  id: string
+  clientId: string
+  caller: string
+  leadId: string
+  outcome: 'booked' | 'lost'
+  at: string
+}
+
+export type ThreadHold = {
+  id: string
+  clientId: string
+  caller: string
+  at: string
 }
 
 export type LampState = 'ready' | 'missing' | 'fault'
