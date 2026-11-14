@@ -1,36 +1,29 @@
 body:has(.admin-deck) {
-  background: oklch(0.17 0.004 70);
+  background: #07080a;
 }
 
 body:has(.admin-deck.admin-day) {
-  background: oklch(0.99 0.004 70);
+  background: #f4f0eb;
 }
 
 .admin-deck {
-  --background: oklch(0.17 0.004 70);
-  --foreground: oklch(0.96 0.004 70);
-  --card: oklch(0.21 0.004 70);
-  --card-foreground: oklch(0.96 0.004 70);
+  --background: #07080a;
+  --foreground: #f6f3ef;
+  --card: color-mix(in srgb, #1a1c20 58%, transparent);
+  --card-foreground: #f6f3ef;
   --primary: #ff6b1a;
   --primary-foreground: #0f1011;
-  --muted: oklch(0.24 0.004 70);
-  --muted-foreground: oklch(0.7 0.004 70);
-  --border: oklch(0.32 0.004 70);
+  --muted: color-mix(in srgb, #fff 8%, transparent);
+  --muted-foreground: #d4cdc6;
+  --border: color-mix(in srgb, #fff 16%, transparent);
   --ring: #ff6b1a;
-  --grid: oklch(1 0 0 / 6%);
+  --glass-blur: 18px;
   color: var(--foreground);
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, var(--grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid) 1px, transparent 1px),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 14px,
-      color-mix(in srgb, var(--primary) 7%, transparent) 14px,
-      color-mix(in srgb, var(--primary) 7%, transparent) 15px
-    );
-  background-size: 48px 48px, 48px 48px, auto;
+    radial-gradient(ellipse 90% 42% at 50% -8%, color-mix(in srgb, #ff6b1a 26%, transparent), transparent 62%),
+    radial-gradient(ellipse 55% 36% at 100% 100%, color-mix(in srgb, #ff6b1a 14%, transparent), transparent 70%);
+  background-attachment: fixed;
   color-scheme: dark;
   accent-color: #ff6b1a;
   min-height: 100dvh;
@@ -39,19 +32,20 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-deck.admin-day {
-  --background: oklch(0.99 0.004 70);
-  --foreground: oklch(0.17 0.004 70);
-  --card: #fff;
-  --card-foreground: oklch(0.17 0.004 70);
+  --background: #f4f0eb;
+  --foreground: #161412;
+  --card: color-mix(in srgb, #fff 62%, transparent);
+  --card-foreground: #161412;
   --primary: #c94a08;
   --primary-foreground: #fff;
-  --muted: oklch(0.96 0.004 70);
-  --muted-foreground: oklch(0.45 0.004 70);
-  --border: oklch(0.86 0.004 70);
+  --muted: color-mix(in srgb, #161412 6%, transparent);
+  --muted-foreground: #3f3a36;
+  --border: color-mix(in srgb, #161412 14%, transparent);
   --ring: #c94a08;
-  --grid: oklch(0 0 0 / 6%);
   color-scheme: light;
   accent-color: #c94a08;
+  background-image:
+    radial-gradient(ellipse 90% 42% at 50% -8%, color-mix(in srgb, #c94a08 18%, transparent), transparent 64%);
 }
 
 .admin-deck ::selection {
@@ -60,7 +54,7 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-deck :focus-visible {
-  outline: 3px solid var(--primary);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
@@ -110,9 +104,10 @@ body:has(.admin-deck.admin-day) {
   gap: 0.75rem 0.8rem;
   align-items: center;
   padding: 0.75rem 0.9rem 0.85rem;
-  background: color-mix(in srgb, var(--background) 88%, transparent);
-  border-bottom: 3px solid var(--primary);
-  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--background) 72%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 10px 40px color-mix(in srgb, #ff6b1a 8%, transparent);
   overflow: hidden;
 }
 
@@ -150,7 +145,9 @@ body:has(.admin-deck.admin-day) {
   min-height: 1.7rem;
   padding: 0.15rem 0.5rem;
   border: 1px solid var(--border);
+  border-radius: 999px;
   background: var(--card);
+  backdrop-filter: blur(12px);
   font-family: var(--ff-overpass), ui-monospace, monospace;
   font-size: 0.62rem;
   letter-spacing: 0.14em;
@@ -185,6 +182,14 @@ body:has(.admin-deck.admin-day) {
   flex-direction: column;
   justify-content: center;
   gap: 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-radius: 24px;
+  background: var(--card);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent),
+    0 20px 60px color-mix(in srgb, #ff6b1a 10%, transparent);
+  padding: 1.4rem 1.1rem;
 }
 
 .admin-main {
@@ -203,8 +208,9 @@ body:has(.admin-deck.admin-day) {
   grid-template-columns: repeat(5, 1fr);
   gap: 0.15rem;
   padding: 0.3rem 0.35rem calc(0.35rem + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--card) 94%, black);
-  border-top: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--background) 70%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .admin-nav a {
@@ -225,7 +231,8 @@ body:has(.admin-deck.admin-day) {
 
 .admin-nav a[aria-current='page'] {
   color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  border-radius: 12px;
 }
 
 .admin-title {
@@ -247,22 +254,23 @@ body:has(.admin-deck.admin-day) {
   font-size: clamp(4.5rem, 28vw, 8rem);
   line-height: 0.8;
   color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--primary) 45%, transparent);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--primary) 28%, transparent);
 }
 
 .admin-panel {
   position: relative;
-  border: 2px solid color-mix(in srgb, var(--foreground) 18%, transparent);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--card);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent),
+    0 12px 40px rgb(0 0 0 / 28%);
   padding: 0.95rem;
 }
 
 .admin-corner {
-  position: absolute;
-  width: 0.8rem;
-  height: 0.8rem;
-  border: 2px solid var(--primary);
-  pointer-events: none;
+  display: none;
 }
 
 .admin-corner-tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
@@ -274,10 +282,13 @@ body:has(.admin-deck.admin-day) {
   position: relative;
   min-height: 7.2rem;
   overflow: hidden;
-  border: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 32%, transparent);
+  border-radius: 18px;
   background:
-    linear-gradient(160deg, color-mix(in srgb, var(--primary) 16%, transparent), transparent 55%),
+    linear-gradient(165deg, color-mix(in srgb, var(--primary) 14%, transparent), transparent 58%),
     var(--card);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 12%, transparent);
   padding: 0.75rem 0.8rem 0.7rem;
 }
 
@@ -286,16 +297,17 @@ body:has(.admin-deck.admin-day) {
   font-size: clamp(3rem, 15vw, 4.6rem);
   line-height: 0.82;
   color: var(--primary);
-  text-shadow: 0 0 22px color-mix(in srgb, var(--primary) 45%, transparent);
+  text-shadow: 0 0 28px color-mix(in srgb, var(--primary) 32%, transparent);
 }
 
 .admin-stamp {
   display: inline-flex;
   align-items: center;
   min-height: 1.6rem;
-  border: 2px solid var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 999px;
   color: var(--primary);
-  padding: 0.05rem 0.4rem;
+  padding: 0.05rem 0.55rem;
   font-family: var(--ff-stencil), Impact, sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -308,16 +320,18 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-stamp-tilt {
-  transform: rotate(-8deg);
+  transform: none;
 }
 
 .admin-card {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  border: 2px solid var(--border);
-  border-left: 6px solid var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   background: var(--card);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent);
   padding: 0.9rem;
   text-decoration: none;
 }
@@ -330,8 +344,9 @@ body:has(.admin-deck.admin-day) {
 .admin-area,
 .admin-select {
   width: 100%;
-  border: 2px solid color-mix(in srgb, var(--foreground) 28%, transparent);
-  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--background) 55%, transparent);
   color: var(--foreground);
   font-size: 1rem;
   padding: 0.75rem 0.8rem;
@@ -354,10 +369,12 @@ body:has(.admin-deck.admin-day) {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  border: 2px solid var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 14px;
   background: var(--primary);
   color: var(--primary-foreground);
   padding: 0.7rem 1rem;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--primary) 28%, transparent);
   font-family: var(--ff-stencil), Impact, sans-serif;
   font-size: 1.2rem;
   letter-spacing: 0.08em;
@@ -366,8 +383,10 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-btn-ghost {
-  background: transparent;
+  background: color-mix(in srgb, #fff 6%, transparent);
   color: var(--foreground);
+  border-color: var(--border);
+  box-shadow: none;
 }
 
 .admin-btn:disabled {
@@ -376,8 +395,9 @@ body:has(.admin-deck.admin-day) {
 
 .admin-choice {
   min-height: 2.9rem;
-  border: 2px solid var(--border);
-  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, #fff 4%, transparent);
   padding: 0.45rem 0.7rem;
   font-family: var(--ff-stencil), Impact, sans-serif;
   letter-spacing: 0.06em;
@@ -404,11 +424,15 @@ body:has(.admin-deck.admin-day) {
 
 .admin-sheet-card {
   width: min(100%, 32rem);
-  border: 2px solid var(--primary);
-  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--background) 78%, transparent);
+  backdrop-filter: blur(22px);
   color: var(--foreground);
   padding: 1.1rem;
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 28%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 16%, transparent),
+    0 18px 50px rgb(0 0 0 / 45%);
 }
 
 .admin-search {
@@ -427,8 +451,10 @@ body:has(.admin-deck.admin-day) {
   gap: 0.35rem;
   max-height: 18rem;
   overflow: auto;
-  border: 2px solid var(--primary);
-  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  backdrop-filter: blur(18px);
   padding: 0.6rem;
 }
 
@@ -447,8 +473,10 @@ body:has(.admin-deck.admin-day) {
   left: 0.75rem;
   right: 0.75rem;
   bottom: calc(5.4rem + env(safe-area-inset-bottom));
-  border: 2px solid var(--primary);
-  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--background) 80%, transparent);
+  backdrop-filter: blur(18px);
   color: var(--foreground);
   padding: 0.9rem 1rem;
   font-size: 1rem;
@@ -456,16 +484,18 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-toast-ok {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 35%, transparent);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .admin-toast-bad {
-  border-style: dashed;
+  border-color: color-mix(in srgb, var(--primary) 70%, white);
 }
 
 .admin-banner {
-  border: 2px dashed var(--primary);
-  background: color-mix(in srgb, var(--primary) 12%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  backdrop-filter: blur(12px);
   padding: 0.75rem 0.8rem;
   font-family: var(--ff-overpass), ui-monospace, monospace;
   font-size: 0.75rem;
@@ -474,8 +504,10 @@ body:has(.admin-deck.admin-day) {
 }
 
 .admin-roger {
-  border-left: 6px solid var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   background: var(--card);
+  backdrop-filter: blur(var(--glass-blur));
   padding: 0.8rem 0.9rem;
   font-size: 0.95rem;
   line-height: 1.45;
@@ -499,17 +531,6 @@ body:has(.admin-deck.admin-day) {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .admin-top::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
-    animation: admin-sweep 2.8s linear infinite;
-  }
-
   .admin-rise {
     animation: admin-rise 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
