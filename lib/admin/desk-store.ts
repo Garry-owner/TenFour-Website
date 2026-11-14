@@ -7,8 +7,8 @@ import { BoardError } from '@/lib/admin/guard'
 import { phoneKey } from '@/lib/admin/policies'
 import type { AlertPrefs, BlockedNumber, Holiday, LeadOutcome, OptOut, PlanGates, ThreadHold, ThreadMessage } from '@/lib/admin/types'
 
-// About 15 Pro clients. Change it any time on the Revenue page.
-const DEFAULT_QUIT_GOAL = 7500
+// The $10,000 a month goal Garry set. Change it any time on the Revenue page.
+const DEFAULT_QUIT_GOAL = 10000
 
 type Database = ReturnType<typeof getDb>
 
