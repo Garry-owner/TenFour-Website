@@ -36,8 +36,7 @@ export function HomeHeading({
       {description && (
         <p
           className={cn(
-            'text-pretty text-lg leading-relaxed text-muted-foreground',
-            align === 'center' ? 'max-w-2xl' : 'max-w-xl',
+            'max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground',
           )}
         >
           {description}

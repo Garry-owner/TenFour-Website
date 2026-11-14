@@ -15,7 +15,7 @@ export function HowView({ locale }: { locale: Locale }) {
     <main>
       <PageHero eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <section className="border-b border-border py-20 sm:py-24">
+      <section id="call-flow" className="border-b-2 border-border py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading eyebrow={t.flowEyebrow} title={t.flowTitle} description={t.flowDescription} />
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -24,18 +24,18 @@ export function HowView({ locale }: { locale: Locale }) {
               return (
                 <div
                   key={title}
-                  className="relative flex flex-col gap-4 rounded-lg border border-border bg-card p-6"
+                  className="relative flex flex-col gap-4 border-2 border-border bg-card p-6 transition-colors hover:border-primary"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-foreground">
+                    <span className="flex h-11 w-11 items-center justify-center border-2 border-border bg-background text-primary">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                    <span className="font-stencil text-3xl font-black leading-none text-primary">
                       0{index + 1}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                  <h3 className="font-condensed text-2xl font-extrabold uppercase leading-tight tracking-[0.02em]">{title}</h3>
+                  <p className="text-base leading-relaxed text-muted-foreground">{body}</p>
                 </div>
               )
             })}
@@ -43,9 +43,9 @@ export function HowView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <Steps locale={locale} withHeading />
+      <Steps locale={locale} withHeading id="setup" />
 
-      <section className="border-b border-border py-20 sm:py-24">
+      <section id="included" className="border-b-2 border-border py-16 sm:py-24">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
           <SectionHeading
             eyebrow={t.includedEyebrow}
@@ -56,7 +56,7 @@ export function HowView({ locale }: { locale: Locale }) {
             {t.included.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 rounded-lg border border-border bg-card p-4 text-sm"
+                className="flex items-start gap-3 border-2 border-border bg-card p-4 text-base"
               >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                 <span className="text-muted-foreground">{item}</span>

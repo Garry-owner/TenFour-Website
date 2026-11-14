@@ -11,12 +11,12 @@ export function RogerView({ locale }: { locale: Locale }) {
     <main>
       <PageHero eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <section className="border-b border-border py-16 sm:py-20">
+      <section id="about-roger" className="border-b-2 border-border py-16 sm:py-24">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 px-4 text-center sm:px-6">
-          <div className="h-24 w-24 overflow-hidden rounded-full border border-border">
+          <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-primary">
             <Image src="/roger-avatar.png" alt={t.alt} width={96} height={96} />
           </div>
-          <div className="space-y-4 text-pretty text-muted-foreground">
+          <div className="space-y-4 text-pretty text-lg leading-relaxed text-muted-foreground">
             {t.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}

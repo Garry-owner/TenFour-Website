@@ -9,7 +9,7 @@ export function Hero({ locale }: { locale: Locale }) {
   const t = getCopy(locale).hero
 
   return (
-    <section className="border-b-4 border-primary">
+    <section id="hero" className="border-b-4 border-primary">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-24">
         <div className="flex flex-col gap-7">
           <span className="inline-flex w-fit items-center gap-2 border-2 border-border px-3 py-1.5 font-dispatch text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
@@ -45,7 +45,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <dl className="mt-2 grid grid-cols-2 gap-4 border-t-2 border-border pt-6">
             {t.stats.map(({ k, v }) => (
               <div key={v} className="flex flex-col gap-1">
-                <dt className="font-stencil text-3xl font-black uppercase leading-none text-foreground sm:text-4xl">{k}</dt>
+                <dt className="font-stencil text-[1.7rem] font-black uppercase leading-none text-foreground sm:text-4xl">{k}</dt>
                 <dd className="font-dispatch text-xs uppercase tracking-[0.12em] text-muted-foreground">{v}</dd>
               </div>
             ))}

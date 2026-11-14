@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { CtaButton } from '@/components/cta-button'
@@ -21,8 +21,17 @@ export function SiteHeader() {
   const desktop = locale === 'es' ? 'hidden xl:flex' : 'hidden lg:flex'
   const compact = locale === 'es' ? 'flex xl:hidden' : 'flex lg:hidden'
 
+  useEffect(() => {
+    if (!open) return
+    function onKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
   return (
-    <header className="sticky top-0 z-50 border-b-[3px] border-primary bg-background text-foreground">
+    <header id="site-header" className="sticky top-0 z-50 border-b-[3px] border-primary bg-background text-foreground">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <BrandLogo />
 
@@ -34,11 +43,13 @@ export function SiteHeader() {
               <Link
                 key={item.path}
                 href={href}
+                aria-current={active ? 'page' : undefined}
                 className={cn(
+                  'border-b-2 border-transparent transition-colors',
                   locale === 'es'
-                    ? 'whitespace-nowrap px-2 py-2 font-condensed text-base font-bold uppercase tracking-[0.05em] transition-colors'
-                    : 'whitespace-nowrap px-2 py-2 font-condensed text-[1.05rem] font-bold uppercase tracking-[0.06em] transition-colors lg:px-3',
-                  active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
+                    ? 'whitespace-nowrap px-2 py-2 font-condensed text-base font-bold uppercase tracking-[0.05em]'
+                    : 'whitespace-nowrap px-2 py-2 font-condensed text-[1.05rem] font-bold uppercase tracking-[0.06em] lg:px-3',
+                  active ? 'border-primary text-primary' : 'text-muted-foreground hover:text-foreground',
                 )}
               >
                 {item.label}
@@ -50,20 +61,21 @@ export function SiteHeader() {
         <div className={cn('shrink-0 items-center gap-3', desktop)}>
           <LanguageSwitch />
           <ThemeToggle />
-          <CtaButton href={lp(locale, '/contact')} size="sm">
+          <CtaButton href={lp(locale, '/contact')} size="default">
             {t.bookDemo}
           </CtaButton>
         </div>
 
         <div className={cn('items-center gap-2', compact)}>
-          <LanguageSwitch />
+          <LanguageSwitch short />
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center bg-[#ff6b1a] text-[#0f1011]"
+            className="inline-flex h-11 w-11 items-center justify-center bg-[#ff6b1a] text-[#0f1011] transition-colors hover:bg-[#ff812e]"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? t.closeMenu : t.openMenu}
             aria-expanded={open}
+            aria-controls="site-menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -71,7 +83,10 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className={cn('border-t border-border bg-background', locale === 'es' ? 'xl:hidden' : 'lg:hidden')}>
+        <div
+          id="site-menu"
+          className={cn('border-t border-border bg-background', locale === 'es' ? 'xl:hidden' : 'lg:hidden')}
+        >
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 sm:px-6">
             {t.nav.map((item) => {
               const href = lp(locale, item.path)
@@ -80,9 +95,10 @@ export function SiteHeader() {
                   key={item.path}
                   href={href}
                   onClick={() => setOpen(false)}
+                  aria-current={pathname === href ? 'page' : undefined}
                   className={cn(
-                    'border-b border-dashed border-border px-3 py-3 font-condensed text-2xl font-extrabold uppercase tracking-[0.05em]',
-                    pathname === href ? 'bg-secondary text-primary' : 'text-muted-foreground',
+                    'border-b border-dashed border-border px-3 py-3 font-condensed text-2xl font-extrabold uppercase tracking-[0.05em] transition-colors hover:text-foreground',
+                    pathname === href ? 'border-l-4 border-l-primary bg-secondary text-primary' : 'text-muted-foreground',
                   )}
                 >
                   {item.label}

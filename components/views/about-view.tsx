@@ -14,14 +14,14 @@ export function AboutView({ locale }: { locale: Locale }) {
     <main>
       <PageHero eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <section className="border-b border-border py-20 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <section id="our-story" className="border-b-2 border-border py-16 sm:py-24">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-start">
           <SectionHeading
             eyebrow={t.storyEyebrow}
             title={t.storyTitle}
             description={t.storyDescription}
           />
-          <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
+          <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
             {t.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -29,7 +29,7 @@ export function AboutView({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="border-b border-border py-20 sm:py-24">
+      <section id="principles" className="border-b-2 border-border bg-secondary py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHeading
             eyebrow={t.valuesEyebrow}
@@ -41,18 +41,18 @@ export function AboutView({ locale }: { locale: Locale }) {
             {t.values.map(({ title, body }, index) => {
               const Icon = ICONS[index]
               return (
-                <div key={title} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-7">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background text-foreground">
+                <div key={title} className="flex flex-col gap-4 border-2 border-border bg-card p-6 transition-colors hover:border-primary sm:p-7">
+                  <span className="flex h-11 w-11 items-center justify-center border-2 border-border bg-background text-primary">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
+                  <h3 className="font-condensed text-2xl font-extrabold uppercase leading-tight tracking-[0.02em]">{title}</h3>
+                  <p className="text-base leading-relaxed text-muted-foreground">{body}</p>
                 </div>
               )
             })}
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <div className="mt-10 flex items-center justify-center gap-2 font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
             <MapPin className="h-4 w-4 text-primary" />
             {t.location}
           </div>

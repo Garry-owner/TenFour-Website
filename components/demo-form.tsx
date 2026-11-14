@@ -2,15 +2,16 @@
 
 import { useState } from 'react'
 import { CheckCircle2, Loader2, Send } from 'lucide-react'
+import { ctaVariants } from '@/components/cta-button'
 import { RichText } from '@/components/rich-text'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
 import { cn } from '@/lib/utils'
 
 const inputClass =
-  'w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/40'
+  'w-full border-2 border-input bg-background px-3.5 py-3 text-base text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-primary'
 
-const labelClass = 'font-mono text-xs uppercase tracking-widest text-muted-foreground'
+const labelClass = 'font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground'
 
 export function DemoForm() {
   const locale = useLocale()
@@ -44,12 +45,12 @@ export function DemoForm() {
 
   if (status === 'done') {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-xl border border-primary/40 bg-card p-10 text-center shadow-[0_0_40px_-16px_var(--primary)]">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/50 bg-background text-primary">
+      <div className="flex flex-col items-center gap-4 border-2 border-primary bg-card p-10 text-center">
+        <span className="flex h-14 w-14 items-center justify-center border-2 border-primary bg-background text-primary">
           <CheckCircle2 className="h-7 w-7" />
         </span>
-        <h3 className="text-xl font-bold tracking-tight">{t.doneTitle}</h3>
-        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{t.doneBody}</p>
+        <h3 className="font-stencil text-3xl font-black uppercase leading-none">{t.doneTitle}</h3>
+        <p className="max-w-sm text-base leading-relaxed text-muted-foreground">{t.doneBody}</p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
@@ -64,7 +65,7 @@ export function DemoForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-xl border border-border bg-card p-6 sm:p-8"
+      className="relative flex flex-col gap-5 border-2 border-border bg-card p-6 sm:p-8"
     >
       {/* Honeypot field: hidden from real visitors, catches simple bots */}
       <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
@@ -149,12 +150,12 @@ export function DemoForm() {
         </select>
       </div>
 
-      <label className="flex items-start gap-3 rounded-md border border-border bg-background/50 p-4 text-xs leading-relaxed text-muted-foreground">
+      <label className="flex items-start gap-3 border-2 border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
         <input
           type="checkbox"
           name="consent_check"
           value="on"
-          className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+          className="mt-1 h-5 w-5 shrink-0 accent-primary"
         />
         <span>
           <RichText text={t.consent} locale={locale} linkClassName="underline" />
@@ -164,7 +165,7 @@ export function DemoForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-[#ff6b1a] px-6 font-mono text-xs uppercase tracking-widest font-medium text-[#0f1011] transition-all hover:bg-[#ff6b1a]/85 hover:shadow-[0_0_24px_-4px_#ff6b1a] disabled:opacity-60"
+        className={ctaVariants({ variant: 'primary', size: 'lg', className: 'w-full sm:w-auto' })}
       >
         {status === 'submitting' ? (
           <>
@@ -183,7 +184,7 @@ export function DemoForm() {
         <p className="text-center text-xs text-destructive">{t.error}</p>
       )}
 
-      <p className="text-center font-mono text-[0.7rem] uppercase tracking-widest text-muted-foreground">
+      <p className="text-center font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
         {t.fine}
       </p>
     </form>

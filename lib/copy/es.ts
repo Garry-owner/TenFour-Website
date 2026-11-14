@@ -14,9 +14,8 @@ export const es: typeof en = {
     openMenu: 'Abrir menú',
     closeMenu: 'Cerrar menú',
     language: 'Idioma',
-    footerBlurb:
-      'Texto de regreso por llamada perdida para negocios de servicio en el hogar. Cuando no alcanzas a contestar, Roger le escribe a quien llamó, le hace unas preguntas y te pasa el prospecto.',
-    footerTagline: 'Nosotros cubrimos el segundo turno para que tú no tengas que hacerlo.',
+    footerNote:
+      'Roger le escribe a quien llamó y no alcanzó a contestar. No contesta la llamada en vivo y no agenda la cita.',
     navigate: 'Navegación',
     coverage: 'Cobertura destacada',
     coverageNote: 'Para oficios de servicio en el hogar en el metroplex de DFW.',
@@ -476,70 +475,102 @@ export const es: typeof en = {
   },
   privacy: {
     title: 'Política de privacidad',
-    updated: 'Última actualización: 29 de octubre de 2026',
+    updated: 'Última actualización: 14 de noviembre de 2026',
     sections: [
       {
+        id: 'who-we-are',
         heading: '1. Quiénes somos',
         paragraphs: [
-          'TenFour Systems («TenFour», «nosotros») opera tenfoursystems.com y ofrece a negocios de contratistas un servicio automático de texto de regreso por llamada perdida. Esta política explica qué información recopilamos en el sitio y cómo la usamos.',
+          'TenFour Systems («TenFour», «nosotros») opera tenfoursystems.com y ofrece a negocios de contratistas un servicio de texto de regreso por llamada perdida. Cuando una llamada a un cliente no se contesta, le escribimos a quien llamó, le hacemos unas preguntas y le pasamos el prospecto al cliente. Esta política explica qué información recopilamos y cómo la usamos.',
         ],
       },
       {
+        id: 'information-we-collect',
         heading: '2. Información que recopilamos',
         paragraphs: [
-          'Cuando envía nuestro formulario de contacto, recopilamos su nombre, correo, teléfono, el mensaje que escribe, si marcó la casilla de consentimiento para mensajes de texto y en qué momento, y la página desde la que envió el formulario. No cobramos pagos directamente en el sitio. La facturación de los clientes que firman se maneja con nuestro procesador de pagos, Stripe.',
+          'Cuando envía nuestro formulario de contacto, recopilamos su nombre, correo, teléfono, el mensaje que escribe, si marcó la casilla de consentimiento para mensajes de texto y en qué momento, y la página desde la que envió el formulario. No recopilamos información de pago en el sitio. La facturación de los clientes que firman se maneja con un procesador de pagos de terceros.',
         ],
       },
       {
-        heading: '3. Cómo usamos su información',
+        id: 'callers',
+        heading: '3. Personas que llaman a nuestros clientes contratistas',
+        paragraphs: [
+          'Cuando se pierde una llamada a uno de nuestros clientes contratistas, TenFour le escribe a quien llamó, en nombre de ese cliente. Recopilamos el número de teléfono de quien llamó, los mensajes que envía y las respuestas que da. Compartimos esa información solo con ese contratista y con los proveedores de servicio que operan el servicio para nosotros. Quien llama puede responder STOP en cualquier momento para cancelar, o HELP para pedir ayuda. Pueden aplicar tarifas de mensajes y datos. La frecuencia de los mensajes varía. El consentimiento no es condición de compra.',
+        ],
+      },
+      {
+        id: 'how-we-use',
+        heading: '4. Cómo usamos su información',
         paragraphs: [
           'Usamos la información que nos da para responder a su consulta, enviarle mensajes de texto automáticos si marcó la casilla de consentimiento, guardar el registro de ese consentimiento como lo pide la ley de protección al consumidor telefónico (TCPA) y mejorar nuestros servicios y el sitio.',
         ],
       },
       {
-        heading: '4. Mensajes de texto (SMS)',
+        id: 'text-messaging',
+        heading: '5. Mensajes de texto (SMS)',
         paragraphs: [
           'Si marca la casilla de consentimiento en el formulario, acepta recibir mensajes de texto automáticos de TenFour Systems en el número que indicó. El consentimiento no es condición de compra. Pueden aplicar tarifas de mensajes y datos. La frecuencia de los mensajes varía. Responda STOP en cualquier momento para cancelar, o HELP para pedir ayuda.',
         ],
       },
       {
-        heading: '5. Con quién compartimos su información',
+        id: 'ai-and-translation',
+        heading: '6. Herramientas de inteligencia artificial y traducción',
         paragraphs: [
-          'Usamos estos proveedores para operar el negocio, y ellos pueden procesar su información: Zoho CRM (registros), Make.com (automatización), Twilio (envío de mensajes de texto) y Stripe (cobros, para clientes que ya firmaron). No vendemos su información personal a terceros y no la compartimos fuera de estos proveedores, salvo que la ley lo exija. La información del celular y el consentimiento para recibir mensajes de texto no se comparten con terceros ni con afiliados para marketing o promociones.',
+          'Los mensajes pueden procesarse con herramientas de inteligencia artificial y de traducción para responder en el idioma de quien llamó y para entregar una copia en inglés al contratista.',
         ],
       },
       {
-        heading: '6. Seguridad de los datos',
+        id: 'how-we-share',
+        heading: '7. Con quién compartimos su información',
+        paragraphs: [
+          'Usamos estos proveedores para operar el negocio, y ellos pueden procesar su información: Zoho CRM (registros), Make.com (automatización), Twilio (envío de mensajes de texto), un procesador de pagos de terceros (facturación de los clientes que ya firmaron) y herramientas de inteligencia artificial y de traducción (responder a quien llamó y entregar una copia en inglés). No vendemos su información personal a terceros y no la compartimos fuera de estos proveedores, salvo que la ley lo exija. La información del celular y el consentimiento para recibir mensajes de texto no se comparten con terceros ni con afiliados para marketing o promociones.',
+        ],
+      },
+      {
+        id: 'cookies',
+        heading: '8. Cookies y analítica',
+        paragraphs: [
+          'Este sitio usa Vercel Web Analytics para saber qué páginas se visitan y cómo se usa la calculadora del costo de las llamadas perdidas. Vercel Web Analytics no usa cookies. No usamos cookies de publicidad.',
+        ],
+      },
+      {
+        id: 'data-security',
+        heading: '9. Seguridad de los datos',
         paragraphs: [
           'Tomamos medidas razonables para proteger la información que nos da, incluyendo seguridad a nivel de campo en los datos sensibles dentro de nuestro CRM. Ningún método de almacenamiento o transmisión electrónica es completamente seguro, y no podemos garantizar una seguridad absoluta.',
         ],
       },
       {
-        heading: '7. Conservación de los datos',
+        id: 'data-retention',
+        heading: '10. Conservación de los datos',
         paragraphs: [
           'Conservamos su información el tiempo necesario para prestar el servicio y mantener los registros de cumplimiento que nos piden, incluyendo la prueba de consentimiento de la TCPA, o el tiempo que exija la ley.',
         ],
       },
       {
-        heading: '8. Sus derechos',
+        id: 'your-rights',
+        heading: '11. Sus derechos',
         paragraphs: [
           'Puede responder STOP a cualquier mensaje de texto para no recibir más, responder HELP para pedir ayuda, o escribirnos a {{email}} para preguntar qué información tenemos sobre usted o para pedir que la borremos, salvo los registros que la ley nos obliga a conservar.',
         ],
       },
       {
-        heading: '9. Privacidad de los menores',
+        id: 'childrens-privacy',
+        heading: '12. Privacidad de los menores',
         paragraphs: [
           'El sitio y los servicios están dirigidos a dueños de negocio y no están pensados para menores de 18 años. No recopilamos información de niños a sabiendas.',
         ],
       },
       {
-        heading: '10. Cambios a esta política',
+        id: 'changes',
+        heading: '13. Cambios a esta política',
         paragraphs: [
           'Podemos actualizar esta política de vez en cuando. La fecha de «Última actualización» de arriba muestra el cambio más reciente.',
         ],
       },
       {
-        heading: '11. Contáctenos',
+        id: 'contact',
+        heading: '14. Contáctenos',
         paragraphs: ['Las preguntas sobre esta política pueden enviarse a {{email}}.'],
       },
     ],

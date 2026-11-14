@@ -82,7 +82,7 @@ export function BrandLogo({
     return (
       <Link
         href={lp(locale, '/')}
-        className={cn('inline-flex shrink-0', className)}
+        className={cn('inline-flex shrink-0 rounded-none', className)}
         aria-label={t.homeLabel}
       >
         <LogoStacked className="h-auto w-36" />
@@ -94,7 +94,7 @@ export function BrandLogo({
   return (
     <Link
       href={lp(locale, '/')}
-      className={cn('flex shrink-0 items-center gap-2.5', className)}
+      className={cn('flex shrink-0 items-center gap-2.5 rounded-none', className)}
       aria-label={t.homeLabel}
     >
       <svg

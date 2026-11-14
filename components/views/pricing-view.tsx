@@ -14,42 +14,40 @@ export function PricingView({ locale }: { locale: Locale }) {
     <main>
       <PageHero eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <section className="border-b border-border py-20 sm:py-24">
+      <section id="plans" className="border-b-2 border-border py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid items-start gap-6 lg:grid-cols-3">
+          <div className="grid items-stretch gap-6 pt-3 lg:grid-cols-3">
             {t.plans.map((plan, index) => {
               const featured = index === 1
               return (
                 <div
                   key={plan.name}
                   className={cn(
-                    'relative flex flex-col gap-6 rounded-xl border bg-card p-8',
-                    featured
-                      ? 'border-primary shadow-[0_0_40px_-12px_var(--primary)]'
-                      : 'border-border',
+                    'relative flex flex-col gap-6 border-2 bg-card p-7 sm:p-8',
+                    featured ? 'border-primary border-t-4' : 'border-border',
                   )}
                 >
                   {featured && (
-                    <span className="absolute -top-3 left-8 rounded-full bg-[#ff6b1a] px-3 py-1 font-mono text-[0.65rem] uppercase tracking-widest text-[#0f1011]">
+                    <span className="absolute -top-3 left-7 bg-[#ff6b1a] px-3 py-1 font-dispatch text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#0f1011]">
                       {plan.tag}
                     </span>
                   )}
                   <div className="flex flex-col gap-1">
                     {!featured && (
-                      <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                      <span className="font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
                         {plan.tag}
                       </span>
                     )}
-                    <h2 className="text-2xl font-bold tracking-tight">{plan.name}</h2>
+                    <h2 className="font-condensed text-3xl font-extrabold uppercase tracking-[0.02em]">{plan.name}</h2>
                   </div>
 
                   <div className="flex items-end gap-1">
-                    <span className="font-mono text-4xl font-bold tracking-tight">{plan.price}</span>
-                    <span className="mb-1 font-mono text-sm text-muted-foreground">{plan.cadence}</span>
+                    <span className="font-stencil text-5xl font-black leading-none">{plan.price}</span>
+                    <span className="mb-1 font-dispatch text-sm text-muted-foreground">{plan.cadence}</span>
                   </div>
-                  <span className="font-mono text-xs text-muted-foreground">{plan.setup}</span>
+                  <span className="font-dispatch text-xs uppercase tracking-[0.08em] text-muted-foreground">{plan.setup}</span>
 
-                  <p className="text-sm leading-relaxed text-muted-foreground">{plan.blurb}</p>
+                  <p className="text-base leading-relaxed text-muted-foreground">{plan.blurb}</p>
 
                   <CtaButton
                     href={lp(locale, '/contact')}
@@ -59,9 +57,9 @@ export function PricingView({ locale }: { locale: Locale }) {
                     {plan.cta}
                   </CtaButton>
 
-                  <ul className="flex flex-col gap-3 border-t border-border pt-6">
+                  <ul className="flex flex-col gap-3 border-t-2 border-border pt-6">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3 text-sm">
+                      <li key={feature} className="flex items-start gap-3 text-base">
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                         <span className="text-muted-foreground">{feature}</span>
                       </li>
@@ -72,27 +70,29 @@ export function PricingView({ locale }: { locale: Locale }) {
             })}
           </div>
 
-          <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          <div id="pricing-notes" className="mx-auto mt-12 max-w-4xl">
+          <p className="mx-auto max-w-2xl text-center text-base leading-relaxed text-muted-foreground">
             {t.setupNote}
           </p>
 
-          <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card p-6">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-primary">{t.overageTitle}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t.overageBody}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="border-2 border-border border-t-4 border-t-primary bg-card p-6">
+              <h3 className="font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-primary">{t.overageTitle}</h3>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{t.overageBody}</p>
             </div>
-            <div className="rounded-xl border border-border bg-card p-6">
-              <h3 className="font-mono text-xs uppercase tracking-widest text-primary">{t.offerTitle}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t.offerBody}</p>
+            <div className="border-2 border-border border-t-4 border-t-primary bg-card p-6">
+              <h3 className="font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-primary">{t.offerTitle}</h3>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{t.offerBody}</p>
             </div>
           </div>
 
-          <p className="mt-10 text-center font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <p className="mt-8 text-center font-dispatch text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
             {t.contracts}{' '}
-            <Link href={lp(locale, '/contact')} className="text-primary hover:underline">
+            <Link href={lp(locale, '/contact')} className="text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary">
               {t.questions}
             </Link>
           </p>
+          </div>
         </div>
       </section>
 
