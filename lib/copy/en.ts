@@ -26,6 +26,7 @@ export const en = {
     logoAlt: 'TenFour Systems logo',
     theme: 'Toggle theme',
     tradeIn: (trade: string, city: string) => `${trade} in ${city}`,
+    allAreas: 'See all service areas',
   },
   cta: {
     title: 'Stop losing jobs to voicemail.',
@@ -36,10 +37,11 @@ export const en = {
   },
   hero: {
     badge: 'Watching for missed calls',
-    titleBefore: 'We work the ',
-    titleEmphasis: 'second shift',
-    titleAfter: " so you don't have to.",
-    body: 'Missed call text back for home service businesses. When you miss a call, Roger texts the caller back, asks a few questions, and sends the lead to you.',
+    title: 'Missed call text back for home service businesses in DFW',
+    taglineBefore: 'We work the ',
+    taglineEmphasis: 'second shift',
+    taglineAfter: " so you don't have to.",
+    body: 'When you miss a call, Roger texts the caller back, asks a few questions, and sends the lead to you.',
     rogerAlt: 'Roger',
     roger:
       "The name comes from an old radio callsign, ten-four, message received. That's Roger's whole job. He doesn't sleep, doesn't take lunch, and doesn't let a missed call go cold.",
@@ -452,6 +454,15 @@ export const en = {
   },
   serviceArea: {
     ctaSubtitle: 'Join the waitlist and be one of the first contractors to try Roger.',
+    otherTrades: (city: string) => `Other trades in ${city}`,
+    nearby: (trade: string) => `${trade} in nearby cities`,
+    allAreas: 'All service areas',
+    indexEyebrow: 'Service areas',
+    indexTitle: 'Missed call text back across DFW',
+    indexDescription: 'Find your city and trade below.',
+    indexMetaTitle: 'Service Areas. TenFour Systems',
+    indexMetaDescription:
+      'Missed call text back for HVAC, plumbing, electrical and other home service businesses in Terrell, Forney, Rockwall, Mesquite, Garland, Dallas and McKinney.',
   },
   privacy: {
     title: 'Privacy Policy',

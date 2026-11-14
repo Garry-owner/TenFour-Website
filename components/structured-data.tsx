@@ -1,7 +1,7 @@
 'use client'
 
 import { useLocale } from '@/components/use-locale'
-import { absoluteUrl } from '@/lib/locale'
+import { absoluteUrl, SITE_URL } from '@/lib/locale'
 
 const AREA = [
   'Dallas',
@@ -12,6 +12,9 @@ const AREA = [
   'Southlake',
   'Grapevine',
   'Prosper',
+  'Forney',
+  'Mesquite',
+  'Garland',
 ]
 
 export function StructuredData() {
@@ -28,7 +31,7 @@ export function StructuredData() {
     url: absoluteUrl(locale, '/'),
     telephone: '+1-972-349-5808',
     email: 'garry@tenfoursystems.com',
-    image: 'https://www.tenfoursystems.com/roger-avatar.png',
+    image: `${SITE_URL}/roger-avatar.png`,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Terrell',

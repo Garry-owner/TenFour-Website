@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { absoluteUrl, lp, type Locale } from '@/lib/locale'
+import { absoluteUrl, type Locale } from '@/lib/locale'
 
 const OG_IMAGE = {
   url: '/og-image.png',
@@ -10,12 +10,45 @@ const OG_IMAGE = {
 export function languageAlternates(path: string): Pick<Metadata, 'alternates'> {
   return {
     alternates: {
-      canonical: lp('en', path),
+      canonical: absoluteUrl('en', path),
       languages: {
-        en: lp('en', path),
-        es: lp('es', path),
-        'x-default': lp('en', path),
+        en: absoluteUrl('en', path),
+        es: absoluteUrl('es', path),
+        'x-default': absoluteUrl('en', path),
       },
+    },
+  }
+}
+
+/**
+ * English page metadata. Sets canonical, hreflang and og:url to the same
+ * absolute address so search engines see one version of each page.
+ */
+export function englishMetadata(path: string, title: string, description: string): Metadata {
+  return {
+    title,
+    description,
+    ...languageAlternates(path),
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl('en', path),
+      siteName: 'TenFour Systems',
+      locale: 'en_US',
+      alternateLocale: ['es_US'],
+      type: 'website',
+      images: [
+        {
+          ...OG_IMAGE,
+          alt: 'TenFour Systems, missed call text back for home service businesses',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
     },
   }
 }
@@ -25,11 +58,11 @@ export function spanishMetadata(path: string, title: string, description: string
     title,
     description,
     alternates: {
-      canonical: lp('es', path),
+      canonical: absoluteUrl('es', path),
       languages: {
-        en: lp('en', path),
-        es: lp('es', path),
-        'x-default': lp('en', path),
+        en: absoluteUrl('en', path),
+        es: absoluteUrl('es', path),
+        'x-default': absoluteUrl('en', path),
       },
     },
     openGraph: {
