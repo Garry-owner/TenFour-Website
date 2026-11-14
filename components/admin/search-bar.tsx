@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { Search } from 'lucide-react'
 import type { SearchHit } from '@/lib/admin/types'
 
 export function SearchBar() {
@@ -26,13 +27,14 @@ export function SearchBar() {
   return (
     <div className="admin-search">
       <label className="sr-only" htmlFor="board-search">
-        Search leads and clients
+        Search leads, clients, phone
       </label>
+      <Search className="admin-search-icon" size={16} aria-hidden="true" />
       <input
         id="board-search"
         className="admin-field"
         value={query}
-        placeholder="Search name, phone, email, business"
+        placeholder="Search leads, clients, phone"
         onChange={(event) => {
           setQuery(event.target.value)
           setOpen(true)
@@ -46,7 +48,7 @@ export function SearchBar() {
           ) : (
             hits.map((hit) => (
               <Link key={`${hit.kind}-${hit.id}`} href={hit.href} onClick={() => setOpen(false)}>
-                <span className="admin-title text-2xl">{hit.title}</span>
+                <span className="admin-row-title">{hit.title}</span>
                 <span className="admin-kicker">{hit.kind}</span>
                 <span className="admin-break text-sm">{hit.detail}</span>
               </Link>

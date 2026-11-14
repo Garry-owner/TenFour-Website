@@ -66,6 +66,52 @@ export function money(amount: number): string {
   return `$${amount}`
 }
 
+export function moneyGrouped(amount: number): string {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(amount)
+}
+
+export function chicagoHour(date: Date): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    hour: 'numeric',
+    hourCycle: 'h23',
+  }).formatToParts(date)
+  return Number(parts.find((part) => part.type === 'hour')?.value || 0)
+}
+
+export function greetingChicago(date: Date): string {
+  const hour = chicagoHour(date)
+  if (hour >= 5 && hour < 12) return 'Good morning'
+  if (hour >= 12 && hour < 17) return 'Good afternoon'
+  return 'Good evening'
+}
+
+export function formatBoardDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Chicago',
+    weekday: 'long',
+    month: 'short',
+    day: 'numeric',
+  }).format(date)
+}
+
+export function relativeShort(iso: string | null, now = new Date()): string {
+  if (!iso) return ''
+  const then = Date.parse(iso)
+  if (Number.isNaN(then)) return ''
+  const mins = Math.max(0, Math.round((now.getTime() - then) / 60000))
+  if (mins < 1) return 'now'
+  if (mins < 60) return `${mins}m`
+  const hours = Math.round(mins / 60)
+  if (hours < 24) return `${hours}h`
+  const days = Math.round(hours / 24)
+  return `${days}d`
+}
+
 export function planName(id: PlanId): string {
   return PLANS.find((plan) => plan.id === id)?.name ?? id
 }

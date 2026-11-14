@@ -40,12 +40,20 @@ export function CountUp({ value }: { value: number }) {
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
   }, [value])
-  return <>{String(shown).padStart(2, '0')}</>
+  return <>{String(shown)}</>
 }
 
 export function FeedBanner({ notice }: { notice: string | null }) {
-  if (!notice) return null
-  return <p className="admin-banner">{notice}</p>
+  const [open, setOpen] = useState(true)
+  if (!notice || !open) return null
+  return (
+    <p className="admin-note">
+      <span>{notice}</span>
+      <button type="button" onClick={() => setOpen(false)}>
+        Close
+      </button>
+    </p>
+  )
 }
 
 export function Field({

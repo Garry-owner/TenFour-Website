@@ -1,23 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { BookText, HardHat, House, LogOut, Moon, Phone, SlidersHorizontal, Sun, Users } from 'lucide-react'
-import { LogoStacked } from '@/components/brand-logo'
-import { formatClock } from '@/lib/admin/format'
-import type { Connections } from '@/lib/admin/types'
+import { Ellipsis, HardHat, House, Phone, Users } from 'lucide-react'
+import { LogoMark } from '@/components/brand-logo'
 import { SearchBar } from '@/components/admin/search-bar'
 import { ToastProvider } from '@/components/admin/toast'
-import { sendJson } from '@/components/admin/ui'
+import type { Connections, LampState } from '@/lib/admin/types'
 
 const NAV = [
-  { href: '/admin', label: 'Glance', icon: House },
+  { href: '/admin', label: 'Home', icon: House },
   { href: '/admin/leads', label: 'Leads', icon: Users },
-  { href: '/admin/calls', label: 'Calls', icon: Phone },
   { href: '/admin/clients', label: 'Clients', icon: HardHat },
-  { href: '/admin/log', label: 'Log', icon: BookText },
+  { href: '/admin/calls', label: 'Calls', icon: Phone },
+  { href: '/admin/more', label: 'More', icon: Ellipsis },
 ]
+
+const MORE_PREFIXES = ['/admin/more', '/admin/log', '/admin/make', '/admin/report', '/admin/activity', '/admin/search']
 
 export function AdminFrame({
   authed,
@@ -30,22 +30,7 @@ export function AdminFrame({
 }) {
   const pathname = usePathname()
   const shareCard = pathname.startsWith('/admin/report/share')
-  const router = useRouter()
-  const [mode, setMode] = useState(shift)
-  const [open, setOpen] = useState(false)
-  const [clock, setClock] = useState('Central')
   const [lamps, setLamps] = useState<Connections | null>(null)
-
-  useEffect(() => {
-    setMode(shift)
-  }, [shift])
-
-  useEffect(() => {
-    const tick = () => setClock(formatClock(new Date()))
-    tick()
-    const id = window.setInterval(tick, 1000)
-    return () => window.clearInterval(id)
-  }, [])
 
   useEffect(() => {
     if (!authed) return
@@ -61,45 +46,25 @@ export function AdminFrame({
     }
   }, [authed, pathname])
 
-  function chooseShift(next: 'day' | 'night') {
-    setMode(next)
-    const secure = window.location.protocol === 'https:' ? '; Secure' : ''
-    document.cookie = `tenfour_admin_shift=${next}; Path=/; Max-Age=31536000; SameSite=Lax${secure}`
-  }
-
-  async function signOut() {
-    await sendJson('/api/admin/logout', 'POST', {})
-    router.replace('/admin/login')
-    router.refresh()
-  }
+  const dot = overall(lamps)
 
   return (
-    <div className={`admin-deck ${mode === 'day' ? 'admin-day' : 'admin-night'}`}>
+    <div className={`admin-deck ${shift === 'day' ? 'admin-day' : 'admin-night'}`}>
       {authed ? (
         <>
           <a className="admin-skip" href="#admin-main">
             Skip to the board
           </a>
           {!shareCard && (
-          <header className="admin-top">
-            <Link href="/admin" aria-label="TenFour command center">
-              <LogoStacked className="admin-logo" />
-            </Link>
-            <div className="min-w-0">
-              <p className="admin-kicker">Command</p>
-              <p className="admin-clock">{clock}</p>
-            </div>
-            <button type="button" className="admin-btn px-3 text-base" onClick={() => setOpen(true)}>
-              Systems
-            </button>
-            <div className="admin-lamps">
-              <Lamp name="Zoho" state={lamps?.zoho} detail={lamps?.detail.zoho} />
-              <Lamp name="Make" state={lamps?.make} detail={lamps?.detail.make} />
-              <Lamp name="Twilio" state={lamps?.twilio} detail={lamps?.detail.twilio} />
-              <Lamp name="Store" state={lamps?.store} detail={lamps?.detail.store} />
-            </div>
-            <SearchBar />
-          </header>
+            <header className="admin-top">
+              <Link className="admin-logo-tile" href="/admin" aria-label="TenFour home">
+                <LogoMark />
+              </Link>
+              <SearchBar />
+              <Link className="admin-status-link" href="/admin/more" data-state={dot} aria-label="Connection status">
+                <span className="admin-status-dot" />
+              </Link>
+            </header>
           )}
           <ToastProvider>
             <main id="admin-main" className={shareCard ? 'admin-main admin-main-share' : 'admin-main'}>
@@ -107,51 +72,18 @@ export function AdminFrame({
             </main>
           </ToastProvider>
           {!shareCard && (
-          <nav className="admin-nav" aria-label="Command center">
-            {NAV.map((item) => {
-              const Icon = item.icon
-              const active = item.href === '/admin' ? pathname === '/admin' : pathname.startsWith(item.href)
-              return (
-                <Link key={item.href} href={item.href} aria-current={active ? 'page' : undefined}>
-                  <Icon aria-hidden="true" size={20} />
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
-          )}
-          {open && (
-            <div className="admin-sheet" role="presentation" onClick={() => setOpen(false)}>
-              <div
-                className="admin-sheet-card flex flex-col gap-3"
-                role="dialog"
-                aria-modal="true"
-                aria-label="Systems"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <h2 className="admin-title text-4xl">Systems</h2>
-                <div className="grid grid-cols-2 gap-2">
-                  <button type="button" className="admin-choice" aria-pressed={mode === 'night'} onClick={() => chooseShift('night')}>
-                    <Moon className="mr-1 inline" size={16} aria-hidden="true" /> Night
-                  </button>
-                  <button type="button" className="admin-choice" aria-pressed={mode === 'day'} onClick={() => chooseShift('day')}>
-                    <Sun className="mr-1 inline" size={16} aria-hidden="true" /> Day
-                  </button>
-                </div>
-                <Link className="admin-btn admin-btn-ghost" href="/admin/report" onClick={() => setOpen(false)}>
-                  Monthly report
-                </Link>
-                <Link className="admin-btn admin-btn-ghost" href="/admin/activity" onClick={() => setOpen(false)}>
-                  Activity
-                </Link>
-                <Link className="admin-btn admin-btn-ghost" href="/admin/make" onClick={() => setOpen(false)}>
-                  <SlidersHorizontal size={18} aria-hidden="true" /> Make
-                </Link>
-                <button type="button" className="admin-btn" onClick={signOut}>
-                  <LogOut size={18} aria-hidden="true" /> Sign out
-                </button>
-              </div>
-            </div>
+            <nav className="admin-nav" aria-label="Command center">
+              {NAV.map((item) => {
+                const Icon = item.icon
+                const active = isActive(pathname, item.href)
+                return (
+                  <Link key={item.href} href={item.href} aria-current={active ? 'page' : undefined}>
+                    <Icon aria-hidden="true" size={20} strokeWidth={1.75} />
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
           )}
         </>
       ) : (
@@ -161,20 +93,18 @@ export function AdminFrame({
   )
 }
 
-function Lamp({
-  name,
-  state,
-  detail,
-}: {
-  name: string
-  state?: 'ready' | 'missing' | 'fault'
-  detail?: string
-}) {
-  const label = state === 'ready' ? 'Live' : state === 'fault' ? 'Fault' : state === 'missing' ? 'Off' : '…'
-  return (
-    <span className="admin-lamp" data-state={state || 'missing'} title={detail || name}>
-      <span className="admin-dot" aria-hidden="true" />
-      {name} {label}
-    </span>
-  )
+function isActive(pathname: string, href: string) {
+  if (href === '/admin') return pathname === '/admin'
+  if (href === '/admin/more') return MORE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))
+  if (href === '/admin/leads') return pathname.startsWith('/admin/leads') || pathname.startsWith('/admin/customers/lead')
+  if (href === '/admin/clients') return pathname.startsWith('/admin/clients') || pathname.startsWith('/admin/customers/client')
+  return pathname.startsWith(href)
+}
+
+function overall(lamps: Connections | null): LampState {
+  if (!lamps) return 'missing'
+  const states = [lamps.zoho, lamps.make, lamps.twilio, lamps.store]
+  if (states.some((state) => state === 'fault')) return 'fault'
+  if (states.every((state) => state === 'ready')) return 'ready'
+  return 'missing'
 }

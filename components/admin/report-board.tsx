@@ -1,5 +1,4 @@
 import { FeedBanner, Panel } from '@/components/admin/ui'
-import { ROGER_LINE } from '@/lib/admin/constants'
 import { planName } from '@/lib/admin/format'
 import type { ReportBoard } from '@/lib/admin/types'
 
@@ -8,9 +7,8 @@ export function ReportBoardView({ report }: { report: ReportBoard }) {
     <div className="admin-rise flex flex-col gap-4">
       <div>
         <p className="admin-kicker">{report.monthLabel}</p>
-        <h2 className="admin-title text-4xl">Saved leads</h2>
+        <h2 className="admin-title">Saved leads</h2>
       </div>
-      <p className="admin-roger">{ROGER_LINE}</p>
       <FeedBanner notice={report.notice} />
       {report.rows.length === 0 ? (
         <Panel>

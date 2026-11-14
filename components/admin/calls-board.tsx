@@ -26,9 +26,8 @@ export function CallsBoard({ feed }: { feed: Feed<CallLog> }) {
         <p className="admin-kicker">Business line</p>
         <h1 className="admin-title text-6xl">Calls</h1>
       </div>
-      <p className="admin-roger">{CALL_LIMITATION}</p>
-      <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">{CALL_LIVE_NOTE}</p>
-      <FeedBanner notice={feed.notice} />
+      <p className="admin-muted">{CALL_LIMITATION}</p>
+      <FeedBanner notice={feed.notice || CALL_LIVE_NOTE} />
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter calls">
         {FILTERS.map((item) => (
           <button key={item} type="button" className="admin-choice" aria-pressed={filter === item} onClick={() => setFilter(item)}>

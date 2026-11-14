@@ -1,9 +1,16 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { AdminFrame } from '@/components/admin/frame'
 import { hasSession } from '@/lib/admin/session'
 import './admin.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--ff-admin',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Command center',
@@ -21,8 +28,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (authed && login) redirect('/admin')
   const shift = (await cookies()).get('tenfour_admin_shift')?.value === 'day' ? 'day' : 'night'
   return (
-    <AdminFrame authed={authed && !login} shift={shift}>
-      {children}
-    </AdminFrame>
+    <div className={inter.variable}>
+      <AdminFrame authed={authed && !login} shift={shift}>
+        {children}
+      </AdminFrame>
+    </div>
   )
 }

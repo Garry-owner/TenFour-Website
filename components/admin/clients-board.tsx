@@ -102,8 +102,8 @@ export function ClientsBoard({ feed, startOpen = false }: { feed: Feed<ClientRec
         ))}
       </div>
       <p className="admin-title text-4xl">
-        {String(founding).padStart(2, '0')}
-        <span className="text-2xl"> / {FOUNDING_SEATS} founding</span>
+        {founding}
+        <span className="text-lg font-normal"> / {FOUNDING_SEATS} founding</span>
       </p>
       <FeedBanner notice={feed.notice} />
       {feed.items.length === 0 && (

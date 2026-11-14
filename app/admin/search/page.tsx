@@ -18,7 +18,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   return (
     <div className="admin-rise flex flex-col gap-4">
       <p className="admin-kicker">Search</p>
-      <h1 className="admin-title text-5xl">{q ? `“${q}”` : 'Find someone'}</h1>
+      <h1 className="admin-title">{q || 'Find someone'}</h1>
       <form action="/admin/search">
         <input className="admin-field" name="q" defaultValue={q} placeholder="Name, phone, email, business" />
       </form>

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Field, Panel, Sheet, sendJson } from '@/components/admin/ui'
 import { useToast } from '@/components/admin/toast'
-import { MONTHLY_STATUSES, PLANS, ROGER_LINE, ROGER_SAVED_LINE } from '@/lib/admin/constants'
+import { MONTHLY_STATUSES, PLANS, ROGER_SAVED_LINE } from '@/lib/admin/constants'
 import { formatCentral, formatPhone, formatSeconds, leadName, monthlyLabel, planName, telHref } from '@/lib/admin/format'
 import type { CustomerBundle } from '@/lib/admin/customer'
 import type { MonthlyStatus, PlanId } from '@/lib/admin/types'
@@ -181,11 +181,10 @@ export function CustomerRecord({
     <div className="admin-rise flex flex-col gap-4">
       <p className="admin-kicker">{bundle.kind === 'client' ? 'Client' : 'Lead'}</p>
       <div className="flex items-start justify-between gap-3">
-        <h1 className="admin-title text-5xl">{title}</h1>
-        {lead?.example && <span className="admin-stamp">Example</span>}
-        {lead?.obviousTest && <span className="admin-stamp admin-stamp-solid admin-stamp-tilt">Test</span>}
+        <h1 className="admin-title">{title}</h1>
+        {lead?.example && <span className="admin-pill">Example</span>}
+        {lead?.obviousTest && <span className="admin-pill admin-pill-solid">Test</span>}
       </div>
-      <p className="admin-roger">{ROGER_LINE}</p>
       {phone && (
         <a className="admin-btn" href={phone}>
           Call {formatPhone(contact.phone)}
