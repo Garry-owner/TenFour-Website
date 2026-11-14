@@ -16,13 +16,13 @@ export default function NotFound() {
   }, [locale])
 
   return (
-    <main className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
-      <div className="mb-6 h-20 w-20 overflow-hidden rounded-full border border-border">
+    <main id="missing-page" className="flex min-h-[70vh] flex-col items-center justify-center px-4 py-16 text-center">
+      <div className="mb-6 h-20 w-20 overflow-hidden rounded-full border-2 border-primary">
         <Image src="/roger-avatar.png" alt="Roger" width={80} height={80} />
       </div>
-      <p className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">404</p>
-      <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">{t.title}</h1>
-      <p className="mb-8 max-w-md text-pretty text-muted-foreground">{t.body}</p>
+      <p className="mb-3 font-dispatch text-xs font-bold uppercase tracking-[0.2em] text-primary">404</p>
+      <h1 className="mb-4 max-w-xl font-stencil text-4xl font-black uppercase leading-[0.95] sm:text-5xl">{t.title}</h1>
+      <p className="mb-8 max-w-md text-pretty text-lg text-muted-foreground">{t.body}</p>
       <div className="flex flex-col gap-3 sm:flex-row">
         <CtaButton href={lp(locale, '/')} size="lg">
           {t.home}

@@ -7,14 +7,14 @@ export function HomeSteps({ locale }: { locale: Locale }) {
   const t = getCopy(locale).steps
 
   return (
-    <section className="border-b-2 border-border py-16 sm:py-20">
+    <section id="how-it-works" className="border-b-2 border-border py-16 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <HomeHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-        <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {t.items.map((step, index) => (
-            <li key={step.title} className="flex flex-col gap-4 border-2 border-border bg-card p-6">
-              <span className="font-stencil text-4xl font-black leading-none text-muted-foreground">
+            <li key={step.title} className="flex flex-col gap-4 border-2 border-border bg-card p-6 transition-colors hover:border-primary">
+              <span className="font-stencil text-4xl font-black leading-none text-primary">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div className="h-[2px] w-full bg-border" aria-hidden />

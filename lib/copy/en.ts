@@ -12,9 +12,8 @@ export const en = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
-    footerBlurb:
-      'Missed call text back for home service businesses. When you miss a call, Roger texts the caller back, asks a few questions, and sends the lead to you.',
-    footerTagline: "We work the second shift so you don't have to.",
+    footerNote:
+      "Roger texts missed callers for home-service contractors. He doesn't answer calls and doesn't book appointments.",
     navigate: 'Navigate',
     coverage: 'Featured Coverage',
     coverageNote: 'Serving home service trades across the DFW metroplex.',
@@ -455,70 +454,102 @@ export const en = {
   },
   privacy: {
     title: 'Privacy Policy',
-    updated: 'Last updated: October 29, 2026',
+    updated: 'Last updated: November 14, 2026',
     sections: [
       {
+        id: 'who-we-are',
         heading: '1. Who we are',
         paragraphs: [
-          'TenFour Systems ("TenFour," "we," "us") operates tenfoursystems.com and provides automated SMS dispatch services to contractor businesses. This policy explains what information we collect through our website and how we use it.',
+          'TenFour Systems ("TenFour," "we," "us") operates tenfoursystems.com and provides a missed-call text-back service to contractor businesses. When a call to a client goes unanswered, we text that caller back, ask a few questions, and send the lead to the client. This policy explains what information we collect and how we use it.',
         ],
       },
       {
+        id: 'information-we-collect',
         heading: '2. Information we collect',
         paragraphs: [
-          'When you submit our contact form, we collect your name, email address, phone number, the message you submit, whether you checked the SMS consent box and when, and the page you submitted the form from. We do not collect payment information through the website directly; billing for signed clients is handled through our payment processor, Stripe.',
+          'When you submit our contact form, we collect your name, email address, phone number, the message you submit, whether you checked the SMS consent box and when, and the page you submitted the form from. We do not collect payment information through the website. Billing for signed clients is handled through a third-party payment processor.',
         ],
       },
       {
-        heading: '3. How we use your information',
+        id: 'callers',
+        heading: '3. People who call our contractor clients',
+        paragraphs: [
+          "When a call to one of our contractor clients is missed, TenFour texts the caller on that client's behalf. We collect the caller's phone number, the messages they send, and the answers they give. We share that information only with that contractor and with the service providers that run the service for us. The caller can reply STOP at any time to opt out, or reply HELP for help. Message and data rates may apply. Message frequency varies. Consent is not a condition of purchase.",
+        ],
+      },
+      {
+        id: 'how-we-use',
+        heading: '4. How we use your information',
         paragraphs: [
           'We use the information you provide to respond to your inquiry, send you automated text messages if you checked the consent box, maintain records of consent as required by the Telephone Consumer Protection Act (TCPA), and improve our services and website.',
         ],
       },
       {
-        heading: '4. Text messaging (SMS)',
+        id: 'text-messaging',
+        heading: '5. Text messaging (SMS)',
         paragraphs: [
           'If you check the consent box on our form, you agree to receive automated text messages from TenFour Systems at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply STOP at any time to opt out, or reply HELP for help.',
         ],
       },
       {
-        heading: '5. How we share your information',
+        id: 'ai-and-translation',
+        heading: '6. AI and translation tools',
         paragraphs: [
-          'We use the following third-party service providers to operate our business, and your information may be processed by them: Zoho CRM (record-keeping), Make.com (automation), Twilio (sending text messages), and Stripe (payment processing, for signed clients). We do not sell your personal information to third parties, and we do not share it outside of these service providers except as required by law. Mobile information and SMS opt-in consent will not be shared with third parties or affiliates for marketing or promotional purposes.',
+          "Messages may be processed by AI and translation tools so we can reply in the caller's language and provide an English copy to the contractor.",
         ],
       },
       {
-        heading: '6. Data security',
+        id: 'how-we-share',
+        heading: '7. How we share your information',
+        paragraphs: [
+          'We use the following third-party service providers to operate our business, and your information may be processed by them: Zoho CRM (record-keeping), Make.com (automation), Twilio (sending text messages), a third-party payment processor (billing for signed clients), and AI and translation tools (replying to callers and providing an English copy). We do not sell your personal information to third parties, and we do not share it outside of these service providers except as required by law. Mobile information and SMS opt-in consent will not be shared with third parties or affiliates for marketing or promotional purposes.',
+        ],
+      },
+      {
+        id: 'cookies',
+        heading: '8. Cookies and analytics',
+        paragraphs: [
+          'This website is hosted on Netlify. We do not use a visitor analytics tool or advertising cookies.',
+        ],
+      },
+      {
+        id: 'data-security',
+        heading: '9. Data security',
         paragraphs: [
           'We take reasonable steps to protect the information you provide, including field-level security on sensitive data within our CRM. No method of electronic storage or transmission is completely secure, and we cannot guarantee absolute security.',
         ],
       },
       {
-        heading: '7. Data retention',
+        id: 'data-retention',
+        heading: '10. Data retention',
         paragraphs: [
           "We retain your information for as long as necessary to provide our services and maintain required compliance records, including TCPA consent evidence, or as required by law.",
         ],
       },
       {
-        heading: '8. Your rights',
+        id: 'your-rights',
+        heading: '11. Your rights',
         paragraphs: [
           "You may reply STOP to any text message to opt out of future messages, reply HELP for help, or contact us at {{email}} to ask what information we have about you or to request deletion, subject to any records we're legally required to retain.",
         ],
       },
       {
-        heading: "9. Children's privacy",
+        id: 'childrens-privacy',
+        heading: "12. Children's privacy",
         paragraphs: [
           'Our website and services are directed at business owners and are not intended for use by anyone under 18. We do not knowingly collect information from children.',
         ],
       },
       {
-        heading: '10. Changes to this policy',
+        id: 'changes',
+        heading: '13. Changes to this policy',
         paragraphs: [
           'We may update this policy from time to time. The "Last updated" date above reflects the most recent changes.',
         ],
       },
       {
-        heading: '11. Contact us',
+        id: 'contact',
+        heading: '14. Contact us',
         paragraphs: ['Questions about this policy can be directed to {{email}}.'],
       },
     ],

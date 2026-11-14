@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { track } from '@vercel/analytics'
 import { CtaButton } from '@/components/cta-button'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
@@ -52,12 +51,7 @@ export function CostCalculator() {
           id="trade"
           className={styles.select}
           defaultValue=""
-          onChange={(e) => {
-            const newValue = Number(e.target.value)
-            setValue(newValue)
-            const trade = TRADES.find((item) => item.value === newValue)
-            track('calculator_trade_selected', { trade: trade?.id ?? 'unknown' })
-          }}
+          onChange={(e) => setValue(Number(e.target.value))}
         >
           <option value="" disabled>
             {t.choose}
@@ -142,7 +136,6 @@ export function CostCalculator() {
         href={lp(locale, '/contact')}
         size="lg"
         className="mt-5 w-full sm:w-auto"
-        onClick={() => track('calculator_waitlist_click')}
       >
         {copy.cta.book}
       </CtaButton>

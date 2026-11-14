@@ -18,7 +18,7 @@ export function HomeView({ locale }: { locale: Locale }) {
       <Capabilities locale={locale} />
       <HomeSteps locale={locale} />
       <Proof locale={locale} />
-      <section className="border-b-2 border-border py-16 sm:py-20">
+      <section id="cost-calculator" className="border-b-2 border-border py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <CostCalculator />
         </div>

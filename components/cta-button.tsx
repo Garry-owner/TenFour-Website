@@ -3,14 +3,14 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const ctaVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-none font-condensed text-base font-extrabold uppercase tracking-[0.06em] transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 rounded-none font-condensed text-base font-extrabold uppercase tracking-[0.06em] transition-[transform,box-shadow,background-color,border-color,color] disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
         primary:
-          'border-2 border-[#ff6b1a] bg-[#ff6b1a] text-[#0f1011] shadow-[4px_4px_0_0_rgba(0,0,0,0.35)] hover:-translate-x-0.5 hover:-translate-y-0.5',
+          'border-2 border-[#ff6b1a] bg-[#ff6b1a] text-[#0f1011] shadow-[4px_4px_0_0_#1c140f] hover:bg-[#ff812e] motion-safe:hover:-translate-x-0.5 motion-safe:hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#1c140f] motion-safe:active:translate-x-0 motion-safe:active:translate-y-0 active:shadow-[2px_2px_0_0_#1c140f] dark:shadow-[4px_4px_0_0_#f6f3ee] dark:hover:shadow-[6px_6px_0_0_#f6f3ee] dark:active:shadow-[2px_2px_0_0_#f6f3ee]',
         outline:
-          'border-2 border-foreground/40 bg-transparent text-foreground hover:border-foreground hover:bg-foreground hover:text-background',
+          'border-2 border-foreground/50 bg-transparent text-foreground hover:border-foreground hover:bg-foreground hover:text-background',
         ghost: 'text-muted-foreground hover:text-foreground',
       },
       size: {

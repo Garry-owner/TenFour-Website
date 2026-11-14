@@ -13,11 +13,11 @@ export function SiteFooter() {
   const t = getCopy(locale).chrome
 
   return (
-    <footer className="border-t-[3px] border-primary bg-background text-foreground">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer id="site-footer" className="border-t-[3px] border-primary bg-background text-foreground">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-12">
         <div className="space-y-4">
           <BrandLogo variant="stacked" />
-          <p className="font-condensed text-lg font-extrabold uppercase tracking-[0.03em] text-primary">{t.footerTagline}</p>
+          <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{t.footerNote}</p>
         </div>
 
         <div className="space-y-3">
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <li key={item.path}>
                 <Link
                   href={lp(locale, item.path)}
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex py-1 text-muted-foreground transition-colors hover:text-primary"
                 >
                   {item.label}
                 </Link>
@@ -50,7 +50,7 @@ export function SiteFooter() {
               <li key={area.slug}>
                 <Link
                   href={lp(locale, `/service-areas/${area.slug}`)}
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex py-1 text-muted-foreground transition-colors hover:text-primary"
                 >
                   {t.tradeIn(locale === 'es' ? area.tradeEs : area.trade, area.city)}
                 </Link>
@@ -68,18 +68,18 @@ export function SiteFooter() {
             <li>
               <a
                 href="mailto:garry@tenfoursystems.com"
-                className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-2 py-1 text-muted-foreground transition-colors hover:text-primary"
               >
-                <Mail className="h-4 w-4 text-primary" />
+                <Mail className="h-4 w-4 shrink-0 text-primary" />
                 garry@tenfoursystems.com
               </a>
             </li>
             <li>
               <a
                 href="tel:+19723495808"
-                className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-2 py-1 text-muted-foreground transition-colors hover:text-primary"
               >
-                <Phone className="h-4 w-4 text-primary" />
+                <Phone className="h-4 w-4 shrink-0 text-primary" />
                 (972) 349 5808
               </a>
             </li>
@@ -99,13 +99,13 @@ export function SiteFooter() {
           <div className="flex items-center gap-4">
             <Link
               href={lp(locale, '/privacy')}
-              className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
             >
               {t.privacy}
             </Link>
             <Link
               href={lp(locale, '/terms')}
-              className="font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex py-1 font-mono text-xs uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
             >
               {t.terms}
             </Link>
