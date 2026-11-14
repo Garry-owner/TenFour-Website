@@ -444,6 +444,11 @@ export const es: typeof en = {
     emailPlaceholder: 'tu@negocio.com',
     message: '¿Qué quieres resolver? (opcional)',
     messagePlaceholder: 'Se nos van muchas llamadas fuera de horario en temporada de tormentas.',
+    trade: '¿A qué oficio te dedicas?',
+    tradePlaceholder: 'Elige tu oficio',
+    tradeOther: 'Otro / no aparece',
+    businessType: '¿Qué tipo de negocio?',
+    businessTypePlaceholder: 'Ejemplos: constructor de albercas, spa médico',
     timezone: '¿En qué zona horaria estás?',
     timezonePlaceholder: 'Elige tu zona horaria',
     zones: [

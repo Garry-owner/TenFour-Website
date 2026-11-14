@@ -6,6 +6,7 @@ import { RichText } from '@/components/rich-text'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
 import { cn } from '@/lib/utils'
+import { TRADE_OTHER, TRADE_VALUES } from '@/lib/trades'
 
 const inputClass =
   'w-full rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/40'
@@ -14,8 +15,16 @@ const labelClass = 'font-mono text-xs uppercase tracking-widest text-muted-foreg
 
 export function DemoForm() {
   const locale = useLocale()
-  const t = getCopy(locale).form
+  const copy = getCopy(locale)
+  const t = copy.form
+  // Labels follow the page language, but the value sent to Make.com is always
+  // the English trade name so Zoho stays consistent.
+  const tradeOptions = [
+    ...TRADE_VALUES.map((value, index) => ({ value, label: copy.calculator.trades[index] || value })),
+    { value: TRADE_OTHER, label: t.tradeOther },
+  ]
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle')
+  const [trade, setTrade] = useState('')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -37,6 +46,7 @@ export function DemoForm() {
       if (!res.ok) throw new Error('Server error')
       setStatus('done')
       form.reset()
+      setTrade('')
     } catch {
       setStatus('error')
     }
@@ -121,6 +131,43 @@ export function DemoForm() {
           />
         </div>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <label htmlFor="trade" className={labelClass}>
+          {t.trade}
+        </label>
+        <select
+          id="trade"
+          name="Trade"
+          required
+          value={trade}
+          onChange={(e) => setTrade(e.target.value)}
+          className={inputClass}
+        >
+          <option value="">{t.tradePlaceholder}</option>
+          {tradeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {trade === TRADE_OTHER && (
+        <div className="flex flex-col gap-2">
+          <label htmlFor="business-type" className={labelClass}>
+            {t.businessType}
+          </label>
+          <input
+            id="business-type"
+            name="Business type"
+            required
+            maxLength={60}
+            placeholder={t.businessTypePlaceholder}
+            className={inputClass}
+          />
+        </div>
+      )}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className={labelClass}>
