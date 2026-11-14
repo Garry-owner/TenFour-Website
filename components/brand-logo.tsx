@@ -50,6 +50,14 @@ function Systems() {
   )
 }
 
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="660 420 1700 1300" className={className} aria-hidden="true" focusable="false">
+      <Mark />
+    </svg>
+  )
+}
+
 // Stacked logo: the T4 mark with TENFOUR and SYSTEMS underneath.
 export function LogoStacked({ className }: { className?: string }) {
   return (
