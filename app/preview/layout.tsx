@@ -1,13 +1,5 @@
 import type { Viewport } from 'next'
-import { Source_Sans_3 } from 'next/font/google'
 import { ForceLight } from '@/components/preview/barneys-electric/force-light'
-
-const sourceSans = Source_Sans_3({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-})
 
 export const viewport: Viewport = {
   themeColor: '#ffffff',
@@ -17,8 +9,12 @@ export const viewport: Viewport = {
 export default function PreviewLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`${sourceSans.className} min-h-screen bg-white text-[#334155] antialiased`}
-      style={{ colorScheme: 'light' }}
+      className="min-h-screen bg-white text-[#334155] antialiased"
+      style={{
+        colorScheme: 'light',
+        fontFamily:
+          'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      }}
     >
       <script
         dangerouslySetInnerHTML={{
