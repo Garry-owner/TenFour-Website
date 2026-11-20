@@ -10,12 +10,19 @@ export function middleware(request: NextRequest) {
   requestHeaders.set('x-pathname', pathname)
   const adminPage = pathname === '/admin' || pathname.startsWith('/admin/')
   const portalPage = pathname === '/portal' || pathname.startsWith('/portal/')
+  const previewPage =
+    pathname === '/preview/barneys-electric' || pathname.startsWith('/preview/barneys-electric/')
   requestHeaders.set('x-admin', adminPage || portalPage ? '1' : '0')
+  // Concept previews render without the TenFour header, footer, or theme.
+  requestHeaders.set('x-standalone', previewPage ? '1' : '0')
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   })
   response.headers.set('Content-Language', locale)
+  if (previewPage) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow')
+  }
   if (adminPage || portalPage || pathname.startsWith('/api/admin') || pathname.startsWith('/api/portal')) {
     response.headers.set('X-Robots-Tag', 'noindex, nofollow')
     response.headers.set('Cache-Control', 'private, no-store')
