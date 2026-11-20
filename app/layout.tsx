@@ -123,6 +123,8 @@ export default async function RootLayout({
   const headerList = await headers()
   const lang = headerList.get('x-locale') === 'es' ? 'es' : 'en'
   const admin = headerList.get('x-admin') === '1'
+  const standalone = headerList.get('x-standalone') === '1'
+  const bare = admin || standalone
 
   return (
     <html
@@ -136,6 +138,12 @@ export default async function RootLayout({
             __html: `
               (function () {
                 try {
+                  var path = location.pathname || '';
+                  if (path === '/preview/barneys-electric' || path.indexOf('/preview/barneys-electric/') === 0) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                    return;
+                  }
                   var stored = localStorage.getItem('theme');
                   var theme;
                   if (stored) {
@@ -155,7 +163,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased font-sans flex min-h-screen flex-col">
-        {admin ? (
+        {bare ? (
           <div id="main-content" className="flex-1">
             {children}
           </div>
