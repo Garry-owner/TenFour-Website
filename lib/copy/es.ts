@@ -28,6 +28,7 @@ export const es: typeof en = {
     logoAlt: 'Logotipo de TenFour Systems',
     theme: 'Cambiar tema',
     tradeIn: (trade: string, city: string) => `${trade} en ${city}`,
+    allAreas: 'Ver todas las áreas',
   },
   cta: {
     title: 'Deja de perder trabajos por el buzón.',
@@ -38,10 +39,11 @@ export const es: typeof en = {
   },
   hero: {
     badge: 'Pendiente de llamadas perdidas',
-    titleBefore: 'Nosotros cubrimos el ',
-    titleEmphasis: 'segundo turno',
-    titleAfter: ' para que tú no tengas que hacerlo.',
-    body: 'Texto de regreso por llamada perdida para negocios de servicio en el hogar. Cuando no alcanzas a contestar, Roger le escribe a quien llamó, le hace unas preguntas y te pasa el prospecto.',
+    title: 'Texto de regreso por llamada perdida para negocios de servicio en el hogar en el área de DFW',
+    taglineBefore: 'Nosotros cubrimos el ',
+    taglineEmphasis: 'segundo turno',
+    taglineAfter: ' para que tú no tengas que hacerlo.',
+    body: 'Cuando no alcanzas a contestar, Roger le escribe a quien llamó, le hace unas preguntas y te pasa el prospecto.',
     rogerAlt: 'Roger',
     roger:
       'El nombre viene de un código viejo de radio, ten-four, mensaje recibido. Ese es todo el trabajo de Roger. No duerme, no sale a comer y no deja que una llamada perdida se enfríe.',
@@ -473,6 +475,15 @@ export const es: typeof en = {
   },
   serviceArea: {
     ctaSubtitle: 'Únete a la lista de espera y sé de los primeros contratistas en probar a Roger.',
+    otherTrades: (city: string) => `Otros oficios en ${city}`,
+    nearby: (trade: string) => `${trade} en ciudades cercanas`,
+    allAreas: 'Todas las áreas',
+    indexEyebrow: 'Áreas de servicio',
+    indexTitle: 'Texto de regreso por llamada perdida en todo DFW',
+    indexDescription: 'Busca tu ciudad y tu oficio abajo.',
+    indexMetaTitle: 'Áreas de servicio. TenFour Systems',
+    indexMetaDescription:
+      'Texto de regreso por llamada perdida para aire acondicionado, plomería, electricidad y otros servicios del hogar en Terrell, Forney, Rockwall, Mesquite, Garland, Dallas y McKinney.',
   },
   privacy: {
     title: 'Política de privacidad',

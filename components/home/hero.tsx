@@ -17,11 +17,16 @@ export function Hero({ locale }: { locale: Locale }) {
             {t.badge}
           </span>
 
-          <h1 className="text-balance font-stencil text-5xl font-black uppercase leading-[0.92] sm:text-6xl lg:text-7xl">
-            {t.titleBefore}
-            <span className="text-primary">{t.titleEmphasis}</span>
-            {t.titleAfter}
-          </h1>
+          <div className="flex flex-col gap-4">
+            <h1 className="text-balance font-stencil text-4xl font-black uppercase leading-[0.95] sm:text-5xl lg:text-6xl">
+              {t.title}
+            </h1>
+            <p className="text-balance font-condensed text-2xl font-extrabold uppercase leading-tight tracking-[0.02em] sm:text-3xl">
+              {t.taglineBefore}
+              <span className="text-primary">{t.taglineEmphasis}</span>
+              {t.taglineAfter}
+            </p>
+          </div>
 
           <p className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">{t.body}</p>
 

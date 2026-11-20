@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
-import { SERVICE_AREAS } from '@/app/service-areas/data'
+import { FEATURED_AREAS } from '@/app/service-areas/data'
 import { BrandLogo } from '@/components/brand-logo'
 import { useLocale } from '@/components/use-locale'
 import { getCopy } from '@/lib/copy'
@@ -46,7 +46,7 @@ export function SiteFooter() {
             {t.coverage}
           </h3>
           <ul className="space-y-2 text-sm">
-            {SERVICE_AREAS.map((area) => (
+            {FEATURED_AREAS.map((area) => (
               <li key={area.slug}>
                 <Link
                   href={lp(locale, `/service-areas/${area.slug}`)}
@@ -56,6 +56,14 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={lp(locale, '/service-areas')}
+                className="text-foreground underline decoration-primary underline-offset-4 transition-colors hover:text-primary"
+              >
+                {t.allAreas}
+              </Link>
+            </li>
           </ul>
           <p className="pt-1 text-xs text-muted-foreground">{t.coverageNote}</p>
         </div>

@@ -1,6 +1,8 @@
 export type Locale = 'en' | 'es'
 
-export const SITE_URL = 'https://www.tenfoursystems.com'
+// One canonical host. Netlify serves the bare domain as primary and
+// redirects www to it, so every absolute link uses the bare domain.
+export const SITE_URL = 'https://tenfoursystems.com'
 
 export function localeFromPathname(pathname: string): Locale {
   return pathname === '/es' || pathname.startsWith('/es/') ? 'es' : 'en'

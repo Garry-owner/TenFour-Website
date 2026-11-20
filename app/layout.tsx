@@ -16,6 +16,7 @@ import { HtmlLang } from '@/components/html-lang'
 import { SkipLink } from '@/components/skip-link'
 import { StructuredData } from '@/components/structured-data'
 import { languageAlternates } from '@/lib/seo'
+import { SITE_URL } from '@/lib/locale'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -67,8 +68,8 @@ const overpassMono = Overpass_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.tenfoursystems.com'),
-  title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
+  metadataBase: new URL(SITE_URL),
+  title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses in DFW',
   description:
     "TenFour Systems texts back your missed calls, asks a few questions, and sends the lead to you. We work the second shift so you don't have to.",
   ...languageAlternates('/'),
@@ -84,10 +85,10 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   openGraph: {
-    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses in DFW',
     description:
       'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
-    url: 'https://www.tenfoursystems.com',
+    url: SITE_URL,
     siteName: 'TenFour Systems',
     images: [
       {
@@ -103,7 +104,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses',
+    title: 'TenFour Systems. Missed Call Text Back for Home Service Businesses in DFW',
     description:
       'Missed call text back for home service businesses. Roger texts the caller back, asks a few questions, and sends the lead to you.',
     images: ['/og-image.png'],
